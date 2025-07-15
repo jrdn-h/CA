@@ -1,0 +1,573 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tradingagents.dataflows.crypto_cache &mdash; TradingAgents 0.3.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../_static/documentation_options.js?v=e259d695"></script>
+      <script src="../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="tradingagents.dataflows.crypto_utils" href="tradingagents.dataflows.crypto_utils.html" />
+    <link rel="prev" title="tradingagents.dataflows.config" href="tradingagents.dataflows.config.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            TradingAgents
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#quick-install">Quick Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#development-installation">Development Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#redis-setup-recommended">Redis Setup (Recommended)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#environment-configuration">Environment Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#verification">Verification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../installation.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../quickstart.html">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#basic-usage">Basic Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#running-with-caching">Running with Caching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#multi-agent-example">Multi-Agent Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#on-chain-analytics">On-Chain Analytics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#cli-interface">CLI Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../quickstart.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../tutorials/index.html">Tutorials</a><ul class="simple">
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#core-modules">Core Modules</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.agents.html">tradingagents.agents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.html#tradingagents.agents.FinancialSituationMemory"><code class="docutils literal notranslate"><span class="pre">FinancialSituationMemory</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.html#tradingagents.agents.Toolkit"><code class="docutils literal notranslate"><span class="pre">Toolkit</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.html#tradingagents.agents.AgentState"><code class="docutils literal notranslate"><span class="pre">AgentState</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.html#tradingagents.agents.create_msg_delete"><code class="docutils literal notranslate"><span class="pre">create_msg_delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.html#tradingagents.agents.InvestDebateState"><code class="docutils literal notranslate"><span class="pre">InvestDebateState</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.html#tradingagents.agents.RiskDebateState"><code class="docutils literal notranslate"><span class="pre">RiskDebateState</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.html#tradingagents.agents.create_bear_researcher"><code class="docutils literal notranslate"><span class="pre">create_bear_researcher()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.html#tradingagents.agents.create_bull_researcher"><code class="docutils literal notranslate"><span class="pre">create_bull_researcher()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.html#tradingagents.agents.create_research_manager"><code class="docutils literal notranslate"><span class="pre">create_research_manager()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.html#tradingagents.agents.create_fundamentals_analyst"><code class="docutils literal notranslate"><span class="pre">create_fundamentals_analyst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.html#tradingagents.agents.create_market_analyst"><code class="docutils literal notranslate"><span class="pre">create_market_analyst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.html#tradingagents.agents.create_neutral_debator"><code class="docutils literal notranslate"><span class="pre">create_neutral_debator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.html#tradingagents.agents.create_news_analyst"><code class="docutils literal notranslate"><span class="pre">create_news_analyst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.html#tradingagents.agents.create_onchain_analyst"><code class="docutils literal notranslate"><span class="pre">create_onchain_analyst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.html#tradingagents.agents.create_risky_debator"><code class="docutils literal notranslate"><span class="pre">create_risky_debator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.html#tradingagents.agents.create_risk_manager"><code class="docutils literal notranslate"><span class="pre">create_risk_manager()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.html#tradingagents.agents.create_safe_debator"><code class="docutils literal notranslate"><span class="pre">create_safe_debator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.html#tradingagents.agents.create_social_media_analyst"><code class="docutils literal notranslate"><span class="pre">create_social_media_analyst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.html#tradingagents.agents.create_trader"><code class="docutils literal notranslate"><span class="pre">create_trader()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="reference internal" href="tradingagents.dataflows.html">tradingagents.dataflows</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.html#tradingagents.dataflows.get_finnhub_news"><code class="docutils literal notranslate"><span class="pre">get_finnhub_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.html#tradingagents.dataflows.get_finnhub_company_insider_sentiment"><code class="docutils literal notranslate"><span class="pre">get_finnhub_company_insider_sentiment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.html#tradingagents.dataflows.get_finnhub_company_insider_transactions"><code class="docutils literal notranslate"><span class="pre">get_finnhub_company_insider_transactions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.html#tradingagents.dataflows.get_google_news"><code class="docutils literal notranslate"><span class="pre">get_google_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.html#tradingagents.dataflows.get_reddit_global_news"><code class="docutils literal notranslate"><span class="pre">get_reddit_global_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.html#tradingagents.dataflows.get_reddit_company_news"><code class="docutils literal notranslate"><span class="pre">get_reddit_company_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.html#tradingagents.dataflows.get_simfin_balance_sheet"><code class="docutils literal notranslate"><span class="pre">get_simfin_balance_sheet()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.html#tradingagents.dataflows.get_simfin_cashflow"><code class="docutils literal notranslate"><span class="pre">get_simfin_cashflow()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.html#tradingagents.dataflows.get_simfin_income_statements"><code class="docutils literal notranslate"><span class="pre">get_simfin_income_statements()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.html#tradingagents.dataflows.get_stock_stats_indicators_window"><code class="docutils literal notranslate"><span class="pre">get_stock_stats_indicators_window()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.html#tradingagents.dataflows.get_stockstats_indicator"><code class="docutils literal notranslate"><span class="pre">get_stockstats_indicator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.html#tradingagents.dataflows.get_YFin_data_window"><code class="docutils literal notranslate"><span class="pre">get_YFin_data_window()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.html#tradingagents.dataflows.get_YFin_data"><code class="docutils literal notranslate"><span class="pre">get_YFin_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.ccxt_adapters.html">tradingagents.dataflows.ccxt_adapters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.config.html">tradingagents.dataflows.config</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">tradingagents.dataflows.crypto_cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.crypto_utils.html">tradingagents.dataflows.crypto_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.finnhub_utils.html">tradingagents.dataflows.finnhub_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.googlenews_utils.html">tradingagents.dataflows.googlenews_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.interface.html">tradingagents.dataflows.interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.metric_registry.html">tradingagents.dataflows.metric_registry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.onchain_loader.html">tradingagents.dataflows.onchain_loader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.reddit_utils.html">tradingagents.dataflows.reddit_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.stockstats_utils.html">tradingagents.dataflows.stockstats_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.utils.html">tradingagents.dataflows.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.yfin_utils.html">tradingagents.dataflows.yfin_utils</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.graph.html">tradingagents.graph</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.graph.html#tradingagents.graph.TradingAgentsGraph"><code class="docutils literal notranslate"><span class="pre">TradingAgentsGraph</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.graph.html#tradingagents.graph.ConditionalLogic"><code class="docutils literal notranslate"><span class="pre">ConditionalLogic</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.graph.html#tradingagents.graph.GraphSetup"><code class="docutils literal notranslate"><span class="pre">GraphSetup</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.graph.html#tradingagents.graph.Propagator"><code class="docutils literal notranslate"><span class="pre">Propagator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.graph.html#tradingagents.graph.Reflector"><code class="docutils literal notranslate"><span class="pre">Reflector</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.graph.html#tradingagents.graph.SignalProcessor"><code class="docutils literal notranslate"><span class="pre">SignalProcessor</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.graph.conditional_logic.html">tradingagents.graph.conditional_logic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.graph.propagation.html">tradingagents.graph.propagation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.graph.reflection.html">tradingagents.graph.reflection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.graph.setup.html">tradingagents.graph.setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.graph.signal_processing.html">tradingagents.graph.signal_processing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.graph.trading_graph.html">tradingagents.graph.trading_graph</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#agents">Agents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.agents.analysts.fundamentals_analyst.html">tradingagents.agents.analysts.fundamentals_analyst</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.analysts.fundamentals_analyst.html#tradingagents.agents.analysts.fundamentals_analyst.create_fundamentals_analyst"><code class="docutils literal notranslate"><span class="pre">create_fundamentals_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.agents.analysts.market_analyst.html">tradingagents.agents.analysts.market_analyst</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.analysts.market_analyst.html#tradingagents.agents.analysts.market_analyst.create_market_analyst"><code class="docutils literal notranslate"><span class="pre">create_market_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.agents.analysts.news_analyst.html">tradingagents.agents.analysts.news_analyst</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.analysts.news_analyst.html#tradingagents.agents.analysts.news_analyst.create_news_analyst"><code class="docutils literal notranslate"><span class="pre">create_news_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.agents.analysts.onchain_analyst.html">tradingagents.agents.analysts.onchain_analyst</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.analysts.onchain_analyst.html#tradingagents.agents.analysts.onchain_analyst.create_onchain_analyst"><code class="docutils literal notranslate"><span class="pre">create_onchain_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.agents.analysts.social_media_analyst.html">tradingagents.agents.analysts.social_media_analyst</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.analysts.social_media_analyst.html#tradingagents.agents.analysts.social_media_analyst.create_social_media_analyst"><code class="docutils literal notranslate"><span class="pre">create_social_media_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.agents.managers.research_manager.html">tradingagents.agents.managers.research_manager</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.managers.research_manager.html#tradingagents.agents.managers.research_manager.create_research_manager"><code class="docutils literal notranslate"><span class="pre">create_research_manager()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.agents.managers.risk_manager.html">tradingagents.agents.managers.risk_manager</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.managers.risk_manager.html#tradingagents.agents.managers.risk_manager.create_risk_manager"><code class="docutils literal notranslate"><span class="pre">create_risk_manager()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.agents.researchers.bear_researcher.html">tradingagents.agents.researchers.bear_researcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.researchers.bear_researcher.html#tradingagents.agents.researchers.bear_researcher.create_bear_researcher"><code class="docutils literal notranslate"><span class="pre">create_bear_researcher()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.agents.researchers.bull_researcher.html">tradingagents.agents.researchers.bull_researcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.researchers.bull_researcher.html#tradingagents.agents.researchers.bull_researcher.create_bull_researcher"><code class="docutils literal notranslate"><span class="pre">create_bull_researcher()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.agents.risk_mgmt.aggresive_debator.html">tradingagents.agents.risk_mgmt.aggresive_debator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.risk_mgmt.aggresive_debator.html#tradingagents.agents.risk_mgmt.aggresive_debator.create_risky_debator"><code class="docutils literal notranslate"><span class="pre">create_risky_debator()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.agents.risk_mgmt.conservative_debator.html">tradingagents.agents.risk_mgmt.conservative_debator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.risk_mgmt.conservative_debator.html#tradingagents.agents.risk_mgmt.conservative_debator.create_safe_debator"><code class="docutils literal notranslate"><span class="pre">create_safe_debator()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.agents.risk_mgmt.neutral_debator.html">tradingagents.agents.risk_mgmt.neutral_debator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.risk_mgmt.neutral_debator.html#tradingagents.agents.risk_mgmt.neutral_debator.create_neutral_debator"><code class="docutils literal notranslate"><span class="pre">create_neutral_debator()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.agents.trader.trader.html">tradingagents.agents.trader.trader</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.trader.trader.html#tradingagents.agents.trader.trader.create_trader"><code class="docutils literal notranslate"><span class="pre">create_trader()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html#data-infrastructure">Data Infrastructure</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.dataflows.ccxt_adapters.html">tradingagents.dataflows.ccxt_adapters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.ccxt_adapters.html#tradingagents.dataflows.ccxt_adapters.ExchangeConfig"><code class="docutils literal notranslate"><span class="pre">ExchangeConfig</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.ccxt_adapters.html#tradingagents.dataflows.ccxt_adapters.init_exchange_client"><code class="docutils literal notranslate"><span class="pre">init_exchange_client()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.ccxt_adapters.html#tradingagents.dataflows.ccxt_adapters.CCXTAdapters"><code class="docutils literal notranslate"><span class="pre">CCXTAdapters</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">tradingagents.dataflows.crypto_cache</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#tradingagents.dataflows.crypto_cache.DataVolatility"><code class="docutils literal notranslate"><span class="pre">DataVolatility</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tradingagents.dataflows.crypto_cache.SmartTTLStrategy"><code class="docutils literal notranslate"><span class="pre">SmartTTLStrategy</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tradingagents.dataflows.crypto_cache.CryptoCacheManager"><code class="docutils literal notranslate"><span class="pre">CryptoCacheManager</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tradingagents.dataflows.crypto_cache.get_cache_manager"><code class="docutils literal notranslate"><span class="pre">get_cache_manager()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#tradingagents.dataflows.crypto_cache.cache_crypto_request"><code class="docutils literal notranslate"><span class="pre">cache_crypto_request()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.dataflows.crypto_utils.html">tradingagents.dataflows.crypto_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.crypto_utils.html#tradingagents.dataflows.crypto_utils.init_crypto_client"><code class="docutils literal notranslate"><span class="pre">init_crypto_client()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.crypto_utils.html#tradingagents.dataflows.crypto_utils.CryptoUtils"><code class="docutils literal notranslate"><span class="pre">CryptoUtils</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.dataflows.metric_registry.html">tradingagents.dataflows.metric_registry</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.DataProvider"><code class="docutils literal notranslate"><span class="pre">DataProvider</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.BatchOptimizer"><code class="docutils literal notranslate"><span class="pre">BatchOptimizer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.MetricRegistry"><code class="docutils literal notranslate"><span class="pre">MetricRegistry</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.get_metric_registry"><code class="docutils literal notranslate"><span class="pre">get_metric_registry()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.dataflows.onchain_loader.html">tradingagents.dataflows.onchain_loader</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.onchain_loader.html#tradingagents.dataflows.onchain_loader.OnChainLoader"><code class="docutils literal notranslate"><span class="pre">OnChainLoader</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.onchain_loader.html#tradingagents.dataflows.onchain_loader.get_onchain_loader"><code class="docutils literal notranslate"><span class="pre">get_onchain_loader()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.dataflows.interface.html">tradingagents.dataflows.interface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_finnhub_news"><code class="docutils literal notranslate"><span class="pre">get_finnhub_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_crypto_data_online"><code class="docutils literal notranslate"><span class="pre">get_crypto_data_online()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_crypto_info_online"><code class="docutils literal notranslate"><span class="pre">get_crypto_info_online()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_exchange_ohlcv_data"><code class="docutils literal notranslate"><span class="pre">get_exchange_ohlcv_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_exchange_order_book"><code class="docutils literal notranslate"><span class="pre">get_exchange_order_book()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.compare_crypto_exchanges"><code class="docutils literal notranslate"><span class="pre">compare_crypto_exchanges()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_supported_crypto_exchanges"><code class="docutils literal notranslate"><span class="pre">get_supported_crypto_exchanges()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_onchain_network_health"><code class="docutils literal notranslate"><span class="pre">get_onchain_network_health()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_onchain_market_indicators"><code class="docutils literal notranslate"><span class="pre">get_onchain_market_indicators()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_onchain_comprehensive_analysis"><code class="docutils literal notranslate"><span class="pre">get_onchain_comprehensive_analysis()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_metric_registry_data"><code class="docutils literal notranslate"><span class="pre">get_metric_registry_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_finnhub_company_insider_sentiment"><code class="docutils literal notranslate"><span class="pre">get_finnhub_company_insider_sentiment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_finnhub_company_insider_transactions"><code class="docutils literal notranslate"><span class="pre">get_finnhub_company_insider_transactions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_simfin_balance_sheet"><code class="docutils literal notranslate"><span class="pre">get_simfin_balance_sheet()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_simfin_cashflow"><code class="docutils literal notranslate"><span class="pre">get_simfin_cashflow()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_simfin_income_statements"><code class="docutils literal notranslate"><span class="pre">get_simfin_income_statements()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_google_news"><code class="docutils literal notranslate"><span class="pre">get_google_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_reddit_global_news"><code class="docutils literal notranslate"><span class="pre">get_reddit_global_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_reddit_company_news"><code class="docutils literal notranslate"><span class="pre">get_reddit_company_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_stock_stats_indicators_window"><code class="docutils literal notranslate"><span class="pre">get_stock_stats_indicators_window()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_stockstats_indicator"><code class="docutils literal notranslate"><span class="pre">get_stockstats_indicator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_YFin_data_window"><code class="docutils literal notranslate"><span class="pre">get_YFin_data_window()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_YFin_data_online"><code class="docutils literal notranslate"><span class="pre">get_YFin_data_online()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_YFin_data"><code class="docutils literal notranslate"><span class="pre">get_YFin_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_stock_news_openai"><code class="docutils literal notranslate"><span class="pre">get_stock_news_openai()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_global_news_openai"><code class="docutils literal notranslate"><span class="pre">get_global_news_openai()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_fundamentals_openai"><code class="docutils literal notranslate"><span class="pre">get_fundamentals_openai()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.dataflows.config.html">tradingagents.dataflows.config</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.config.html#tradingagents.dataflows.config.initialize_config"><code class="docutils literal notranslate"><span class="pre">initialize_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.config.html#tradingagents.dataflows.config.set_config"><code class="docutils literal notranslate"><span class="pre">set_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.config.html#tradingagents.dataflows.config.get_config"><code class="docutils literal notranslate"><span class="pre">get_config()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#market-data-adapters">Market Data Adapters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.dataflows.yfin_utils.html">tradingagents.dataflows.yfin_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.yfin_utils.html#tradingagents.dataflows.yfin_utils.init_ticker"><code class="docutils literal notranslate"><span class="pre">init_ticker()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.yfin_utils.html#tradingagents.dataflows.yfin_utils.YFinanceUtils"><code class="docutils literal notranslate"><span class="pre">YFinanceUtils</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.dataflows.finnhub_utils.html">tradingagents.dataflows.finnhub_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.finnhub_utils.html#tradingagents.dataflows.finnhub_utils.get_data_in_range"><code class="docutils literal notranslate"><span class="pre">get_data_in_range()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.dataflows.googlenews_utils.html">tradingagents.dataflows.googlenews_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.googlenews_utils.html#tradingagents.dataflows.googlenews_utils.is_rate_limited"><code class="docutils literal notranslate"><span class="pre">is_rate_limited()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.googlenews_utils.html#tradingagents.dataflows.googlenews_utils.make_request"><code class="docutils literal notranslate"><span class="pre">make_request()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.googlenews_utils.html#tradingagents.dataflows.googlenews_utils.getNewsData"><code class="docutils literal notranslate"><span class="pre">getNewsData()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.dataflows.reddit_utils.html">tradingagents.dataflows.reddit_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.reddit_utils.html#tradingagents.dataflows.reddit_utils.fetch_top_from_category"><code class="docutils literal notranslate"><span class="pre">fetch_top_from_category()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.dataflows.stockstats_utils.html">tradingagents.dataflows.stockstats_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.stockstats_utils.html#tradingagents.dataflows.stockstats_utils.StockstatsUtils"><code class="docutils literal notranslate"><span class="pre">StockstatsUtils</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#graph-signal-processing">Graph &amp; Signal Processing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.graph.trading_graph.html">tradingagents.graph.trading_graph</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.graph.trading_graph.html#tradingagents.graph.trading_graph.TradingAgentsGraph"><code class="docutils literal notranslate"><span class="pre">TradingAgentsGraph</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.graph.signal_processing.html">tradingagents.graph.signal_processing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.graph.signal_processing.html#tradingagents.graph.signal_processing.SignalProcessor"><code class="docutils literal notranslate"><span class="pre">SignalProcessor</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.graph.conditional_logic.html">tradingagents.graph.conditional_logic</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.graph.conditional_logic.html#tradingagents.graph.conditional_logic.ConditionalLogic"><code class="docutils literal notranslate"><span class="pre">ConditionalLogic</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.graph.propagation.html">tradingagents.graph.propagation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.graph.propagation.html#tradingagents.graph.propagation.Propagator"><code class="docutils literal notranslate"><span class="pre">Propagator</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.graph.reflection.html">tradingagents.graph.reflection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.graph.reflection.html#tradingagents.graph.reflection.Reflector"><code class="docutils literal notranslate"><span class="pre">Reflector</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../index.html#utilities">Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.agents.utils.agent_states.html">tradingagents.agents.utils.agent_states</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.utils.agent_states.html#tradingagents.agents.utils.agent_states.InvestDebateState"><code class="docutils literal notranslate"><span class="pre">InvestDebateState</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.utils.agent_states.html#tradingagents.agents.utils.agent_states.RiskDebateState"><code class="docutils literal notranslate"><span class="pre">RiskDebateState</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.utils.agent_states.html#tradingagents.agents.utils.agent_states.AgentState"><code class="docutils literal notranslate"><span class="pre">AgentState</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.agents.utils.agent_utils.html">tradingagents.agents.utils.agent_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.utils.agent_utils.html#tradingagents.agents.utils.agent_utils.create_msg_delete"><code class="docutils literal notranslate"><span class="pre">create_msg_delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.utils.agent_utils.html#tradingagents.agents.utils.agent_utils.Toolkit"><code class="docutils literal notranslate"><span class="pre">Toolkit</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.agents.utils.memory.html">tradingagents.agents.utils.memory</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.agents.utils.memory.html#tradingagents.agents.utils.memory.FinancialSituationMemory"><code class="docutils literal notranslate"><span class="pre">FinancialSituationMemory</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="tradingagents.dataflows.utils.html">tradingagents.dataflows.utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.utils.html#tradingagents.dataflows.utils.save_output"><code class="docutils literal notranslate"><span class="pre">save_output()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.utils.html#tradingagents.dataflows.utils.get_current_date"><code class="docutils literal notranslate"><span class="pre">get_current_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.utils.html#tradingagents.dataflows.utils.decorate_all_methods"><code class="docutils literal notranslate"><span class="pre">decorate_all_methods()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="tradingagents.dataflows.utils.html#tradingagents.dataflows.utils.get_next_weekday"><code class="docutils literal notranslate"><span class="pre">get_next_weekday()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../examples/index.html">Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../changelog.html#v0-3-0-2025-07-15">v0.3.0 (2025-07-15)</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">TradingAgents</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="tradingagents.dataflows.html">tradingagents.dataflows</a></li>
+      <li class="breadcrumb-item active">tradingagents.dataflows.crypto_cache</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/api/generated/tradingagents.dataflows.crypto_cache.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-tradingagents.dataflows.crypto_cache">
+<span id="tradingagents-dataflows-crypto-cache"></span><h1>tradingagents.dataflows.crypto_cache<a class="headerlink" href="#module-tradingagents.dataflows.crypto_cache" title="Link to this heading"></a></h1>
+<p>Crypto data caching system with Redis for performance optimization.</p>
+<p class="rubric">Functions</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tradingagents.dataflows.crypto_cache.cache_crypto_request" title="tradingagents.dataflows.crypto_cache.cache_crypto_request"><code class="xref py py-obj docutils literal notranslate"><span class="pre">cache_crypto_request</span></code></a>(endpoint[, ttl, data_type])</p></td>
+<td><p>Enhanced decorator to cache crypto API requests with smart TTL.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tradingagents.dataflows.crypto_cache.get_cache_manager" title="tradingagents.dataflows.crypto_cache.get_cache_manager"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_cache_manager</span></code></a>()</p></td>
+<td><p>Get or create the global cache manager instance.</p></td>
+</tr>
+</tbody>
+</table>
+<p class="rubric">Classes</p>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tradingagents.dataflows.crypto_cache.CryptoCacheManager" title="tradingagents.dataflows.crypto_cache.CryptoCacheManager"><code class="xref py py-obj docutils literal notranslate"><span class="pre">CryptoCacheManager</span></code></a>([redis_host, redis_port, ...])</p></td>
+<td><p>Enhanced cache manager with smart TTL and batch optimization.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#tradingagents.dataflows.crypto_cache.DataVolatility" title="tradingagents.dataflows.crypto_cache.DataVolatility"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DataVolatility</span></code></a>(value[, names, module, ...])</p></td>
+<td><p>Data volatility levels for smart TTL management.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#tradingagents.dataflows.crypto_cache.SmartTTLStrategy" title="tradingagents.dataflows.crypto_cache.SmartTTLStrategy"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SmartTTLStrategy</span></code></a>()</p></td>
+<td><p>Smart TTL strategy based on data type and market conditions.</p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py class">
+<dt class="sig sig-object py" id="tradingagents.dataflows.crypto_cache.DataVolatility">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tradingagents.dataflows.crypto_cache.</span></span><span class="sig-name descname"><span class="pre">DataVolatility</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">names</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">*</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">module</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qualname</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">start</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">boundary</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tradingagents/dataflows/crypto_cache.html#DataVolatility"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tradingagents.dataflows.crypto_cache.DataVolatility" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></a></p>
+<p>Data volatility levels for smart TTL management.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tradingagents.dataflows.crypto_cache.DataVolatility.ULTRA_HIGH">
+<span class="sig-name descname"><span class="pre">ULTRA_HIGH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'ultra_high'</span></em><a class="headerlink" href="#tradingagents.dataflows.crypto_cache.DataVolatility.ULTRA_HIGH" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tradingagents.dataflows.crypto_cache.DataVolatility.HIGH">
+<span class="sig-name descname"><span class="pre">HIGH</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'high'</span></em><a class="headerlink" href="#tradingagents.dataflows.crypto_cache.DataVolatility.HIGH" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tradingagents.dataflows.crypto_cache.DataVolatility.MEDIUM">
+<span class="sig-name descname"><span class="pre">MEDIUM</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'medium'</span></em><a class="headerlink" href="#tradingagents.dataflows.crypto_cache.DataVolatility.MEDIUM" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tradingagents.dataflows.crypto_cache.DataVolatility.LOW">
+<span class="sig-name descname"><span class="pre">LOW</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'low'</span></em><a class="headerlink" href="#tradingagents.dataflows.crypto_cache.DataVolatility.LOW" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tradingagents.dataflows.crypto_cache.DataVolatility.VERY_LOW">
+<span class="sig-name descname"><span class="pre">VERY_LOW</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'very_low'</span></em><a class="headerlink" href="#tradingagents.dataflows.crypto_cache.DataVolatility.VERY_LOW" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="tradingagents.dataflows.crypto_cache.SmartTTLStrategy">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tradingagents.dataflows.crypto_cache.</span></span><span class="sig-name descname"><span class="pre">SmartTTLStrategy</span></span><a class="reference internal" href="../../_modules/tradingagents/dataflows/crypto_cache.html#SmartTTLStrategy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tradingagents.dataflows.crypto_cache.SmartTTLStrategy" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Smart TTL strategy based on data type and market conditions.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tradingagents.dataflows.crypto_cache.SmartTTLStrategy.TTL_MAPPING">
+<span class="sig-name descname"><span class="pre">TTL_MAPPING</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{DataVolatility.HIGH:</span> <span class="pre">30,</span> <span class="pre">DataVolatility.LOW:</span> <span class="pre">300,</span> <span class="pre">DataVolatility.MEDIUM:</span> <span class="pre">60,</span> <span class="pre">DataVolatility.ULTRA_HIGH:</span> <span class="pre">10,</span> <span class="pre">DataVolatility.VERY_LOW:</span> <span class="pre">900}</span></em><a class="headerlink" href="#tradingagents.dataflows.crypto_cache.SmartTTLStrategy.TTL_MAPPING" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="tradingagents.dataflows.crypto_cache.SmartTTLStrategy.DATA_TYPE_VOLATILITY">
+<span class="sig-name descname"><span class="pre">DATA_TYPE_VOLATILITY</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'active_addresses':</span> <span class="pre">DataVolatility.LOW,</span> <span class="pre">'arbitrage_opportunities':</span> <span class="pre">DataVolatility.HIGH,</span> <span class="pre">'exchange_flows':</span> <span class="pre">DataVolatility.MEDIUM,</span> <span class="pre">'hash_rate':</span> <span class="pre">DataVolatility.LOW,</span> <span class="pre">'historical_data':</span> <span class="pre">DataVolatility.VERY_LOW,</span> <span class="pre">'live_price':</span> <span class="pre">DataVolatility.ULTRA_HIGH,</span> <span class="pre">'market_cap':</span> <span class="pre">DataVolatility.VERY_LOW,</span> <span class="pre">'market_sentiment':</span> <span class="pre">DataVolatility.MEDIUM,</span> <span class="pre">'network_metrics':</span> <span class="pre">DataVolatility.LOW,</span> <span class="pre">'ohlcv_1d':</span> <span class="pre">DataVolatility.LOW,</span> <span class="pre">'ohlcv_1h':</span> <span class="pre">DataVolatility.MEDIUM,</span> <span class="pre">'ohlcv_1m':</span> <span class="pre">DataVolatility.HIGH,</span> <span class="pre">'ohlcv_4h':</span> <span class="pre">DataVolatility.LOW,</span> <span class="pre">'ohlcv_5m':</span> <span class="pre">DataVolatility.HIGH,</span> <span class="pre">'order_book':</span> <span class="pre">DataVolatility.ULTRA_HIGH,</span> <span class="pre">'order_book_depth':</span> <span class="pre">DataVolatility.ULTRA_HIGH,</span> <span class="pre">'price_data':</span> <span class="pre">DataVolatility.HIGH,</span> <span class="pre">'spread_analysis':</span> <span class="pre">DataVolatility.ULTRA_HIGH,</span> <span class="pre">'supply_metrics':</span> <span class="pre">DataVolatility.VERY_LOW,</span> <span class="pre">'technical_indicators':</span> <span class="pre">DataVolatility.MEDIUM,</span> <span class="pre">'token_info':</span> <span class="pre">DataVolatility.VERY_LOW,</span> <span class="pre">'transactions_count':</span> <span class="pre">DataVolatility.LOW,</span> <span class="pre">'volume_analysis':</span> <span class="pre">DataVolatility.HIGH,</span> <span class="pre">'whale_movements':</span> <span class="pre">DataVolatility.MEDIUM}</span></em><a class="headerlink" href="#tradingagents.dataflows.crypto_cache.SmartTTLStrategy.DATA_TYPE_VOLATILITY" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tradingagents.dataflows.crypto_cache.SmartTTLStrategy.get_ttl">
+<em class="property"><span class="pre">classmethod</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_ttl</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">market_hours</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">high_volatility_period</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></span><a class="reference internal" href="../../_modules/tradingagents/dataflows/crypto_cache.html#SmartTTLStrategy.get_ttl"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tradingagents.dataflows.crypto_cache.SmartTTLStrategy.get_ttl" title="Link to this definition"></a></dt>
+<dd><p>Get optimal TTL for data type considering market conditions.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="tradingagents.dataflows.crypto_cache.CryptoCacheManager">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">tradingagents.dataflows.crypto_cache.</span></span><span class="sig-name descname"><span class="pre">CryptoCacheManager</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">redis_host</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'localhost'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redis_port</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">6379</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">redis_db</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_ttl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">60</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tradingagents/dataflows/crypto_cache.html#CryptoCacheManager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tradingagents.dataflows.crypto_cache.CryptoCacheManager" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.13)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>Enhanced cache manager with smart TTL and batch optimization.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="tradingagents.dataflows.crypto_cache.CryptoCacheManager.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">endpoint</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.13)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../../_modules/tradingagents/dataflows/crypto_cache.html#CryptoCacheManager.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tradingagents.dataflows.crypto_cache.CryptoCacheManager.get" title="Link to this definition"></a></dt>
+<dd><p>Retrieve cached data if available and valid.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tradingagents.dataflows.crypto_cache.CryptoCacheManager.set">
+<span class="sig-name descname"><span class="pre">set</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">endpoint</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">params</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.13)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ttl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="../../_modules/tradingagents/dataflows/crypto_cache.html#CryptoCacheManager.set"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tradingagents.dataflows.crypto_cache.CryptoCacheManager.set" title="Link to this definition"></a></dt>
+<dd><p>Store data in cache with smart TTL.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tradingagents.dataflows.crypto_cache.CryptoCacheManager.get_batch">
+<span class="sig-name descname"><span class="pre">get_batch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">requests</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.13)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.13)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.13)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.13)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/tradingagents/dataflows/crypto_cache.html#CryptoCacheManager.get_batch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tradingagents.dataflows.crypto_cache.CryptoCacheManager.get_batch" title="Link to this definition"></a></dt>
+<dd><p>Retrieve multiple cached items in a single operation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tradingagents.dataflows.crypto_cache.CryptoCacheManager.set_batch">
+<span class="sig-name descname"><span class="pre">set_batch</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_items</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.13)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.13)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.13)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.13)"><span class="pre">None</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></span><a class="reference internal" href="../../_modules/tradingagents/dataflows/crypto_cache.html#CryptoCacheManager.set_batch"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tradingagents.dataflows.crypto_cache.CryptoCacheManager.set_batch" title="Link to this definition"></a></dt>
+<dd><p>Store multiple items in cache efficiently.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tradingagents.dataflows.crypto_cache.CryptoCacheManager.warm_cache">
+<span class="sig-name descname"><span class="pre">warm_cache</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">critical_endpoints</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.13)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Tuple" title="(in Python v3.13)"><span class="pre">Tuple</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.13)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">warm_function</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">callable</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></span><a class="reference internal" href="../../_modules/tradingagents/dataflows/crypto_cache.html#CryptoCacheManager.warm_cache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tradingagents.dataflows.crypto_cache.CryptoCacheManager.warm_cache" title="Link to this definition"></a></dt>
+<dd><p>Proactively warm cache with critical data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tradingagents.dataflows.crypto_cache.CryptoCacheManager.smart_invalidate">
+<span class="sig-name descname"><span class="pre">smart_invalidate</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">patterns</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.13)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_types</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.13)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">older_than_minutes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></span><a class="reference internal" href="../../_modules/tradingagents/dataflows/crypto_cache.html#CryptoCacheManager.smart_invalidate"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tradingagents.dataflows.crypto_cache.CryptoCacheManager.smart_invalidate" title="Link to this definition"></a></dt>
+<dd><p>Intelligent cache invalidation based on patterns, data types, or age.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tradingagents.dataflows.crypto_cache.CryptoCacheManager.get_optimization_stats">
+<span class="sig-name descname"><span class="pre">get_optimization_stats</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.13)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.13)"><span class="pre">Any</span></a><span class="p"><span class="pre">]</span></span></span></span><a class="reference internal" href="../../_modules/tradingagents/dataflows/crypto_cache.html#CryptoCacheManager.get_optimization_stats"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tradingagents.dataflows.crypto_cache.CryptoCacheManager.get_optimization_stats" title="Link to this definition"></a></dt>
+<dd><p>Get detailed cache performance and optimization statistics.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tradingagents.dataflows.crypto_cache.CryptoCacheManager.invalidate_pattern">
+<span class="sig-name descname"><span class="pre">invalidate_pattern</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">pattern</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span></span><a class="reference internal" href="../../_modules/tradingagents/dataflows/crypto_cache.html#CryptoCacheManager.invalidate_pattern"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tradingagents.dataflows.crypto_cache.CryptoCacheManager.invalidate_pattern" title="Link to this definition"></a></dt>
+<dd><p>Invalidate cache entries matching a pattern.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="tradingagents.dataflows.crypto_cache.CryptoCacheManager.clear_all_cache">
+<span class="sig-name descname"><span class="pre">clear_all_cache</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.13)"><span class="pre">bool</span></a></span></span><a class="reference internal" href="../../_modules/tradingagents/dataflows/crypto_cache.html#CryptoCacheManager.clear_all_cache"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tradingagents.dataflows.crypto_cache.CryptoCacheManager.clear_all_cache" title="Link to this definition"></a></dt>
+<dd><p>Clear all crypto cache entries.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tradingagents.dataflows.crypto_cache.get_cache_manager">
+<span class="sig-prename descclassname"><span class="pre">tradingagents.dataflows.crypto_cache.</span></span><span class="sig-name descname"><span class="pre">get_cache_manager</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#tradingagents.dataflows.crypto_cache.CryptoCacheManager" title="tradingagents.dataflows.crypto_cache.CryptoCacheManager"><span class="pre">CryptoCacheManager</span></a></span></span><a class="reference internal" href="../../_modules/tradingagents/dataflows/crypto_cache.html#get_cache_manager"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tradingagents.dataflows.crypto_cache.get_cache_manager" title="Link to this definition"></a></dt>
+<dd><p>Get or create the global cache manager instance.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="tradingagents.dataflows.crypto_cache.cache_crypto_request">
+<span class="sig-prename descclassname"><span class="pre">tradingagents.dataflows.crypto_cache.</span></span><span class="sig-name descname"><span class="pre">cache_crypto_request</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">endpoint</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">ttl</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.13)"><span class="pre">int</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.13)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../../_modules/tradingagents/dataflows/crypto_cache.html#cache_crypto_request"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#tradingagents.dataflows.crypto_cache.cache_crypto_request" title="Link to this definition"></a></dt>
+<dd><p>Enhanced decorator to cache crypto API requests with smart TTL.</p>
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="tradingagents.dataflows.config.html" class="btn btn-neutral float-left" title="tradingagents.dataflows.config" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tradingagents.dataflows.crypto_utils.html" class="btn btn-neutral float-right" title="tradingagents.dataflows.crypto_utils" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, TauricResearch.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

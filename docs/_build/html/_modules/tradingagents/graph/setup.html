@@ -1,0 +1,628 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tradingagents.graph.setup &mdash; TradingAgents 0.3.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=e259d695"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            TradingAgents
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#quick-install">Quick Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#development-installation">Development Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#redis-setup-recommended">Redis Setup (Recommended)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#environment-configuration">Environment Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#verification">Verification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#basic-usage">Basic Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#running-with-caching">Running with Caching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#multi-agent-example">Multi-Agent Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#on-chain-analytics">On-Chain Analytics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#cli-interface">CLI Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/index.html">Tutorials</a><ul class="simple">
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#core-modules">Core Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html">tradingagents.agents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.FinancialSituationMemory"><code class="docutils literal notranslate"><span class="pre">FinancialSituationMemory</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.Toolkit"><code class="docutils literal notranslate"><span class="pre">Toolkit</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.AgentState"><code class="docutils literal notranslate"><span class="pre">AgentState</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_msg_delete"><code class="docutils literal notranslate"><span class="pre">create_msg_delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.InvestDebateState"><code class="docutils literal notranslate"><span class="pre">InvestDebateState</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.RiskDebateState"><code class="docutils literal notranslate"><span class="pre">RiskDebateState</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_bear_researcher"><code class="docutils literal notranslate"><span class="pre">create_bear_researcher()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_bull_researcher"><code class="docutils literal notranslate"><span class="pre">create_bull_researcher()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_research_manager"><code class="docutils literal notranslate"><span class="pre">create_research_manager()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_fundamentals_analyst"><code class="docutils literal notranslate"><span class="pre">create_fundamentals_analyst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_market_analyst"><code class="docutils literal notranslate"><span class="pre">create_market_analyst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_neutral_debator"><code class="docutils literal notranslate"><span class="pre">create_neutral_debator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_news_analyst"><code class="docutils literal notranslate"><span class="pre">create_news_analyst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_onchain_analyst"><code class="docutils literal notranslate"><span class="pre">create_onchain_analyst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_risky_debator"><code class="docutils literal notranslate"><span class="pre">create_risky_debator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_risk_manager"><code class="docutils literal notranslate"><span class="pre">create_risk_manager()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_safe_debator"><code class="docutils literal notranslate"><span class="pre">create_safe_debator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_social_media_analyst"><code class="docutils literal notranslate"><span class="pre">create_social_media_analyst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_trader"><code class="docutils literal notranslate"><span class="pre">create_trader()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html">tradingagents.dataflows</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_finnhub_news"><code class="docutils literal notranslate"><span class="pre">get_finnhub_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_finnhub_company_insider_sentiment"><code class="docutils literal notranslate"><span class="pre">get_finnhub_company_insider_sentiment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_finnhub_company_insider_transactions"><code class="docutils literal notranslate"><span class="pre">get_finnhub_company_insider_transactions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_google_news"><code class="docutils literal notranslate"><span class="pre">get_google_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_reddit_global_news"><code class="docutils literal notranslate"><span class="pre">get_reddit_global_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_reddit_company_news"><code class="docutils literal notranslate"><span class="pre">get_reddit_company_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_simfin_balance_sheet"><code class="docutils literal notranslate"><span class="pre">get_simfin_balance_sheet()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_simfin_cashflow"><code class="docutils literal notranslate"><span class="pre">get_simfin_cashflow()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_simfin_income_statements"><code class="docutils literal notranslate"><span class="pre">get_simfin_income_statements()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_stock_stats_indicators_window"><code class="docutils literal notranslate"><span class="pre">get_stock_stats_indicators_window()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_stockstats_indicator"><code class="docutils literal notranslate"><span class="pre">get_stockstats_indicator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_YFin_data_window"><code class="docutils literal notranslate"><span class="pre">get_YFin_data_window()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_YFin_data"><code class="docutils literal notranslate"><span class="pre">get_YFin_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.ccxt_adapters.html">tradingagents.dataflows.ccxt_adapters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.config.html">tradingagents.dataflows.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html">tradingagents.dataflows.crypto_cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_utils.html">tradingagents.dataflows.crypto_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.finnhub_utils.html">tradingagents.dataflows.finnhub_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.googlenews_utils.html">tradingagents.dataflows.googlenews_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html">tradingagents.dataflows.interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.metric_registry.html">tradingagents.dataflows.metric_registry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.onchain_loader.html">tradingagents.dataflows.onchain_loader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.reddit_utils.html">tradingagents.dataflows.reddit_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.stockstats_utils.html">tradingagents.dataflows.stockstats_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.utils.html">tradingagents.dataflows.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.yfin_utils.html">tradingagents.dataflows.yfin_utils</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.graph.html">tradingagents.graph</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.html#tradingagents.graph.TradingAgentsGraph"><code class="docutils literal notranslate"><span class="pre">TradingAgentsGraph</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.html#tradingagents.graph.ConditionalLogic"><code class="docutils literal notranslate"><span class="pre">ConditionalLogic</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.html#tradingagents.graph.GraphSetup"><code class="docutils literal notranslate"><span class="pre">GraphSetup</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.html#tradingagents.graph.Propagator"><code class="docutils literal notranslate"><span class="pre">Propagator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.html#tradingagents.graph.Reflector"><code class="docutils literal notranslate"><span class="pre">Reflector</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.html#tradingagents.graph.SignalProcessor"><code class="docutils literal notranslate"><span class="pre">SignalProcessor</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.conditional_logic.html">tradingagents.graph.conditional_logic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.propagation.html">tradingagents.graph.propagation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.reflection.html">tradingagents.graph.reflection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.setup.html">tradingagents.graph.setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.signal_processing.html">tradingagents.graph.signal_processing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.trading_graph.html">tradingagents.graph.trading_graph</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#agents">Agents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.fundamentals_analyst.html">tradingagents.agents.analysts.fundamentals_analyst</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.fundamentals_analyst.html#tradingagents.agents.analysts.fundamentals_analyst.create_fundamentals_analyst"><code class="docutils literal notranslate"><span class="pre">create_fundamentals_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.market_analyst.html">tradingagents.agents.analysts.market_analyst</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.market_analyst.html#tradingagents.agents.analysts.market_analyst.create_market_analyst"><code class="docutils literal notranslate"><span class="pre">create_market_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.news_analyst.html">tradingagents.agents.analysts.news_analyst</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.news_analyst.html#tradingagents.agents.analysts.news_analyst.create_news_analyst"><code class="docutils literal notranslate"><span class="pre">create_news_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.onchain_analyst.html">tradingagents.agents.analysts.onchain_analyst</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.onchain_analyst.html#tradingagents.agents.analysts.onchain_analyst.create_onchain_analyst"><code class="docutils literal notranslate"><span class="pre">create_onchain_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.social_media_analyst.html">tradingagents.agents.analysts.social_media_analyst</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.social_media_analyst.html#tradingagents.agents.analysts.social_media_analyst.create_social_media_analyst"><code class="docutils literal notranslate"><span class="pre">create_social_media_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.managers.research_manager.html">tradingagents.agents.managers.research_manager</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.managers.research_manager.html#tradingagents.agents.managers.research_manager.create_research_manager"><code class="docutils literal notranslate"><span class="pre">create_research_manager()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.managers.risk_manager.html">tradingagents.agents.managers.risk_manager</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.managers.risk_manager.html#tradingagents.agents.managers.risk_manager.create_risk_manager"><code class="docutils literal notranslate"><span class="pre">create_risk_manager()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.researchers.bear_researcher.html">tradingagents.agents.researchers.bear_researcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.researchers.bear_researcher.html#tradingagents.agents.researchers.bear_researcher.create_bear_researcher"><code class="docutils literal notranslate"><span class="pre">create_bear_researcher()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.researchers.bull_researcher.html">tradingagents.agents.researchers.bull_researcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.researchers.bull_researcher.html#tradingagents.agents.researchers.bull_researcher.create_bull_researcher"><code class="docutils literal notranslate"><span class="pre">create_bull_researcher()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.risk_mgmt.aggresive_debator.html">tradingagents.agents.risk_mgmt.aggresive_debator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.risk_mgmt.aggresive_debator.html#tradingagents.agents.risk_mgmt.aggresive_debator.create_risky_debator"><code class="docutils literal notranslate"><span class="pre">create_risky_debator()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.risk_mgmt.conservative_debator.html">tradingagents.agents.risk_mgmt.conservative_debator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.risk_mgmt.conservative_debator.html#tradingagents.agents.risk_mgmt.conservative_debator.create_safe_debator"><code class="docutils literal notranslate"><span class="pre">create_safe_debator()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.risk_mgmt.neutral_debator.html">tradingagents.agents.risk_mgmt.neutral_debator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.risk_mgmt.neutral_debator.html#tradingagents.agents.risk_mgmt.neutral_debator.create_neutral_debator"><code class="docutils literal notranslate"><span class="pre">create_neutral_debator()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.trader.trader.html">tradingagents.agents.trader.trader</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.trader.trader.html#tradingagents.agents.trader.trader.create_trader"><code class="docutils literal notranslate"><span class="pre">create_trader()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#data-infrastructure">Data Infrastructure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.ccxt_adapters.html">tradingagents.dataflows.ccxt_adapters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.ccxt_adapters.html#tradingagents.dataflows.ccxt_adapters.ExchangeConfig"><code class="docutils literal notranslate"><span class="pre">ExchangeConfig</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.ccxt_adapters.html#tradingagents.dataflows.ccxt_adapters.init_exchange_client"><code class="docutils literal notranslate"><span class="pre">init_exchange_client()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.ccxt_adapters.html#tradingagents.dataflows.ccxt_adapters.CCXTAdapters"><code class="docutils literal notranslate"><span class="pre">CCXTAdapters</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html">tradingagents.dataflows.crypto_cache</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.DataVolatility"><code class="docutils literal notranslate"><span class="pre">DataVolatility</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.SmartTTLStrategy"><code class="docutils literal notranslate"><span class="pre">SmartTTLStrategy</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.CryptoCacheManager"><code class="docutils literal notranslate"><span class="pre">CryptoCacheManager</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.get_cache_manager"><code class="docutils literal notranslate"><span class="pre">get_cache_manager()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.cache_crypto_request"><code class="docutils literal notranslate"><span class="pre">cache_crypto_request()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_utils.html">tradingagents.dataflows.crypto_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_utils.html#tradingagents.dataflows.crypto_utils.init_crypto_client"><code class="docutils literal notranslate"><span class="pre">init_crypto_client()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_utils.html#tradingagents.dataflows.crypto_utils.CryptoUtils"><code class="docutils literal notranslate"><span class="pre">CryptoUtils</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.metric_registry.html">tradingagents.dataflows.metric_registry</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.DataProvider"><code class="docutils literal notranslate"><span class="pre">DataProvider</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.BatchOptimizer"><code class="docutils literal notranslate"><span class="pre">BatchOptimizer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.MetricRegistry"><code class="docutils literal notranslate"><span class="pre">MetricRegistry</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.get_metric_registry"><code class="docutils literal notranslate"><span class="pre">get_metric_registry()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.onchain_loader.html">tradingagents.dataflows.onchain_loader</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.onchain_loader.html#tradingagents.dataflows.onchain_loader.OnChainLoader"><code class="docutils literal notranslate"><span class="pre">OnChainLoader</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.onchain_loader.html#tradingagents.dataflows.onchain_loader.get_onchain_loader"><code class="docutils literal notranslate"><span class="pre">get_onchain_loader()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html">tradingagents.dataflows.interface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_finnhub_news"><code class="docutils literal notranslate"><span class="pre">get_finnhub_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_crypto_data_online"><code class="docutils literal notranslate"><span class="pre">get_crypto_data_online()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_crypto_info_online"><code class="docutils literal notranslate"><span class="pre">get_crypto_info_online()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_exchange_ohlcv_data"><code class="docutils literal notranslate"><span class="pre">get_exchange_ohlcv_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_exchange_order_book"><code class="docutils literal notranslate"><span class="pre">get_exchange_order_book()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.compare_crypto_exchanges"><code class="docutils literal notranslate"><span class="pre">compare_crypto_exchanges()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_supported_crypto_exchanges"><code class="docutils literal notranslate"><span class="pre">get_supported_crypto_exchanges()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_onchain_network_health"><code class="docutils literal notranslate"><span class="pre">get_onchain_network_health()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_onchain_market_indicators"><code class="docutils literal notranslate"><span class="pre">get_onchain_market_indicators()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_onchain_comprehensive_analysis"><code class="docutils literal notranslate"><span class="pre">get_onchain_comprehensive_analysis()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_metric_registry_data"><code class="docutils literal notranslate"><span class="pre">get_metric_registry_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_finnhub_company_insider_sentiment"><code class="docutils literal notranslate"><span class="pre">get_finnhub_company_insider_sentiment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_finnhub_company_insider_transactions"><code class="docutils literal notranslate"><span class="pre">get_finnhub_company_insider_transactions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_simfin_balance_sheet"><code class="docutils literal notranslate"><span class="pre">get_simfin_balance_sheet()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_simfin_cashflow"><code class="docutils literal notranslate"><span class="pre">get_simfin_cashflow()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_simfin_income_statements"><code class="docutils literal notranslate"><span class="pre">get_simfin_income_statements()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_google_news"><code class="docutils literal notranslate"><span class="pre">get_google_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_reddit_global_news"><code class="docutils literal notranslate"><span class="pre">get_reddit_global_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_reddit_company_news"><code class="docutils literal notranslate"><span class="pre">get_reddit_company_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_stock_stats_indicators_window"><code class="docutils literal notranslate"><span class="pre">get_stock_stats_indicators_window()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_stockstats_indicator"><code class="docutils literal notranslate"><span class="pre">get_stockstats_indicator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_YFin_data_window"><code class="docutils literal notranslate"><span class="pre">get_YFin_data_window()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_YFin_data_online"><code class="docutils literal notranslate"><span class="pre">get_YFin_data_online()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_YFin_data"><code class="docutils literal notranslate"><span class="pre">get_YFin_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_stock_news_openai"><code class="docutils literal notranslate"><span class="pre">get_stock_news_openai()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_global_news_openai"><code class="docutils literal notranslate"><span class="pre">get_global_news_openai()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_fundamentals_openai"><code class="docutils literal notranslate"><span class="pre">get_fundamentals_openai()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.config.html">tradingagents.dataflows.config</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.config.html#tradingagents.dataflows.config.initialize_config"><code class="docutils literal notranslate"><span class="pre">initialize_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.config.html#tradingagents.dataflows.config.set_config"><code class="docutils literal notranslate"><span class="pre">set_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.config.html#tradingagents.dataflows.config.get_config"><code class="docutils literal notranslate"><span class="pre">get_config()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#market-data-adapters">Market Data Adapters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.yfin_utils.html">tradingagents.dataflows.yfin_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.yfin_utils.html#tradingagents.dataflows.yfin_utils.init_ticker"><code class="docutils literal notranslate"><span class="pre">init_ticker()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.yfin_utils.html#tradingagents.dataflows.yfin_utils.YFinanceUtils"><code class="docutils literal notranslate"><span class="pre">YFinanceUtils</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.finnhub_utils.html">tradingagents.dataflows.finnhub_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.finnhub_utils.html#tradingagents.dataflows.finnhub_utils.get_data_in_range"><code class="docutils literal notranslate"><span class="pre">get_data_in_range()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.googlenews_utils.html">tradingagents.dataflows.googlenews_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.googlenews_utils.html#tradingagents.dataflows.googlenews_utils.is_rate_limited"><code class="docutils literal notranslate"><span class="pre">is_rate_limited()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.googlenews_utils.html#tradingagents.dataflows.googlenews_utils.make_request"><code class="docutils literal notranslate"><span class="pre">make_request()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.googlenews_utils.html#tradingagents.dataflows.googlenews_utils.getNewsData"><code class="docutils literal notranslate"><span class="pre">getNewsData()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.reddit_utils.html">tradingagents.dataflows.reddit_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.reddit_utils.html#tradingagents.dataflows.reddit_utils.fetch_top_from_category"><code class="docutils literal notranslate"><span class="pre">fetch_top_from_category()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.stockstats_utils.html">tradingagents.dataflows.stockstats_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.stockstats_utils.html#tradingagents.dataflows.stockstats_utils.StockstatsUtils"><code class="docutils literal notranslate"><span class="pre">StockstatsUtils</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#graph-signal-processing">Graph &amp; Signal Processing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.graph.trading_graph.html">tradingagents.graph.trading_graph</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.trading_graph.html#tradingagents.graph.trading_graph.TradingAgentsGraph"><code class="docutils literal notranslate"><span class="pre">TradingAgentsGraph</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.graph.signal_processing.html">tradingagents.graph.signal_processing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.signal_processing.html#tradingagents.graph.signal_processing.SignalProcessor"><code class="docutils literal notranslate"><span class="pre">SignalProcessor</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.graph.conditional_logic.html">tradingagents.graph.conditional_logic</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.conditional_logic.html#tradingagents.graph.conditional_logic.ConditionalLogic"><code class="docutils literal notranslate"><span class="pre">ConditionalLogic</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.graph.propagation.html">tradingagents.graph.propagation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.propagation.html#tradingagents.graph.propagation.Propagator"><code class="docutils literal notranslate"><span class="pre">Propagator</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.graph.reflection.html">tradingagents.graph.reflection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.reflection.html#tradingagents.graph.reflection.Reflector"><code class="docutils literal notranslate"><span class="pre">Reflector</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#utilities">Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.agent_states.html">tradingagents.agents.utils.agent_states</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.agent_states.html#tradingagents.agents.utils.agent_states.InvestDebateState"><code class="docutils literal notranslate"><span class="pre">InvestDebateState</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.agent_states.html#tradingagents.agents.utils.agent_states.RiskDebateState"><code class="docutils literal notranslate"><span class="pre">RiskDebateState</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.agent_states.html#tradingagents.agents.utils.agent_states.AgentState"><code class="docutils literal notranslate"><span class="pre">AgentState</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.agent_utils.html">tradingagents.agents.utils.agent_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.agent_utils.html#tradingagents.agents.utils.agent_utils.create_msg_delete"><code class="docutils literal notranslate"><span class="pre">create_msg_delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.agent_utils.html#tradingagents.agents.utils.agent_utils.Toolkit"><code class="docutils literal notranslate"><span class="pre">Toolkit</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.memory.html">tradingagents.agents.utils.memory</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.memory.html#tradingagents.agents.utils.memory.FinancialSituationMemory"><code class="docutils literal notranslate"><span class="pre">FinancialSituationMemory</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.utils.html">tradingagents.dataflows.utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.utils.html#tradingagents.dataflows.utils.save_output"><code class="docutils literal notranslate"><span class="pre">save_output()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.utils.html#tradingagents.dataflows.utils.get_current_date"><code class="docutils literal notranslate"><span class="pre">get_current_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.utils.html#tradingagents.dataflows.utils.decorate_all_methods"><code class="docutils literal notranslate"><span class="pre">decorate_all_methods()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.utils.html#tradingagents.dataflows.utils.get_next_weekday"><code class="docutils literal notranslate"><span class="pre">get_next_weekday()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#v0-3-0-2025-07-15">v0.3.0 (2025-07-15)</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TradingAgents</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">tradingagents.graph.setup</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tradingagents.graph.setup</h1><div class="highlight"><pre>
+<span></span><span class="c1"># TradingAgents/graph/setup.py</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Any</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_openai</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatOpenAI</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langgraph.graph</span><span class="w"> </span><span class="kn">import</span> <span class="n">END</span><span class="p">,</span> <span class="n">StateGraph</span><span class="p">,</span> <span class="n">START</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langgraph.prebuilt</span><span class="w"> </span><span class="kn">import</span> <span class="n">ToolNode</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">tradingagents.agents</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tradingagents.agents.utils.agent_states</span><span class="w"> </span><span class="kn">import</span> <span class="n">AgentState</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tradingagents.agents.utils.agent_utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">Toolkit</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.conditional_logic</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConditionalLogic</span>
+
+
+<div class="viewcode-block" id="GraphSetup">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.graph.setup.html#tradingagents.graph.GraphSetup">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">GraphSetup</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Handles the setup and configuration of the agent graph.&quot;&quot;&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">quick_thinking_llm</span><span class="p">:</span> <span class="n">ChatOpenAI</span><span class="p">,</span>
+        <span class="n">deep_thinking_llm</span><span class="p">:</span> <span class="n">ChatOpenAI</span><span class="p">,</span>
+        <span class="n">toolkit</span><span class="p">:</span> <span class="n">Toolkit</span><span class="p">,</span>
+        <span class="n">tool_nodes</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ToolNode</span><span class="p">],</span>
+        <span class="n">bull_memory</span><span class="p">,</span>
+        <span class="n">bear_memory</span><span class="p">,</span>
+        <span class="n">trader_memory</span><span class="p">,</span>
+        <span class="n">invest_judge_memory</span><span class="p">,</span>
+        <span class="n">risk_manager_memory</span><span class="p">,</span>
+        <span class="n">conditional_logic</span><span class="p">:</span> <span class="n">ConditionalLogic</span><span class="p">,</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize with required components.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">quick_thinking_llm</span> <span class="o">=</span> <span class="n">quick_thinking_llm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deep_thinking_llm</span> <span class="o">=</span> <span class="n">deep_thinking_llm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">toolkit</span> <span class="o">=</span> <span class="n">toolkit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tool_nodes</span> <span class="o">=</span> <span class="n">tool_nodes</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bull_memory</span> <span class="o">=</span> <span class="n">bull_memory</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">bear_memory</span> <span class="o">=</span> <span class="n">bear_memory</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">trader_memory</span> <span class="o">=</span> <span class="n">trader_memory</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">invest_judge_memory</span> <span class="o">=</span> <span class="n">invest_judge_memory</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">risk_manager_memory</span> <span class="o">=</span> <span class="n">risk_manager_memory</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">conditional_logic</span> <span class="o">=</span> <span class="n">conditional_logic</span>
+
+<div class="viewcode-block" id="GraphSetup.setup_graph">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.graph.setup.html#tradingagents.graph.GraphSetup.setup_graph">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">setup_graph</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span> <span class="n">selected_analysts</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;market&quot;</span><span class="p">,</span> <span class="s2">&quot;social&quot;</span><span class="p">,</span> <span class="s2">&quot;news&quot;</span><span class="p">,</span> <span class="s2">&quot;fundamentals&quot;</span><span class="p">]</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Set up and compile the agent workflow graph.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            selected_analysts (list): List of analyst types to include. Options are:</span>
+<span class="sd">                - &quot;market&quot;: Market analyst</span>
+<span class="sd">                - &quot;social&quot;: Social media analyst</span>
+<span class="sd">                - &quot;news&quot;: News analyst</span>
+<span class="sd">                - &quot;fundamentals&quot;: Fundamentals analyst</span>
+<span class="sd">                - &quot;onchain&quot;: On-chain analyst (crypto mode only)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">selected_analysts</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Trading Agents Graph Setup Error: no analysts selected!&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Create analyst nodes</span>
+        <span class="n">analyst_nodes</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">delete_nodes</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">tool_nodes</span> <span class="o">=</span> <span class="p">{}</span>
+
+        <span class="k">if</span> <span class="s2">&quot;market&quot;</span> <span class="ow">in</span> <span class="n">selected_analysts</span><span class="p">:</span>
+            <span class="n">analyst_nodes</span><span class="p">[</span><span class="s2">&quot;market&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">create_market_analyst</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">quick_thinking_llm</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">toolkit</span>
+            <span class="p">)</span>
+            <span class="n">delete_nodes</span><span class="p">[</span><span class="s2">&quot;market&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">create_msg_delete</span><span class="p">()</span>
+            <span class="n">tool_nodes</span><span class="p">[</span><span class="s2">&quot;market&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tool_nodes</span><span class="p">[</span><span class="s2">&quot;market&quot;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="s2">&quot;social&quot;</span> <span class="ow">in</span> <span class="n">selected_analysts</span><span class="p">:</span>
+            <span class="n">analyst_nodes</span><span class="p">[</span><span class="s2">&quot;social&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">create_social_media_analyst</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">quick_thinking_llm</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">toolkit</span>
+            <span class="p">)</span>
+            <span class="n">delete_nodes</span><span class="p">[</span><span class="s2">&quot;social&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">create_msg_delete</span><span class="p">()</span>
+            <span class="n">tool_nodes</span><span class="p">[</span><span class="s2">&quot;social&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tool_nodes</span><span class="p">[</span><span class="s2">&quot;social&quot;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="s2">&quot;news&quot;</span> <span class="ow">in</span> <span class="n">selected_analysts</span><span class="p">:</span>
+            <span class="n">analyst_nodes</span><span class="p">[</span><span class="s2">&quot;news&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">create_news_analyst</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">quick_thinking_llm</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">toolkit</span>
+            <span class="p">)</span>
+            <span class="n">delete_nodes</span><span class="p">[</span><span class="s2">&quot;news&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">create_msg_delete</span><span class="p">()</span>
+            <span class="n">tool_nodes</span><span class="p">[</span><span class="s2">&quot;news&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tool_nodes</span><span class="p">[</span><span class="s2">&quot;news&quot;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="s2">&quot;fundamentals&quot;</span> <span class="ow">in</span> <span class="n">selected_analysts</span><span class="p">:</span>
+            <span class="n">analyst_nodes</span><span class="p">[</span><span class="s2">&quot;fundamentals&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">create_fundamentals_analyst</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">quick_thinking_llm</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">toolkit</span>
+            <span class="p">)</span>
+            <span class="n">delete_nodes</span><span class="p">[</span><span class="s2">&quot;fundamentals&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">create_msg_delete</span><span class="p">()</span>
+            <span class="n">tool_nodes</span><span class="p">[</span><span class="s2">&quot;fundamentals&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tool_nodes</span><span class="p">[</span><span class="s2">&quot;fundamentals&quot;</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="s2">&quot;onchain&quot;</span> <span class="ow">in</span> <span class="n">selected_analysts</span> <span class="ow">and</span> <span class="s2">&quot;onchain&quot;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tool_nodes</span><span class="p">:</span>
+            <span class="n">analyst_nodes</span><span class="p">[</span><span class="s2">&quot;onchain&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">create_onchain_analyst</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">quick_thinking_llm</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">toolkit</span>
+            <span class="p">)</span>
+            <span class="n">delete_nodes</span><span class="p">[</span><span class="s2">&quot;onchain&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">create_msg_delete</span><span class="p">()</span>
+            <span class="n">tool_nodes</span><span class="p">[</span><span class="s2">&quot;onchain&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tool_nodes</span><span class="p">[</span><span class="s2">&quot;onchain&quot;</span><span class="p">]</span>
+
+        <span class="c1"># Create researcher and manager nodes</span>
+        <span class="n">bull_researcher_node</span> <span class="o">=</span> <span class="n">create_bull_researcher</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">quick_thinking_llm</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bull_memory</span>
+        <span class="p">)</span>
+        <span class="n">bear_researcher_node</span> <span class="o">=</span> <span class="n">create_bear_researcher</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">quick_thinking_llm</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">bear_memory</span>
+        <span class="p">)</span>
+        <span class="n">research_manager_node</span> <span class="o">=</span> <span class="n">create_research_manager</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">deep_thinking_llm</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">invest_judge_memory</span>
+        <span class="p">)</span>
+        <span class="n">trader_node</span> <span class="o">=</span> <span class="n">create_trader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">quick_thinking_llm</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">trader_memory</span><span class="p">)</span>
+
+        <span class="c1"># Create risk analysis nodes</span>
+        <span class="n">risky_analyst</span> <span class="o">=</span> <span class="n">create_risky_debator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">quick_thinking_llm</span><span class="p">)</span>
+        <span class="n">neutral_analyst</span> <span class="o">=</span> <span class="n">create_neutral_debator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">quick_thinking_llm</span><span class="p">)</span>
+        <span class="n">safe_analyst</span> <span class="o">=</span> <span class="n">create_safe_debator</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">quick_thinking_llm</span><span class="p">)</span>
+        <span class="n">risk_manager_node</span> <span class="o">=</span> <span class="n">create_risk_manager</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">deep_thinking_llm</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">risk_manager_memory</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Create workflow</span>
+        <span class="n">workflow</span> <span class="o">=</span> <span class="n">StateGraph</span><span class="p">(</span><span class="n">AgentState</span><span class="p">)</span>
+
+        <span class="c1"># Add analyst nodes to the graph</span>
+        <span class="k">for</span> <span class="n">analyst_type</span><span class="p">,</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">analyst_nodes</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">workflow</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">analyst_type</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s2"> Analyst&quot;</span><span class="p">,</span> <span class="n">node</span><span class="p">)</span>
+            <span class="n">workflow</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Msg Clear </span><span class="si">{</span><span class="n">analyst_type</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">delete_nodes</span><span class="p">[</span><span class="n">analyst_type</span><span class="p">]</span>
+            <span class="p">)</span>
+            <span class="n">workflow</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;tools_</span><span class="si">{</span><span class="n">analyst_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">tool_nodes</span><span class="p">[</span><span class="n">analyst_type</span><span class="p">])</span>
+
+        <span class="c1"># Add other nodes</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;Bull Researcher&quot;</span><span class="p">,</span> <span class="n">bull_researcher_node</span><span class="p">)</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;Bear Researcher&quot;</span><span class="p">,</span> <span class="n">bear_researcher_node</span><span class="p">)</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;Research Manager&quot;</span><span class="p">,</span> <span class="n">research_manager_node</span><span class="p">)</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;Trader&quot;</span><span class="p">,</span> <span class="n">trader_node</span><span class="p">)</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;Risky Analyst&quot;</span><span class="p">,</span> <span class="n">risky_analyst</span><span class="p">)</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;Neutral Analyst&quot;</span><span class="p">,</span> <span class="n">neutral_analyst</span><span class="p">)</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;Safe Analyst&quot;</span><span class="p">,</span> <span class="n">safe_analyst</span><span class="p">)</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="s2">&quot;Risk Judge&quot;</span><span class="p">,</span> <span class="n">risk_manager_node</span><span class="p">)</span>
+
+        <span class="c1"># Define edges</span>
+        <span class="c1"># Start with the first analyst</span>
+        <span class="n">first_analyst</span> <span class="o">=</span> <span class="n">selected_analysts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">START</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">first_analyst</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s2"> Analyst&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Connect analysts in sequence</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">analyst_type</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">selected_analysts</span><span class="p">):</span>
+            <span class="n">current_analyst</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">analyst_type</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s2"> Analyst&quot;</span>
+            <span class="n">current_tools</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;tools_</span><span class="si">{</span><span class="n">analyst_type</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">current_clear</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Msg Clear </span><span class="si">{</span><span class="n">analyst_type</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span>
+
+            <span class="c1"># Add conditional edges for current analyst</span>
+            <span class="n">workflow</span><span class="o">.</span><span class="n">add_conditional_edges</span><span class="p">(</span>
+                <span class="n">current_analyst</span><span class="p">,</span>
+                <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">conditional_logic</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;should_continue_</span><span class="si">{</span><span class="n">analyst_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">),</span>
+                <span class="p">[</span><span class="n">current_tools</span><span class="p">,</span> <span class="n">current_clear</span><span class="p">],</span>
+            <span class="p">)</span>
+            <span class="n">workflow</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">current_tools</span><span class="p">,</span> <span class="n">current_analyst</span><span class="p">)</span>
+
+            <span class="c1"># Connect to next analyst or to Bull Researcher if this is the last analyst</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">selected_analysts</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">next_analyst</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">selected_analysts</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">capitalize</span><span class="p">()</span><span class="si">}</span><span class="s2"> Analyst&quot;</span>
+                <span class="n">workflow</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">current_clear</span><span class="p">,</span> <span class="n">next_analyst</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">workflow</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">current_clear</span><span class="p">,</span> <span class="s2">&quot;Bull Researcher&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Add remaining edges</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">add_conditional_edges</span><span class="p">(</span>
+            <span class="s2">&quot;Bull Researcher&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">conditional_logic</span><span class="o">.</span><span class="n">should_continue_debate</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;Bear Researcher&quot;</span><span class="p">:</span> <span class="s2">&quot;Bear Researcher&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Research Manager&quot;</span><span class="p">:</span> <span class="s2">&quot;Research Manager&quot;</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">add_conditional_edges</span><span class="p">(</span>
+            <span class="s2">&quot;Bear Researcher&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">conditional_logic</span><span class="o">.</span><span class="n">should_continue_debate</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;Bull Researcher&quot;</span><span class="p">:</span> <span class="s2">&quot;Bull Researcher&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Research Manager&quot;</span><span class="p">:</span> <span class="s2">&quot;Research Manager&quot;</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;Research Manager&quot;</span><span class="p">,</span> <span class="s2">&quot;Trader&quot;</span><span class="p">)</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;Trader&quot;</span><span class="p">,</span> <span class="s2">&quot;Risky Analyst&quot;</span><span class="p">)</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">add_conditional_edges</span><span class="p">(</span>
+            <span class="s2">&quot;Risky Analyst&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">conditional_logic</span><span class="o">.</span><span class="n">should_continue_risk_analysis</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;Safe Analyst&quot;</span><span class="p">:</span> <span class="s2">&quot;Safe Analyst&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Risk Judge&quot;</span><span class="p">:</span> <span class="s2">&quot;Risk Judge&quot;</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">add_conditional_edges</span><span class="p">(</span>
+            <span class="s2">&quot;Safe Analyst&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">conditional_logic</span><span class="o">.</span><span class="n">should_continue_risk_analysis</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;Neutral Analyst&quot;</span><span class="p">:</span> <span class="s2">&quot;Neutral Analyst&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Risk Judge&quot;</span><span class="p">:</span> <span class="s2">&quot;Risk Judge&quot;</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+        <span class="n">workflow</span><span class="o">.</span><span class="n">add_conditional_edges</span><span class="p">(</span>
+            <span class="s2">&quot;Neutral Analyst&quot;</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">conditional_logic</span><span class="o">.</span><span class="n">should_continue_risk_analysis</span><span class="p">,</span>
+            <span class="p">{</span>
+                <span class="s2">&quot;Risky Analyst&quot;</span><span class="p">:</span> <span class="s2">&quot;Risky Analyst&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;Risk Judge&quot;</span><span class="p">:</span> <span class="s2">&quot;Risk Judge&quot;</span><span class="p">,</span>
+            <span class="p">},</span>
+        <span class="p">)</span>
+
+        <span class="n">workflow</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="s2">&quot;Risk Judge&quot;</span><span class="p">,</span> <span class="n">END</span><span class="p">)</span>
+
+        <span class="c1"># Compile and return</span>
+        <span class="k">return</span> <span class="n">workflow</span><span class="o">.</span><span class="n">compile</span><span class="p">()</span></div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, TauricResearch.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

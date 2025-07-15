@@ -1,0 +1,815 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tradingagents.dataflows.ccxt_adapters &mdash; TradingAgents 0.3.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=e259d695"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            TradingAgents
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#quick-install">Quick Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#development-installation">Development Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#redis-setup-recommended">Redis Setup (Recommended)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#environment-configuration">Environment Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#verification">Verification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#basic-usage">Basic Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#running-with-caching">Running with Caching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#multi-agent-example">Multi-Agent Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#on-chain-analytics">On-Chain Analytics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#cli-interface">CLI Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/index.html">Tutorials</a><ul class="simple">
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#core-modules">Core Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html">tradingagents.agents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.FinancialSituationMemory"><code class="docutils literal notranslate"><span class="pre">FinancialSituationMemory</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.Toolkit"><code class="docutils literal notranslate"><span class="pre">Toolkit</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.AgentState"><code class="docutils literal notranslate"><span class="pre">AgentState</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_msg_delete"><code class="docutils literal notranslate"><span class="pre">create_msg_delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.InvestDebateState"><code class="docutils literal notranslate"><span class="pre">InvestDebateState</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.RiskDebateState"><code class="docutils literal notranslate"><span class="pre">RiskDebateState</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_bear_researcher"><code class="docutils literal notranslate"><span class="pre">create_bear_researcher()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_bull_researcher"><code class="docutils literal notranslate"><span class="pre">create_bull_researcher()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_research_manager"><code class="docutils literal notranslate"><span class="pre">create_research_manager()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_fundamentals_analyst"><code class="docutils literal notranslate"><span class="pre">create_fundamentals_analyst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_market_analyst"><code class="docutils literal notranslate"><span class="pre">create_market_analyst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_neutral_debator"><code class="docutils literal notranslate"><span class="pre">create_neutral_debator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_news_analyst"><code class="docutils literal notranslate"><span class="pre">create_news_analyst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_onchain_analyst"><code class="docutils literal notranslate"><span class="pre">create_onchain_analyst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_risky_debator"><code class="docutils literal notranslate"><span class="pre">create_risky_debator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_risk_manager"><code class="docutils literal notranslate"><span class="pre">create_risk_manager()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_safe_debator"><code class="docutils literal notranslate"><span class="pre">create_safe_debator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_social_media_analyst"><code class="docutils literal notranslate"><span class="pre">create_social_media_analyst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_trader"><code class="docutils literal notranslate"><span class="pre">create_trader()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html">tradingagents.dataflows</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_finnhub_news"><code class="docutils literal notranslate"><span class="pre">get_finnhub_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_finnhub_company_insider_sentiment"><code class="docutils literal notranslate"><span class="pre">get_finnhub_company_insider_sentiment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_finnhub_company_insider_transactions"><code class="docutils literal notranslate"><span class="pre">get_finnhub_company_insider_transactions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_google_news"><code class="docutils literal notranslate"><span class="pre">get_google_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_reddit_global_news"><code class="docutils literal notranslate"><span class="pre">get_reddit_global_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_reddit_company_news"><code class="docutils literal notranslate"><span class="pre">get_reddit_company_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_simfin_balance_sheet"><code class="docutils literal notranslate"><span class="pre">get_simfin_balance_sheet()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_simfin_cashflow"><code class="docutils literal notranslate"><span class="pre">get_simfin_cashflow()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_simfin_income_statements"><code class="docutils literal notranslate"><span class="pre">get_simfin_income_statements()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_stock_stats_indicators_window"><code class="docutils literal notranslate"><span class="pre">get_stock_stats_indicators_window()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_stockstats_indicator"><code class="docutils literal notranslate"><span class="pre">get_stockstats_indicator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_YFin_data_window"><code class="docutils literal notranslate"><span class="pre">get_YFin_data_window()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_YFin_data"><code class="docutils literal notranslate"><span class="pre">get_YFin_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.ccxt_adapters.html">tradingagents.dataflows.ccxt_adapters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.config.html">tradingagents.dataflows.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html">tradingagents.dataflows.crypto_cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_utils.html">tradingagents.dataflows.crypto_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.finnhub_utils.html">tradingagents.dataflows.finnhub_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.googlenews_utils.html">tradingagents.dataflows.googlenews_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html">tradingagents.dataflows.interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.metric_registry.html">tradingagents.dataflows.metric_registry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.onchain_loader.html">tradingagents.dataflows.onchain_loader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.reddit_utils.html">tradingagents.dataflows.reddit_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.stockstats_utils.html">tradingagents.dataflows.stockstats_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.utils.html">tradingagents.dataflows.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.yfin_utils.html">tradingagents.dataflows.yfin_utils</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.graph.html">tradingagents.graph</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.html#tradingagents.graph.TradingAgentsGraph"><code class="docutils literal notranslate"><span class="pre">TradingAgentsGraph</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.html#tradingagents.graph.ConditionalLogic"><code class="docutils literal notranslate"><span class="pre">ConditionalLogic</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.html#tradingagents.graph.GraphSetup"><code class="docutils literal notranslate"><span class="pre">GraphSetup</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.html#tradingagents.graph.Propagator"><code class="docutils literal notranslate"><span class="pre">Propagator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.html#tradingagents.graph.Reflector"><code class="docutils literal notranslate"><span class="pre">Reflector</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.html#tradingagents.graph.SignalProcessor"><code class="docutils literal notranslate"><span class="pre">SignalProcessor</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.conditional_logic.html">tradingagents.graph.conditional_logic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.propagation.html">tradingagents.graph.propagation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.reflection.html">tradingagents.graph.reflection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.setup.html">tradingagents.graph.setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.signal_processing.html">tradingagents.graph.signal_processing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.trading_graph.html">tradingagents.graph.trading_graph</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#agents">Agents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.fundamentals_analyst.html">tradingagents.agents.analysts.fundamentals_analyst</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.fundamentals_analyst.html#tradingagents.agents.analysts.fundamentals_analyst.create_fundamentals_analyst"><code class="docutils literal notranslate"><span class="pre">create_fundamentals_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.market_analyst.html">tradingagents.agents.analysts.market_analyst</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.market_analyst.html#tradingagents.agents.analysts.market_analyst.create_market_analyst"><code class="docutils literal notranslate"><span class="pre">create_market_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.news_analyst.html">tradingagents.agents.analysts.news_analyst</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.news_analyst.html#tradingagents.agents.analysts.news_analyst.create_news_analyst"><code class="docutils literal notranslate"><span class="pre">create_news_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.onchain_analyst.html">tradingagents.agents.analysts.onchain_analyst</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.onchain_analyst.html#tradingagents.agents.analysts.onchain_analyst.create_onchain_analyst"><code class="docutils literal notranslate"><span class="pre">create_onchain_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.social_media_analyst.html">tradingagents.agents.analysts.social_media_analyst</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.social_media_analyst.html#tradingagents.agents.analysts.social_media_analyst.create_social_media_analyst"><code class="docutils literal notranslate"><span class="pre">create_social_media_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.managers.research_manager.html">tradingagents.agents.managers.research_manager</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.managers.research_manager.html#tradingagents.agents.managers.research_manager.create_research_manager"><code class="docutils literal notranslate"><span class="pre">create_research_manager()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.managers.risk_manager.html">tradingagents.agents.managers.risk_manager</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.managers.risk_manager.html#tradingagents.agents.managers.risk_manager.create_risk_manager"><code class="docutils literal notranslate"><span class="pre">create_risk_manager()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.researchers.bear_researcher.html">tradingagents.agents.researchers.bear_researcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.researchers.bear_researcher.html#tradingagents.agents.researchers.bear_researcher.create_bear_researcher"><code class="docutils literal notranslate"><span class="pre">create_bear_researcher()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.researchers.bull_researcher.html">tradingagents.agents.researchers.bull_researcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.researchers.bull_researcher.html#tradingagents.agents.researchers.bull_researcher.create_bull_researcher"><code class="docutils literal notranslate"><span class="pre">create_bull_researcher()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.risk_mgmt.aggresive_debator.html">tradingagents.agents.risk_mgmt.aggresive_debator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.risk_mgmt.aggresive_debator.html#tradingagents.agents.risk_mgmt.aggresive_debator.create_risky_debator"><code class="docutils literal notranslate"><span class="pre">create_risky_debator()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.risk_mgmt.conservative_debator.html">tradingagents.agents.risk_mgmt.conservative_debator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.risk_mgmt.conservative_debator.html#tradingagents.agents.risk_mgmt.conservative_debator.create_safe_debator"><code class="docutils literal notranslate"><span class="pre">create_safe_debator()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.risk_mgmt.neutral_debator.html">tradingagents.agents.risk_mgmt.neutral_debator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.risk_mgmt.neutral_debator.html#tradingagents.agents.risk_mgmt.neutral_debator.create_neutral_debator"><code class="docutils literal notranslate"><span class="pre">create_neutral_debator()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.trader.trader.html">tradingagents.agents.trader.trader</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.trader.trader.html#tradingagents.agents.trader.trader.create_trader"><code class="docutils literal notranslate"><span class="pre">create_trader()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#data-infrastructure">Data Infrastructure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.ccxt_adapters.html">tradingagents.dataflows.ccxt_adapters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.ccxt_adapters.html#tradingagents.dataflows.ccxt_adapters.ExchangeConfig"><code class="docutils literal notranslate"><span class="pre">ExchangeConfig</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.ccxt_adapters.html#tradingagents.dataflows.ccxt_adapters.init_exchange_client"><code class="docutils literal notranslate"><span class="pre">init_exchange_client()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.ccxt_adapters.html#tradingagents.dataflows.ccxt_adapters.CCXTAdapters"><code class="docutils literal notranslate"><span class="pre">CCXTAdapters</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html">tradingagents.dataflows.crypto_cache</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.DataVolatility"><code class="docutils literal notranslate"><span class="pre">DataVolatility</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.SmartTTLStrategy"><code class="docutils literal notranslate"><span class="pre">SmartTTLStrategy</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.CryptoCacheManager"><code class="docutils literal notranslate"><span class="pre">CryptoCacheManager</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.get_cache_manager"><code class="docutils literal notranslate"><span class="pre">get_cache_manager()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.cache_crypto_request"><code class="docutils literal notranslate"><span class="pre">cache_crypto_request()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_utils.html">tradingagents.dataflows.crypto_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_utils.html#tradingagents.dataflows.crypto_utils.init_crypto_client"><code class="docutils literal notranslate"><span class="pre">init_crypto_client()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_utils.html#tradingagents.dataflows.crypto_utils.CryptoUtils"><code class="docutils literal notranslate"><span class="pre">CryptoUtils</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.metric_registry.html">tradingagents.dataflows.metric_registry</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.DataProvider"><code class="docutils literal notranslate"><span class="pre">DataProvider</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.BatchOptimizer"><code class="docutils literal notranslate"><span class="pre">BatchOptimizer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.MetricRegistry"><code class="docutils literal notranslate"><span class="pre">MetricRegistry</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.get_metric_registry"><code class="docutils literal notranslate"><span class="pre">get_metric_registry()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.onchain_loader.html">tradingagents.dataflows.onchain_loader</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.onchain_loader.html#tradingagents.dataflows.onchain_loader.OnChainLoader"><code class="docutils literal notranslate"><span class="pre">OnChainLoader</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.onchain_loader.html#tradingagents.dataflows.onchain_loader.get_onchain_loader"><code class="docutils literal notranslate"><span class="pre">get_onchain_loader()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html">tradingagents.dataflows.interface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_finnhub_news"><code class="docutils literal notranslate"><span class="pre">get_finnhub_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_crypto_data_online"><code class="docutils literal notranslate"><span class="pre">get_crypto_data_online()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_crypto_info_online"><code class="docutils literal notranslate"><span class="pre">get_crypto_info_online()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_exchange_ohlcv_data"><code class="docutils literal notranslate"><span class="pre">get_exchange_ohlcv_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_exchange_order_book"><code class="docutils literal notranslate"><span class="pre">get_exchange_order_book()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.compare_crypto_exchanges"><code class="docutils literal notranslate"><span class="pre">compare_crypto_exchanges()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_supported_crypto_exchanges"><code class="docutils literal notranslate"><span class="pre">get_supported_crypto_exchanges()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_onchain_network_health"><code class="docutils literal notranslate"><span class="pre">get_onchain_network_health()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_onchain_market_indicators"><code class="docutils literal notranslate"><span class="pre">get_onchain_market_indicators()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_onchain_comprehensive_analysis"><code class="docutils literal notranslate"><span class="pre">get_onchain_comprehensive_analysis()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_metric_registry_data"><code class="docutils literal notranslate"><span class="pre">get_metric_registry_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_finnhub_company_insider_sentiment"><code class="docutils literal notranslate"><span class="pre">get_finnhub_company_insider_sentiment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_finnhub_company_insider_transactions"><code class="docutils literal notranslate"><span class="pre">get_finnhub_company_insider_transactions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_simfin_balance_sheet"><code class="docutils literal notranslate"><span class="pre">get_simfin_balance_sheet()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_simfin_cashflow"><code class="docutils literal notranslate"><span class="pre">get_simfin_cashflow()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_simfin_income_statements"><code class="docutils literal notranslate"><span class="pre">get_simfin_income_statements()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_google_news"><code class="docutils literal notranslate"><span class="pre">get_google_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_reddit_global_news"><code class="docutils literal notranslate"><span class="pre">get_reddit_global_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_reddit_company_news"><code class="docutils literal notranslate"><span class="pre">get_reddit_company_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_stock_stats_indicators_window"><code class="docutils literal notranslate"><span class="pre">get_stock_stats_indicators_window()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_stockstats_indicator"><code class="docutils literal notranslate"><span class="pre">get_stockstats_indicator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_YFin_data_window"><code class="docutils literal notranslate"><span class="pre">get_YFin_data_window()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_YFin_data_online"><code class="docutils literal notranslate"><span class="pre">get_YFin_data_online()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_YFin_data"><code class="docutils literal notranslate"><span class="pre">get_YFin_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_stock_news_openai"><code class="docutils literal notranslate"><span class="pre">get_stock_news_openai()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_global_news_openai"><code class="docutils literal notranslate"><span class="pre">get_global_news_openai()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_fundamentals_openai"><code class="docutils literal notranslate"><span class="pre">get_fundamentals_openai()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.config.html">tradingagents.dataflows.config</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.config.html#tradingagents.dataflows.config.initialize_config"><code class="docutils literal notranslate"><span class="pre">initialize_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.config.html#tradingagents.dataflows.config.set_config"><code class="docutils literal notranslate"><span class="pre">set_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.config.html#tradingagents.dataflows.config.get_config"><code class="docutils literal notranslate"><span class="pre">get_config()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#market-data-adapters">Market Data Adapters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.yfin_utils.html">tradingagents.dataflows.yfin_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.yfin_utils.html#tradingagents.dataflows.yfin_utils.init_ticker"><code class="docutils literal notranslate"><span class="pre">init_ticker()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.yfin_utils.html#tradingagents.dataflows.yfin_utils.YFinanceUtils"><code class="docutils literal notranslate"><span class="pre">YFinanceUtils</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.finnhub_utils.html">tradingagents.dataflows.finnhub_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.finnhub_utils.html#tradingagents.dataflows.finnhub_utils.get_data_in_range"><code class="docutils literal notranslate"><span class="pre">get_data_in_range()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.googlenews_utils.html">tradingagents.dataflows.googlenews_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.googlenews_utils.html#tradingagents.dataflows.googlenews_utils.is_rate_limited"><code class="docutils literal notranslate"><span class="pre">is_rate_limited()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.googlenews_utils.html#tradingagents.dataflows.googlenews_utils.make_request"><code class="docutils literal notranslate"><span class="pre">make_request()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.googlenews_utils.html#tradingagents.dataflows.googlenews_utils.getNewsData"><code class="docutils literal notranslate"><span class="pre">getNewsData()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.reddit_utils.html">tradingagents.dataflows.reddit_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.reddit_utils.html#tradingagents.dataflows.reddit_utils.fetch_top_from_category"><code class="docutils literal notranslate"><span class="pre">fetch_top_from_category()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.stockstats_utils.html">tradingagents.dataflows.stockstats_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.stockstats_utils.html#tradingagents.dataflows.stockstats_utils.StockstatsUtils"><code class="docutils literal notranslate"><span class="pre">StockstatsUtils</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#graph-signal-processing">Graph &amp; Signal Processing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.graph.trading_graph.html">tradingagents.graph.trading_graph</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.trading_graph.html#tradingagents.graph.trading_graph.TradingAgentsGraph"><code class="docutils literal notranslate"><span class="pre">TradingAgentsGraph</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.graph.signal_processing.html">tradingagents.graph.signal_processing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.signal_processing.html#tradingagents.graph.signal_processing.SignalProcessor"><code class="docutils literal notranslate"><span class="pre">SignalProcessor</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.graph.conditional_logic.html">tradingagents.graph.conditional_logic</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.conditional_logic.html#tradingagents.graph.conditional_logic.ConditionalLogic"><code class="docutils literal notranslate"><span class="pre">ConditionalLogic</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.graph.propagation.html">tradingagents.graph.propagation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.propagation.html#tradingagents.graph.propagation.Propagator"><code class="docutils literal notranslate"><span class="pre">Propagator</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.graph.reflection.html">tradingagents.graph.reflection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.reflection.html#tradingagents.graph.reflection.Reflector"><code class="docutils literal notranslate"><span class="pre">Reflector</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#utilities">Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.agent_states.html">tradingagents.agents.utils.agent_states</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.agent_states.html#tradingagents.agents.utils.agent_states.InvestDebateState"><code class="docutils literal notranslate"><span class="pre">InvestDebateState</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.agent_states.html#tradingagents.agents.utils.agent_states.RiskDebateState"><code class="docutils literal notranslate"><span class="pre">RiskDebateState</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.agent_states.html#tradingagents.agents.utils.agent_states.AgentState"><code class="docutils literal notranslate"><span class="pre">AgentState</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.agent_utils.html">tradingagents.agents.utils.agent_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.agent_utils.html#tradingagents.agents.utils.agent_utils.create_msg_delete"><code class="docutils literal notranslate"><span class="pre">create_msg_delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.agent_utils.html#tradingagents.agents.utils.agent_utils.Toolkit"><code class="docutils literal notranslate"><span class="pre">Toolkit</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.memory.html">tradingagents.agents.utils.memory</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.memory.html#tradingagents.agents.utils.memory.FinancialSituationMemory"><code class="docutils literal notranslate"><span class="pre">FinancialSituationMemory</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.utils.html">tradingagents.dataflows.utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.utils.html#tradingagents.dataflows.utils.save_output"><code class="docutils literal notranslate"><span class="pre">save_output()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.utils.html#tradingagents.dataflows.utils.get_current_date"><code class="docutils literal notranslate"><span class="pre">get_current_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.utils.html#tradingagents.dataflows.utils.decorate_all_methods"><code class="docutils literal notranslate"><span class="pre">decorate_all_methods()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.utils.html#tradingagents.dataflows.utils.get_next_weekday"><code class="docutils literal notranslate"><span class="pre">get_next_weekday()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#v0-3-0-2025-07-15">v0.3.0 (2025-07-15)</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TradingAgents</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">tradingagents.dataflows.ccxt_adapters</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tradingagents.dataflows.ccxt_adapters</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;CCXT adapters for exchange-specific OHLCV and order book depth data.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">ccxt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">wraps</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.crypto_cache</span><span class="w"> </span><span class="kn">import</span> <span class="n">cache_crypto_request</span><span class="p">,</span> <span class="n">get_cache_manager</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">decorate_all_methods</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="ExchangeConfig">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.ccxt_adapters.html#tradingagents.dataflows.ccxt_adapters.ExchangeConfig">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">ExchangeConfig</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configuration for supported exchanges with their capabilities.&quot;&quot;&quot;</span>
+    
+    <span class="n">SUPPORTED_EXCHANGES</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="s1">&#39;binance&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="n">ccxt</span><span class="o">.</span><span class="n">binance</span><span class="p">,</span>
+            <span class="s1">&#39;has_ohlcv&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s1">&#39;has_order_book&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s1">&#39;rate_limit&#39;</span><span class="p">:</span> <span class="mi">1200</span><span class="p">,</span>  <span class="c1"># requests per minute</span>
+            <span class="s1">&#39;sandbox&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s1">&#39;fees&#39;</span><span class="p">:</span> <span class="mf">0.001</span>  <span class="c1"># 0.1% trading fee</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;coinbase&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="n">ccxt</span><span class="o">.</span><span class="n">coinbase</span><span class="p">,</span>
+            <span class="s1">&#39;has_ohlcv&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s1">&#39;has_order_book&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s1">&#39;rate_limit&#39;</span><span class="p">:</span> <span class="mi">600</span><span class="p">,</span>
+            <span class="s1">&#39;sandbox&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s1">&#39;fees&#39;</span><span class="p">:</span> <span class="mf">0.005</span>  <span class="c1"># 0.5% trading fee</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;kraken&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="n">ccxt</span><span class="o">.</span><span class="n">kraken</span><span class="p">,</span>
+            <span class="s1">&#39;has_ohlcv&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s1">&#39;has_order_book&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s1">&#39;rate_limit&#39;</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+            <span class="s1">&#39;sandbox&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s1">&#39;fees&#39;</span><span class="p">:</span> <span class="mf">0.0026</span>  <span class="c1"># 0.26% trading fee</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;okx&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="n">ccxt</span><span class="o">.</span><span class="n">okx</span><span class="p">,</span>
+            <span class="s1">&#39;has_ohlcv&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s1">&#39;has_order_book&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s1">&#39;rate_limit&#39;</span><span class="p">:</span> <span class="mi">1200</span><span class="p">,</span>
+            <span class="s1">&#39;sandbox&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s1">&#39;fees&#39;</span><span class="p">:</span> <span class="mf">0.001</span>  <span class="c1"># 0.1% trading fee</span>
+        <span class="p">},</span>
+        <span class="s1">&#39;huobi&#39;</span><span class="p">:</span> <span class="p">{</span>
+            <span class="s1">&#39;class&#39;</span><span class="p">:</span> <span class="n">ccxt</span><span class="o">.</span><span class="n">huobi</span><span class="p">,</span>
+            <span class="s1">&#39;has_ohlcv&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s1">&#39;has_order_book&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="s1">&#39;rate_limit&#39;</span><span class="p">:</span> <span class="mi">600</span><span class="p">,</span>
+            <span class="s1">&#39;sandbox&#39;</span><span class="p">:</span> <span class="kc">False</span><span class="p">,</span>
+            <span class="s1">&#39;fees&#39;</span><span class="p">:</span> <span class="mf">0.002</span>  <span class="c1"># 0.2% trading fee</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+<div class="viewcode-block" id="ExchangeConfig.get_exchange_info">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.ccxt_adapters.html#tradingagents.dataflows.ccxt_adapters.ExchangeConfig.get_exchange_info">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_exchange_info</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">exchange_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get configuration info for a specific exchange.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="o">.</span><span class="n">SUPPORTED_EXCHANGES</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">exchange_name</span><span class="o">.</span><span class="n">lower</span><span class="p">())</span></div>
+
+
+<div class="viewcode-block" id="ExchangeConfig.list_exchanges">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.ccxt_adapters.html#tradingagents.dataflows.ccxt_adapters.ExchangeConfig.list_exchanges">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">list_exchanges</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;List all supported exchange names.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="bp">cls</span><span class="o">.</span><span class="n">SUPPORTED_EXCHANGES</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="init_exchange_client">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.ccxt_adapters.html#tradingagents.dataflows.ccxt_adapters.init_exchange_client">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">init_exchange_client</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Decorator to initialize exchange client and handle rate limiting.&quot;&quot;&quot;</span>
+    
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exchange_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">symbol</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">exchange_config</span> <span class="o">=</span> <span class="n">ExchangeConfig</span><span class="o">.</span><span class="n">get_exchange_info</span><span class="p">(</span><span class="n">exchange_name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">exchange_config</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unsupported exchange: </span><span class="si">{</span><span class="n">exchange_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Get or create exchange client</span>
+        <span class="n">client</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_exchange_client</span><span class="p">(</span><span class="n">exchange_name</span><span class="p">,</span> <span class="n">exchange_config</span><span class="p">)</span>
+        
+        <span class="c1"># Rate limiting</span>
+        <span class="n">rate_limit</span> <span class="o">=</span> <span class="n">exchange_config</span><span class="p">[</span><span class="s1">&#39;rate_limit&#39;</span><span class="p">]</span>
+        <span class="n">min_interval</span> <span class="o">=</span> <span class="mf">60.0</span> <span class="o">/</span> <span class="n">rate_limit</span>  <span class="c1"># seconds between requests</span>
+        
+        <span class="n">current_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">last_request_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;last_request_</span><span class="si">{</span><span class="n">exchange_name</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">last_request</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">last_request_key</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">current_time</span> <span class="o">-</span> <span class="n">last_request</span> <span class="o">&lt;</span> <span class="n">min_interval</span><span class="p">:</span>
+            <span class="n">sleep_time</span> <span class="o">=</span> <span class="n">min_interval</span> <span class="o">-</span> <span class="p">(</span><span class="n">current_time</span> <span class="o">-</span> <span class="n">last_request</span><span class="p">)</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">sleep_time</span><span class="p">)</span>
+        
+        <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">last_request_key</span><span class="p">,</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())</span>
+        
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">,</span> <span class="n">symbol</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    
+    <span class="k">return</span> <span class="n">wrapper</span></div>
+
+
+
+<div class="viewcode-block" id="CCXTAdapters">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.ccxt_adapters.html#tradingagents.dataflows.ccxt_adapters.CCXTAdapters">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CCXTAdapters</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;CCXT adapters for exchange-specific cryptocurrency data.&quot;&quot;&quot;</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize CCXT adapters with exchange clients cache.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_exchange_clients</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache_manager</span> <span class="o">=</span> <span class="n">get_cache_manager</span><span class="p">()</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;🏦 CCXTAdapters initialized&quot;</span><span class="p">)</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_exchange_client</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exchange_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">config</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">ccxt</span><span class="o">.</span><span class="n">Exchange</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get or create exchange client with proper configuration.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">exchange_name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exchange_clients</span><span class="p">:</span>
+            <span class="n">exchange_class</span> <span class="o">=</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;class&#39;</span><span class="p">]</span>
+            
+            <span class="c1"># Initialize with sandbox mode if available</span>
+            <span class="n">params</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;rateLimit&#39;</span><span class="p">:</span> <span class="mi">60000</span> <span class="o">/</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;rate_limit&#39;</span><span class="p">],</span>  <span class="c1"># Convert to milliseconds</span>
+                <span class="s1">&#39;enableRateLimit&#39;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+            <span class="p">}</span>
+            
+            <span class="k">if</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sandbox&#39;</span><span class="p">):</span>
+                <span class="n">params</span><span class="p">[</span><span class="s1">&#39;sandbox&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+            
+            <span class="n">client</span> <span class="o">=</span> <span class="n">exchange_class</span><span class="p">(</span><span class="n">params</span><span class="p">)</span>
+            
+            <span class="c1"># Test connection</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">client</span><span class="o">.</span><span class="n">load_markets</span><span class="p">()</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Connected to </span><span class="si">{</span><span class="n">exchange_name</span><span class="si">}</span><span class="s2"> exchange&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;⚠️  Connection warning for </span><span class="si">{</span><span class="n">exchange_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            
+            <span class="bp">self</span><span class="o">.</span><span class="n">_exchange_clients</span><span class="p">[</span><span class="n">exchange_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">client</span>
+        
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_exchange_clients</span><span class="p">[</span><span class="n">exchange_name</span><span class="p">]</span>
+
+    <span class="nd">@cache_crypto_request</span><span class="p">(</span><span class="s2">&quot;ccxt_ohlcv&quot;</span><span class="p">,</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+    <span class="nd">@init_exchange_client</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fetch_ohlcv</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">ccxt</span><span class="o">.</span><span class="n">Exchange</span><span class="p">,</span> <span class="n">symbol</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
+                   <span class="n">timeframe</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;1h&#39;</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fetch OHLCV data from specific exchange.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            client: CCXT exchange client</span>
+<span class="sd">            symbol: Trading pair symbol (e.g., &#39;BTC/USDT&#39;)</span>
+<span class="sd">            timeframe: Candlestick timeframe (&#39;1m&#39;, &#39;5m&#39;, &#39;1h&#39;, &#39;1d&#39;, etc.)</span>
+<span class="sd">            limit: Number of candlesticks to fetch</span>
+<span class="sd">            </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            DataFrame with OHLCV data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Ensure symbol is available on the exchange</span>
+            <span class="k">if</span> <span class="n">symbol</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">client</span><span class="o">.</span><span class="n">symbols</span><span class="p">:</span>
+                <span class="c1"># Try common variations</span>
+                <span class="n">variations</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="n">symbol</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;USDT&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;USDT&#39;</span><span class="p">,</span> <span class="s1">&#39;/USDT&#39;</span><span class="p">),</span>
+                    <span class="n">symbol</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;USD&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;USD&#39;</span><span class="p">,</span> <span class="s1">&#39;/USD&#39;</span><span class="p">),</span>
+                    <span class="n">symbol</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">),</span>
+                <span class="p">]</span>
+                <span class="k">for</span> <span class="n">variation</span> <span class="ow">in</span> <span class="n">variations</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">variation</span> <span class="ow">in</span> <span class="n">client</span><span class="o">.</span><span class="n">symbols</span><span class="p">:</span>
+                        <span class="n">symbol</span> <span class="o">=</span> <span class="n">variation</span>
+                        <span class="k">break</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">available_symbols</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">client</span><span class="o">.</span><span class="n">symbols</span> <span class="k">if</span> <span class="n">symbol</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">s</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">available_symbols</span><span class="p">:</span>
+                        <span class="n">symbol</span> <span class="o">=</span> <span class="n">available_symbols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Using available symbol: </span><span class="si">{</span><span class="n">symbol</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Symbol </span><span class="si">{</span><span class="n">symbol</span><span class="si">}</span><span class="s2"> not found on </span><span class="si">{</span><span class="n">client</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            
+            <span class="c1"># Fetch OHLCV data</span>
+            <span class="n">ohlcv_data</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">fetch_ohlcv</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="n">timeframe</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="n">limit</span><span class="p">)</span>
+            
+            <span class="c1"># Convert to DataFrame</span>
+            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">ohlcv_data</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">,</span> <span class="s1">&#39;open&#39;</span><span class="p">,</span> <span class="s1">&#39;high&#39;</span><span class="p">,</span> <span class="s1">&#39;low&#39;</span><span class="p">,</span> <span class="s1">&#39;close&#39;</span><span class="p">,</span> <span class="s1">&#39;volume&#39;</span><span class="p">])</span>
+            <span class="n">df</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s1">&#39;timestamp&#39;</span><span class="p">],</span> <span class="n">unit</span><span class="o">=</span><span class="s1">&#39;ms&#39;</span><span class="p">)</span>
+            <span class="n">df</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s1">&#39;timestamp&#39;</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            
+            <span class="c1"># Add exchange info</span>
+            <span class="n">df</span><span class="p">[</span><span class="s1">&#39;exchange&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">name</span>
+            <span class="n">df</span><span class="p">[</span><span class="s1">&#39;symbol&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">symbol</span>
+            <span class="n">df</span><span class="p">[</span><span class="s1">&#39;timeframe&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">timeframe</span>
+            
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;📊 Fetched </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span><span class="si">}</span><span class="s2"> OHLCV candles for </span><span class="si">{</span><span class="n">symbol</span><span class="si">}</span><span class="s2"> from </span><span class="si">{</span><span class="n">client</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">df</span>
+            
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Failed to fetch OHLCV from </span><span class="si">{</span><span class="n">client</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">raise</span>
+
+    <span class="nd">@cache_crypto_request</span><span class="p">(</span><span class="s2">&quot;ccxt_orderbook&quot;</span><span class="p">,</span> <span class="n">ttl</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+    <span class="nd">@init_exchange_client</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fetch_order_book</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">client</span><span class="p">:</span> <span class="n">ccxt</span><span class="o">.</span><span class="n">Exchange</span><span class="p">,</span> <span class="n">symbol</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> 
+                        <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fetch order book depth from specific exchange.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            client: CCXT exchange client</span>
+<span class="sd">            symbol: Trading pair symbol (e.g., &#39;BTC/USDT&#39;)</span>
+<span class="sd">            limit: Number of order book levels to fetch</span>
+<span class="sd">            </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary with order book data and analysis</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Ensure symbol is available</span>
+            <span class="k">if</span> <span class="n">symbol</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">client</span><span class="o">.</span><span class="n">symbols</span><span class="p">:</span>
+                <span class="c1"># Try common variations (same logic as OHLCV)</span>
+                <span class="n">variations</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="n">symbol</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;USDT&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;USDT&#39;</span><span class="p">,</span> <span class="s1">&#39;/USDT&#39;</span><span class="p">),</span>
+                    <span class="n">symbol</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="s1">&#39;USD&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;USD&#39;</span><span class="p">,</span> <span class="s1">&#39;/USD&#39;</span><span class="p">),</span>
+                    <span class="n">symbol</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;/&#39;</span><span class="p">),</span>
+                <span class="p">]</span>
+                <span class="k">for</span> <span class="n">variation</span> <span class="ow">in</span> <span class="n">variations</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">variation</span> <span class="ow">in</span> <span class="n">client</span><span class="o">.</span><span class="n">symbols</span><span class="p">:</span>
+                        <span class="n">symbol</span> <span class="o">=</span> <span class="n">variation</span>
+                        <span class="k">break</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">available_symbols</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">client</span><span class="o">.</span><span class="n">symbols</span> <span class="k">if</span> <span class="n">symbol</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">in</span> <span class="n">s</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">available_symbols</span><span class="p">:</span>
+                        <span class="n">symbol</span> <span class="o">=</span> <span class="n">available_symbols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Symbol </span><span class="si">{</span><span class="n">symbol</span><span class="si">}</span><span class="s2"> not found on </span><span class="si">{</span><span class="n">client</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            
+            <span class="c1"># Fetch order book</span>
+            <span class="n">order_book</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">fetch_order_book</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="n">limit</span><span class="p">)</span>
+            
+            <span class="c1"># Calculate order book analytics</span>
+            <span class="n">bids</span> <span class="o">=</span> <span class="n">order_book</span><span class="p">[</span><span class="s1">&#39;bids&#39;</span><span class="p">]</span>
+            <span class="n">asks</span> <span class="o">=</span> <span class="n">order_book</span><span class="p">[</span><span class="s1">&#39;asks&#39;</span><span class="p">]</span>
+            
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">bids</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">asks</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Empty order book&quot;</span><span class="p">)</span>
+            
+            <span class="c1"># Best bid/ask</span>
+            <span class="n">best_bid</span> <span class="o">=</span> <span class="n">bids</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">bids</span> <span class="k">else</span> <span class="mi">0</span>
+            <span class="n">best_ask</span> <span class="o">=</span> <span class="n">asks</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">if</span> <span class="n">asks</span> <span class="k">else</span> <span class="mi">0</span>
+            <span class="n">spread</span> <span class="o">=</span> <span class="n">best_ask</span> <span class="o">-</span> <span class="n">best_bid</span> <span class="k">if</span> <span class="n">best_bid</span> <span class="ow">and</span> <span class="n">best_ask</span> <span class="k">else</span> <span class="mi">0</span>
+            <span class="n">spread_pct</span> <span class="o">=</span> <span class="p">(</span><span class="n">spread</span> <span class="o">/</span> <span class="n">best_ask</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span> <span class="k">if</span> <span class="n">best_ask</span> <span class="k">else</span> <span class="mi">0</span>
+            
+            <span class="c1"># Volume analysis</span>
+            <span class="n">bid_volume</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">level</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">level</span> <span class="ow">in</span> <span class="n">bids</span><span class="p">[:</span><span class="mi">10</span><span class="p">]])</span>  <span class="c1"># Top 10 levels</span>
+            <span class="n">ask_volume</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">level</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">level</span> <span class="ow">in</span> <span class="n">asks</span><span class="p">[:</span><span class="mi">10</span><span class="p">]])</span>
+            <span class="n">volume_imbalance</span> <span class="o">=</span> <span class="p">(</span><span class="n">bid_volume</span> <span class="o">-</span> <span class="n">ask_volume</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="n">bid_volume</span> <span class="o">+</span> <span class="n">ask_volume</span><span class="p">)</span> <span class="k">if</span> <span class="p">(</span><span class="n">bid_volume</span> <span class="o">+</span> <span class="n">ask_volume</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+            
+            <span class="c1"># Depth analysis</span>
+            <span class="n">bid_depth</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">level</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">level</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">level</span> <span class="ow">in</span> <span class="n">bids</span><span class="p">[:</span><span class="mi">5</span><span class="p">]])</span>  <span class="c1"># Value in quote currency</span>
+            <span class="n">ask_depth</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">level</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="n">level</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">level</span> <span class="ow">in</span> <span class="n">asks</span><span class="p">[:</span><span class="mi">5</span><span class="p">]])</span>
+            
+            <span class="n">result</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s1">&#39;exchange&#39;</span><span class="p">:</span> <span class="n">client</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                <span class="s1">&#39;symbol&#39;</span><span class="p">:</span> <span class="n">symbol</span><span class="p">,</span>
+                <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+                <span class="s1">&#39;bids&#39;</span><span class="p">:</span> <span class="n">bids</span><span class="p">[:</span><span class="n">limit</span><span class="p">],</span>
+                <span class="s1">&#39;asks&#39;</span><span class="p">:</span> <span class="n">asks</span><span class="p">[:</span><span class="n">limit</span><span class="p">],</span>
+                <span class="s1">&#39;spread&#39;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s1">&#39;absolute&#39;</span><span class="p">:</span> <span class="n">spread</span><span class="p">,</span>
+                    <span class="s1">&#39;percentage&#39;</span><span class="p">:</span> <span class="n">spread_pct</span><span class="p">,</span>
+                    <span class="s1">&#39;best_bid&#39;</span><span class="p">:</span> <span class="n">best_bid</span><span class="p">,</span>
+                    <span class="s1">&#39;best_ask&#39;</span><span class="p">:</span> <span class="n">best_ask</span>
+                <span class="p">},</span>
+                <span class="s1">&#39;volume_analysis&#39;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s1">&#39;bid_volume_top10&#39;</span><span class="p">:</span> <span class="n">bid_volume</span><span class="p">,</span>
+                    <span class="s1">&#39;ask_volume_top10&#39;</span><span class="p">:</span> <span class="n">ask_volume</span><span class="p">,</span>
+                    <span class="s1">&#39;volume_imbalance&#39;</span><span class="p">:</span> <span class="n">volume_imbalance</span><span class="p">,</span>  <span class="c1"># Positive = more bids, Negative = more asks</span>
+                    <span class="s1">&#39;imbalance_signal&#39;</span><span class="p">:</span> <span class="s1">&#39;BULLISH&#39;</span> <span class="k">if</span> <span class="n">volume_imbalance</span> <span class="o">&gt;</span> <span class="mf">0.1</span> <span class="k">else</span> <span class="s1">&#39;BEARISH&#39;</span> <span class="k">if</span> <span class="n">volume_imbalance</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">0.1</span> <span class="k">else</span> <span class="s1">&#39;NEUTRAL&#39;</span>
+                <span class="p">},</span>
+                <span class="s1">&#39;depth_analysis&#39;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s1">&#39;bid_depth_top5&#39;</span><span class="p">:</span> <span class="n">bid_depth</span><span class="p">,</span>
+                    <span class="s1">&#39;ask_depth_top5&#39;</span><span class="p">:</span> <span class="n">ask_depth</span><span class="p">,</span>
+                    <span class="s1">&#39;total_depth&#39;</span><span class="p">:</span> <span class="n">bid_depth</span> <span class="o">+</span> <span class="n">ask_depth</span><span class="p">,</span>
+                    <span class="s1">&#39;depth_ratio&#39;</span><span class="p">:</span> <span class="n">bid_depth</span> <span class="o">/</span> <span class="n">ask_depth</span> <span class="k">if</span> <span class="n">ask_depth</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+                <span class="p">},</span>
+                <span class="s1">&#39;market_quality&#39;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s1">&#39;spread_category&#39;</span><span class="p">:</span> <span class="s1">&#39;TIGHT&#39;</span> <span class="k">if</span> <span class="n">spread_pct</span> <span class="o">&lt;</span> <span class="mf">0.05</span> <span class="k">else</span> <span class="s1">&#39;NORMAL&#39;</span> <span class="k">if</span> <span class="n">spread_pct</span> <span class="o">&lt;</span> <span class="mf">0.1</span> <span class="k">else</span> <span class="s1">&#39;WIDE&#39;</span><span class="p">,</span>
+                    <span class="s1">&#39;liquidity_score&#39;</span><span class="p">:</span> <span class="nb">min</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="p">(</span><span class="n">bid_depth</span> <span class="o">+</span> <span class="n">ask_depth</span><span class="p">)</span> <span class="o">/</span> <span class="mi">10000</span><span class="p">),</span>  <span class="c1"># Normalized liquidity score</span>
+                    <span class="s1">&#39;order_book_levels&#39;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">bids</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">asks</span><span class="p">)</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+            
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;📚 Fetched order book for </span><span class="si">{</span><span class="n">symbol</span><span class="si">}</span><span class="s2"> from </span><span class="si">{</span><span class="n">client</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> - Spread: </span><span class="si">{</span><span class="n">spread_pct</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">%&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">result</span>
+            
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ Failed to fetch order book from </span><span class="si">{</span><span class="n">client</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">raise</span>
+
+<div class="viewcode-block" id="CCXTAdapters.get_exchange_comparison">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.ccxt_adapters.html#tradingagents.dataflows.ccxt_adapters.CCXTAdapters.get_exchange_comparison">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_exchange_comparison</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">symbol</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">exchanges</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> 
+                              <span class="n">timeframe</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;1h&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Compare data across multiple exchanges for arbitrage opportunities.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            symbol: Trading pair symbol</span>
+<span class="sd">            exchanges: List of exchange names to compare (default: all supported)</span>
+<span class="sd">            timeframe: Timeframe for OHLCV comparison</span>
+<span class="sd">            </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Comparison data across exchanges</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">exchanges</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">exchanges</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;binance&#39;</span><span class="p">,</span> <span class="s1">&#39;coinbase&#39;</span><span class="p">,</span> <span class="s1">&#39;kraken&#39;</span><span class="p">]</span>
+        
+        <span class="n">comparison</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;symbol&#39;</span><span class="p">:</span> <span class="n">symbol</span><span class="p">,</span>
+            <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+            <span class="s1">&#39;exchanges&#39;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s1">&#39;arbitrage_opportunities&#39;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s1">&#39;best_liquidity&#39;</span><span class="p">:</span> <span class="kc">None</span><span class="p">,</span>
+            <span class="s1">&#39;tightest_spread&#39;</span><span class="p">:</span> <span class="kc">None</span>
+        <span class="p">}</span>
+        
+        <span class="n">prices</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">spreads</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">liquidities</span> <span class="o">=</span> <span class="p">{}</span>
+        
+        <span class="k">for</span> <span class="n">exchange_name</span> <span class="ow">in</span> <span class="n">exchanges</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Get order book for current price and spread</span>
+                <span class="n">order_book</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fetch_order_book</span><span class="p">(</span><span class="n">exchange_name</span><span class="p">,</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">limit</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+                
+                <span class="n">current_price</span> <span class="o">=</span> <span class="p">(</span><span class="n">order_book</span><span class="p">[</span><span class="s1">&#39;spread&#39;</span><span class="p">][</span><span class="s1">&#39;best_bid&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">order_book</span><span class="p">[</span><span class="s1">&#39;spread&#39;</span><span class="p">][</span><span class="s1">&#39;best_ask&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+                <span class="n">spread_pct</span> <span class="o">=</span> <span class="n">order_book</span><span class="p">[</span><span class="s1">&#39;spread&#39;</span><span class="p">][</span><span class="s1">&#39;percentage&#39;</span><span class="p">]</span>
+                <span class="n">liquidity</span> <span class="o">=</span> <span class="n">order_book</span><span class="p">[</span><span class="s1">&#39;depth_analysis&#39;</span><span class="p">][</span><span class="s1">&#39;total_depth&#39;</span><span class="p">]</span>
+                
+                <span class="n">prices</span><span class="p">[</span><span class="n">exchange_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">current_price</span>
+                <span class="n">spreads</span><span class="p">[</span><span class="n">exchange_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">spread_pct</span>
+                <span class="n">liquidities</span><span class="p">[</span><span class="n">exchange_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">liquidity</span>
+                
+                <span class="n">comparison</span><span class="p">[</span><span class="s1">&#39;exchanges&#39;</span><span class="p">][</span><span class="n">exchange_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s1">&#39;price&#39;</span><span class="p">:</span> <span class="n">current_price</span><span class="p">,</span>
+                    <span class="s1">&#39;spread_pct&#39;</span><span class="p">:</span> <span class="n">spread_pct</span><span class="p">,</span>
+                    <span class="s1">&#39;liquidity&#39;</span><span class="p">:</span> <span class="n">liquidity</span><span class="p">,</span>
+                    <span class="s1">&#39;volume_imbalance&#39;</span><span class="p">:</span> <span class="n">order_book</span><span class="p">[</span><span class="s1">&#39;volume_analysis&#39;</span><span class="p">][</span><span class="s1">&#39;volume_imbalance&#39;</span><span class="p">],</span>
+                    <span class="s1">&#39;market_quality&#39;</span><span class="p">:</span> <span class="n">order_book</span><span class="p">[</span><span class="s1">&#39;market_quality&#39;</span><span class="p">]</span>
+                <span class="p">}</span>
+                
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;⚠️  Failed to get data from </span><span class="si">{</span><span class="n">exchange_name</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">comparison</span><span class="p">[</span><span class="s1">&#39;exchanges&#39;</span><span class="p">][</span><span class="n">exchange_name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;error&#39;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)}</span>
+        
+        <span class="c1"># Find arbitrage opportunities</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span><span class="p">:</span>
+            <span class="n">price_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">prices</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">price_list</span><span class="p">)):</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">price_list</span><span class="p">)):</span>
+                    <span class="n">exchange1</span><span class="p">,</span> <span class="n">price1</span> <span class="o">=</span> <span class="n">price_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                    <span class="n">exchange2</span><span class="p">,</span> <span class="n">price2</span> <span class="o">=</span> <span class="n">price_list</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                    
+                    <span class="n">price_diff_pct</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">price1</span> <span class="o">-</span> <span class="n">price2</span><span class="p">)</span> <span class="o">/</span> <span class="nb">min</span><span class="p">(</span><span class="n">price1</span><span class="p">,</span> <span class="n">price2</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+                    
+                    <span class="k">if</span> <span class="n">price_diff_pct</span> <span class="o">&gt;</span> <span class="mf">0.1</span><span class="p">:</span>  <span class="c1"># Significant price difference</span>
+                        <span class="n">comparison</span><span class="p">[</span><span class="s1">&#39;arbitrage_opportunities&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">({</span>
+                            <span class="s1">&#39;buy_exchange&#39;</span><span class="p">:</span> <span class="n">exchange1</span> <span class="k">if</span> <span class="n">price1</span> <span class="o">&lt;</span> <span class="n">price2</span> <span class="k">else</span> <span class="n">exchange2</span><span class="p">,</span>
+                            <span class="s1">&#39;sell_exchange&#39;</span><span class="p">:</span> <span class="n">exchange2</span> <span class="k">if</span> <span class="n">price1</span> <span class="o">&lt;</span> <span class="n">price2</span> <span class="k">else</span> <span class="n">exchange1</span><span class="p">,</span>
+                            <span class="s1">&#39;price_difference_pct&#39;</span><span class="p">:</span> <span class="n">price_diff_pct</span><span class="p">,</span>
+                            <span class="s1">&#39;potential_profit&#39;</span><span class="p">:</span> <span class="n">price_diff_pct</span> <span class="o">-</span> <span class="mf">0.2</span>  <span class="c1"># Minus estimated trading fees</span>
+                        <span class="p">})</span>
+        
+        <span class="c1"># Find best liquidity and tightest spread</span>
+        <span class="k">if</span> <span class="n">liquidities</span><span class="p">:</span>
+            <span class="n">comparison</span><span class="p">[</span><span class="s1">&#39;best_liquidity&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">liquidities</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">spreads</span><span class="p">:</span>
+            <span class="n">comparison</span><span class="p">[</span><span class="s1">&#39;tightest_spread&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">spreads</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        
+        <span class="k">return</span> <span class="n">comparison</span></div>
+
+
+<div class="viewcode-block" id="CCXTAdapters.get_supported_exchanges">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.ccxt_adapters.html#tradingagents.dataflows.ccxt_adapters.CCXTAdapters.get_supported_exchanges">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_supported_exchanges</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get list of supported exchanges with their capabilities.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">[</span>
+            <span class="p">{</span>
+                <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+                <span class="s1">&#39;has_ohlcv&#39;</span><span class="p">:</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;has_ohlcv&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;has_order_book&#39;</span><span class="p">:</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;has_order_book&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;rate_limit_per_minute&#39;</span><span class="p">:</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;rate_limit&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;trading_fees&#39;</span><span class="p">:</span> <span class="n">config</span><span class="p">[</span><span class="s1">&#39;fees&#39;</span><span class="p">],</span>
+                <span class="s1">&#39;sandbox_available&#39;</span><span class="p">:</span> <span class="n">config</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;sandbox&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+            <span class="p">}</span>
+            <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">config</span> <span class="ow">in</span> <span class="n">ExchangeConfig</span><span class="o">.</span><span class="n">SUPPORTED_EXCHANGES</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="p">]</span> </div>
+</div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, TauricResearch.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

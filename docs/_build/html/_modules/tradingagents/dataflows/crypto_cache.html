@@ -1,0 +1,1007 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tradingagents.dataflows.crypto_cache &mdash; TradingAgents 0.3.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=e259d695"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            TradingAgents
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#quick-install">Quick Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#development-installation">Development Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#redis-setup-recommended">Redis Setup (Recommended)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#environment-configuration">Environment Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#verification">Verification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#basic-usage">Basic Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#running-with-caching">Running with Caching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#multi-agent-example">Multi-Agent Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#on-chain-analytics">On-Chain Analytics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#cli-interface">CLI Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/index.html">Tutorials</a><ul class="simple">
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#core-modules">Core Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html">tradingagents.agents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.FinancialSituationMemory"><code class="docutils literal notranslate"><span class="pre">FinancialSituationMemory</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.Toolkit"><code class="docutils literal notranslate"><span class="pre">Toolkit</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.AgentState"><code class="docutils literal notranslate"><span class="pre">AgentState</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_msg_delete"><code class="docutils literal notranslate"><span class="pre">create_msg_delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.InvestDebateState"><code class="docutils literal notranslate"><span class="pre">InvestDebateState</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.RiskDebateState"><code class="docutils literal notranslate"><span class="pre">RiskDebateState</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_bear_researcher"><code class="docutils literal notranslate"><span class="pre">create_bear_researcher()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_bull_researcher"><code class="docutils literal notranslate"><span class="pre">create_bull_researcher()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_research_manager"><code class="docutils literal notranslate"><span class="pre">create_research_manager()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_fundamentals_analyst"><code class="docutils literal notranslate"><span class="pre">create_fundamentals_analyst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_market_analyst"><code class="docutils literal notranslate"><span class="pre">create_market_analyst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_neutral_debator"><code class="docutils literal notranslate"><span class="pre">create_neutral_debator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_news_analyst"><code class="docutils literal notranslate"><span class="pre">create_news_analyst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_onchain_analyst"><code class="docutils literal notranslate"><span class="pre">create_onchain_analyst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_risky_debator"><code class="docutils literal notranslate"><span class="pre">create_risky_debator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_risk_manager"><code class="docutils literal notranslate"><span class="pre">create_risk_manager()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_safe_debator"><code class="docutils literal notranslate"><span class="pre">create_safe_debator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_social_media_analyst"><code class="docutils literal notranslate"><span class="pre">create_social_media_analyst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_trader"><code class="docutils literal notranslate"><span class="pre">create_trader()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html">tradingagents.dataflows</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_finnhub_news"><code class="docutils literal notranslate"><span class="pre">get_finnhub_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_finnhub_company_insider_sentiment"><code class="docutils literal notranslate"><span class="pre">get_finnhub_company_insider_sentiment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_finnhub_company_insider_transactions"><code class="docutils literal notranslate"><span class="pre">get_finnhub_company_insider_transactions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_google_news"><code class="docutils literal notranslate"><span class="pre">get_google_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_reddit_global_news"><code class="docutils literal notranslate"><span class="pre">get_reddit_global_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_reddit_company_news"><code class="docutils literal notranslate"><span class="pre">get_reddit_company_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_simfin_balance_sheet"><code class="docutils literal notranslate"><span class="pre">get_simfin_balance_sheet()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_simfin_cashflow"><code class="docutils literal notranslate"><span class="pre">get_simfin_cashflow()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_simfin_income_statements"><code class="docutils literal notranslate"><span class="pre">get_simfin_income_statements()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_stock_stats_indicators_window"><code class="docutils literal notranslate"><span class="pre">get_stock_stats_indicators_window()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_stockstats_indicator"><code class="docutils literal notranslate"><span class="pre">get_stockstats_indicator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_YFin_data_window"><code class="docutils literal notranslate"><span class="pre">get_YFin_data_window()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_YFin_data"><code class="docutils literal notranslate"><span class="pre">get_YFin_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.ccxt_adapters.html">tradingagents.dataflows.ccxt_adapters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.config.html">tradingagents.dataflows.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html">tradingagents.dataflows.crypto_cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_utils.html">tradingagents.dataflows.crypto_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.finnhub_utils.html">tradingagents.dataflows.finnhub_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.googlenews_utils.html">tradingagents.dataflows.googlenews_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html">tradingagents.dataflows.interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.metric_registry.html">tradingagents.dataflows.metric_registry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.onchain_loader.html">tradingagents.dataflows.onchain_loader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.reddit_utils.html">tradingagents.dataflows.reddit_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.stockstats_utils.html">tradingagents.dataflows.stockstats_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.utils.html">tradingagents.dataflows.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.yfin_utils.html">tradingagents.dataflows.yfin_utils</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.graph.html">tradingagents.graph</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.html#tradingagents.graph.TradingAgentsGraph"><code class="docutils literal notranslate"><span class="pre">TradingAgentsGraph</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.html#tradingagents.graph.ConditionalLogic"><code class="docutils literal notranslate"><span class="pre">ConditionalLogic</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.html#tradingagents.graph.GraphSetup"><code class="docutils literal notranslate"><span class="pre">GraphSetup</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.html#tradingagents.graph.Propagator"><code class="docutils literal notranslate"><span class="pre">Propagator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.html#tradingagents.graph.Reflector"><code class="docutils literal notranslate"><span class="pre">Reflector</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.html#tradingagents.graph.SignalProcessor"><code class="docutils literal notranslate"><span class="pre">SignalProcessor</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.conditional_logic.html">tradingagents.graph.conditional_logic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.propagation.html">tradingagents.graph.propagation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.reflection.html">tradingagents.graph.reflection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.setup.html">tradingagents.graph.setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.signal_processing.html">tradingagents.graph.signal_processing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.trading_graph.html">tradingagents.graph.trading_graph</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#agents">Agents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.fundamentals_analyst.html">tradingagents.agents.analysts.fundamentals_analyst</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.fundamentals_analyst.html#tradingagents.agents.analysts.fundamentals_analyst.create_fundamentals_analyst"><code class="docutils literal notranslate"><span class="pre">create_fundamentals_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.market_analyst.html">tradingagents.agents.analysts.market_analyst</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.market_analyst.html#tradingagents.agents.analysts.market_analyst.create_market_analyst"><code class="docutils literal notranslate"><span class="pre">create_market_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.news_analyst.html">tradingagents.agents.analysts.news_analyst</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.news_analyst.html#tradingagents.agents.analysts.news_analyst.create_news_analyst"><code class="docutils literal notranslate"><span class="pre">create_news_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.onchain_analyst.html">tradingagents.agents.analysts.onchain_analyst</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.onchain_analyst.html#tradingagents.agents.analysts.onchain_analyst.create_onchain_analyst"><code class="docutils literal notranslate"><span class="pre">create_onchain_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.social_media_analyst.html">tradingagents.agents.analysts.social_media_analyst</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.social_media_analyst.html#tradingagents.agents.analysts.social_media_analyst.create_social_media_analyst"><code class="docutils literal notranslate"><span class="pre">create_social_media_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.managers.research_manager.html">tradingagents.agents.managers.research_manager</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.managers.research_manager.html#tradingagents.agents.managers.research_manager.create_research_manager"><code class="docutils literal notranslate"><span class="pre">create_research_manager()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.managers.risk_manager.html">tradingagents.agents.managers.risk_manager</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.managers.risk_manager.html#tradingagents.agents.managers.risk_manager.create_risk_manager"><code class="docutils literal notranslate"><span class="pre">create_risk_manager()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.researchers.bear_researcher.html">tradingagents.agents.researchers.bear_researcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.researchers.bear_researcher.html#tradingagents.agents.researchers.bear_researcher.create_bear_researcher"><code class="docutils literal notranslate"><span class="pre">create_bear_researcher()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.researchers.bull_researcher.html">tradingagents.agents.researchers.bull_researcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.researchers.bull_researcher.html#tradingagents.agents.researchers.bull_researcher.create_bull_researcher"><code class="docutils literal notranslate"><span class="pre">create_bull_researcher()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.risk_mgmt.aggresive_debator.html">tradingagents.agents.risk_mgmt.aggresive_debator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.risk_mgmt.aggresive_debator.html#tradingagents.agents.risk_mgmt.aggresive_debator.create_risky_debator"><code class="docutils literal notranslate"><span class="pre">create_risky_debator()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.risk_mgmt.conservative_debator.html">tradingagents.agents.risk_mgmt.conservative_debator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.risk_mgmt.conservative_debator.html#tradingagents.agents.risk_mgmt.conservative_debator.create_safe_debator"><code class="docutils literal notranslate"><span class="pre">create_safe_debator()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.risk_mgmt.neutral_debator.html">tradingagents.agents.risk_mgmt.neutral_debator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.risk_mgmt.neutral_debator.html#tradingagents.agents.risk_mgmt.neutral_debator.create_neutral_debator"><code class="docutils literal notranslate"><span class="pre">create_neutral_debator()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.trader.trader.html">tradingagents.agents.trader.trader</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.trader.trader.html#tradingagents.agents.trader.trader.create_trader"><code class="docutils literal notranslate"><span class="pre">create_trader()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#data-infrastructure">Data Infrastructure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.ccxt_adapters.html">tradingagents.dataflows.ccxt_adapters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.ccxt_adapters.html#tradingagents.dataflows.ccxt_adapters.ExchangeConfig"><code class="docutils literal notranslate"><span class="pre">ExchangeConfig</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.ccxt_adapters.html#tradingagents.dataflows.ccxt_adapters.init_exchange_client"><code class="docutils literal notranslate"><span class="pre">init_exchange_client()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.ccxt_adapters.html#tradingagents.dataflows.ccxt_adapters.CCXTAdapters"><code class="docutils literal notranslate"><span class="pre">CCXTAdapters</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html">tradingagents.dataflows.crypto_cache</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.DataVolatility"><code class="docutils literal notranslate"><span class="pre">DataVolatility</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.SmartTTLStrategy"><code class="docutils literal notranslate"><span class="pre">SmartTTLStrategy</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.CryptoCacheManager"><code class="docutils literal notranslate"><span class="pre">CryptoCacheManager</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.get_cache_manager"><code class="docutils literal notranslate"><span class="pre">get_cache_manager()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.cache_crypto_request"><code class="docutils literal notranslate"><span class="pre">cache_crypto_request()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_utils.html">tradingagents.dataflows.crypto_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_utils.html#tradingagents.dataflows.crypto_utils.init_crypto_client"><code class="docutils literal notranslate"><span class="pre">init_crypto_client()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_utils.html#tradingagents.dataflows.crypto_utils.CryptoUtils"><code class="docutils literal notranslate"><span class="pre">CryptoUtils</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.metric_registry.html">tradingagents.dataflows.metric_registry</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.DataProvider"><code class="docutils literal notranslate"><span class="pre">DataProvider</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.BatchOptimizer"><code class="docutils literal notranslate"><span class="pre">BatchOptimizer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.MetricRegistry"><code class="docutils literal notranslate"><span class="pre">MetricRegistry</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.get_metric_registry"><code class="docutils literal notranslate"><span class="pre">get_metric_registry()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.onchain_loader.html">tradingagents.dataflows.onchain_loader</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.onchain_loader.html#tradingagents.dataflows.onchain_loader.OnChainLoader"><code class="docutils literal notranslate"><span class="pre">OnChainLoader</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.onchain_loader.html#tradingagents.dataflows.onchain_loader.get_onchain_loader"><code class="docutils literal notranslate"><span class="pre">get_onchain_loader()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html">tradingagents.dataflows.interface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_finnhub_news"><code class="docutils literal notranslate"><span class="pre">get_finnhub_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_crypto_data_online"><code class="docutils literal notranslate"><span class="pre">get_crypto_data_online()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_crypto_info_online"><code class="docutils literal notranslate"><span class="pre">get_crypto_info_online()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_exchange_ohlcv_data"><code class="docutils literal notranslate"><span class="pre">get_exchange_ohlcv_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_exchange_order_book"><code class="docutils literal notranslate"><span class="pre">get_exchange_order_book()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.compare_crypto_exchanges"><code class="docutils literal notranslate"><span class="pre">compare_crypto_exchanges()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_supported_crypto_exchanges"><code class="docutils literal notranslate"><span class="pre">get_supported_crypto_exchanges()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_onchain_network_health"><code class="docutils literal notranslate"><span class="pre">get_onchain_network_health()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_onchain_market_indicators"><code class="docutils literal notranslate"><span class="pre">get_onchain_market_indicators()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_onchain_comprehensive_analysis"><code class="docutils literal notranslate"><span class="pre">get_onchain_comprehensive_analysis()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_metric_registry_data"><code class="docutils literal notranslate"><span class="pre">get_metric_registry_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_finnhub_company_insider_sentiment"><code class="docutils literal notranslate"><span class="pre">get_finnhub_company_insider_sentiment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_finnhub_company_insider_transactions"><code class="docutils literal notranslate"><span class="pre">get_finnhub_company_insider_transactions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_simfin_balance_sheet"><code class="docutils literal notranslate"><span class="pre">get_simfin_balance_sheet()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_simfin_cashflow"><code class="docutils literal notranslate"><span class="pre">get_simfin_cashflow()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_simfin_income_statements"><code class="docutils literal notranslate"><span class="pre">get_simfin_income_statements()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_google_news"><code class="docutils literal notranslate"><span class="pre">get_google_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_reddit_global_news"><code class="docutils literal notranslate"><span class="pre">get_reddit_global_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_reddit_company_news"><code class="docutils literal notranslate"><span class="pre">get_reddit_company_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_stock_stats_indicators_window"><code class="docutils literal notranslate"><span class="pre">get_stock_stats_indicators_window()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_stockstats_indicator"><code class="docutils literal notranslate"><span class="pre">get_stockstats_indicator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_YFin_data_window"><code class="docutils literal notranslate"><span class="pre">get_YFin_data_window()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_YFin_data_online"><code class="docutils literal notranslate"><span class="pre">get_YFin_data_online()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_YFin_data"><code class="docutils literal notranslate"><span class="pre">get_YFin_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_stock_news_openai"><code class="docutils literal notranslate"><span class="pre">get_stock_news_openai()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_global_news_openai"><code class="docutils literal notranslate"><span class="pre">get_global_news_openai()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_fundamentals_openai"><code class="docutils literal notranslate"><span class="pre">get_fundamentals_openai()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.config.html">tradingagents.dataflows.config</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.config.html#tradingagents.dataflows.config.initialize_config"><code class="docutils literal notranslate"><span class="pre">initialize_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.config.html#tradingagents.dataflows.config.set_config"><code class="docutils literal notranslate"><span class="pre">set_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.config.html#tradingagents.dataflows.config.get_config"><code class="docutils literal notranslate"><span class="pre">get_config()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#market-data-adapters">Market Data Adapters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.yfin_utils.html">tradingagents.dataflows.yfin_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.yfin_utils.html#tradingagents.dataflows.yfin_utils.init_ticker"><code class="docutils literal notranslate"><span class="pre">init_ticker()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.yfin_utils.html#tradingagents.dataflows.yfin_utils.YFinanceUtils"><code class="docutils literal notranslate"><span class="pre">YFinanceUtils</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.finnhub_utils.html">tradingagents.dataflows.finnhub_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.finnhub_utils.html#tradingagents.dataflows.finnhub_utils.get_data_in_range"><code class="docutils literal notranslate"><span class="pre">get_data_in_range()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.googlenews_utils.html">tradingagents.dataflows.googlenews_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.googlenews_utils.html#tradingagents.dataflows.googlenews_utils.is_rate_limited"><code class="docutils literal notranslate"><span class="pre">is_rate_limited()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.googlenews_utils.html#tradingagents.dataflows.googlenews_utils.make_request"><code class="docutils literal notranslate"><span class="pre">make_request()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.googlenews_utils.html#tradingagents.dataflows.googlenews_utils.getNewsData"><code class="docutils literal notranslate"><span class="pre">getNewsData()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.reddit_utils.html">tradingagents.dataflows.reddit_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.reddit_utils.html#tradingagents.dataflows.reddit_utils.fetch_top_from_category"><code class="docutils literal notranslate"><span class="pre">fetch_top_from_category()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.stockstats_utils.html">tradingagents.dataflows.stockstats_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.stockstats_utils.html#tradingagents.dataflows.stockstats_utils.StockstatsUtils"><code class="docutils literal notranslate"><span class="pre">StockstatsUtils</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#graph-signal-processing">Graph &amp; Signal Processing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.graph.trading_graph.html">tradingagents.graph.trading_graph</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.trading_graph.html#tradingagents.graph.trading_graph.TradingAgentsGraph"><code class="docutils literal notranslate"><span class="pre">TradingAgentsGraph</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.graph.signal_processing.html">tradingagents.graph.signal_processing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.signal_processing.html#tradingagents.graph.signal_processing.SignalProcessor"><code class="docutils literal notranslate"><span class="pre">SignalProcessor</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.graph.conditional_logic.html">tradingagents.graph.conditional_logic</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.conditional_logic.html#tradingagents.graph.conditional_logic.ConditionalLogic"><code class="docutils literal notranslate"><span class="pre">ConditionalLogic</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.graph.propagation.html">tradingagents.graph.propagation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.propagation.html#tradingagents.graph.propagation.Propagator"><code class="docutils literal notranslate"><span class="pre">Propagator</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.graph.reflection.html">tradingagents.graph.reflection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.reflection.html#tradingagents.graph.reflection.Reflector"><code class="docutils literal notranslate"><span class="pre">Reflector</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#utilities">Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.agent_states.html">tradingagents.agents.utils.agent_states</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.agent_states.html#tradingagents.agents.utils.agent_states.InvestDebateState"><code class="docutils literal notranslate"><span class="pre">InvestDebateState</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.agent_states.html#tradingagents.agents.utils.agent_states.RiskDebateState"><code class="docutils literal notranslate"><span class="pre">RiskDebateState</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.agent_states.html#tradingagents.agents.utils.agent_states.AgentState"><code class="docutils literal notranslate"><span class="pre">AgentState</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.agent_utils.html">tradingagents.agents.utils.agent_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.agent_utils.html#tradingagents.agents.utils.agent_utils.create_msg_delete"><code class="docutils literal notranslate"><span class="pre">create_msg_delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.agent_utils.html#tradingagents.agents.utils.agent_utils.Toolkit"><code class="docutils literal notranslate"><span class="pre">Toolkit</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.memory.html">tradingagents.agents.utils.memory</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.memory.html#tradingagents.agents.utils.memory.FinancialSituationMemory"><code class="docutils literal notranslate"><span class="pre">FinancialSituationMemory</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.utils.html">tradingagents.dataflows.utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.utils.html#tradingagents.dataflows.utils.save_output"><code class="docutils literal notranslate"><span class="pre">save_output()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.utils.html#tradingagents.dataflows.utils.get_current_date"><code class="docutils literal notranslate"><span class="pre">get_current_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.utils.html#tradingagents.dataflows.utils.decorate_all_methods"><code class="docutils literal notranslate"><span class="pre">decorate_all_methods()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.utils.html#tradingagents.dataflows.utils.get_next_weekday"><code class="docutils literal notranslate"><span class="pre">get_next_weekday()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#v0-3-0-2025-07-15">v0.3.0 (2025-07-15)</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TradingAgents</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">tradingagents.dataflows.crypto_cache</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tradingagents.dataflows.crypto_cache</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;Crypto data caching system with Redis for performance optimization.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">redis</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span><span class="p">,</span> <span class="n">timedelta</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">enum</span><span class="w"> </span><span class="kn">import</span> <span class="n">Enum</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="DataVolatility">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.DataVolatility">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DataVolatility</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Data volatility levels for smart TTL management.&quot;&quot;&quot;</span>
+    <span class="n">ULTRA_HIGH</span> <span class="o">=</span> <span class="s2">&quot;ultra_high&quot;</span>    <span class="c1"># 10 seconds</span>
+    <span class="n">HIGH</span> <span class="o">=</span> <span class="s2">&quot;high&quot;</span>                <span class="c1"># 30 seconds</span>
+    <span class="n">MEDIUM</span> <span class="o">=</span> <span class="s2">&quot;medium&quot;</span>            <span class="c1"># 60 seconds</span>
+    <span class="n">LOW</span> <span class="o">=</span> <span class="s2">&quot;low&quot;</span>                  <span class="c1"># 300 seconds</span>
+    <span class="n">VERY_LOW</span> <span class="o">=</span> <span class="s2">&quot;very_low&quot;</span>        <span class="c1"># 900 seconds</span></div>
+
+
+
+<div class="viewcode-block" id="SmartTTLStrategy">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.SmartTTLStrategy">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">SmartTTLStrategy</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Smart TTL strategy based on data type and market conditions.&quot;&quot;&quot;</span>
+    
+    <span class="c1"># Base TTL mapping by data volatility</span>
+    <span class="n">TTL_MAPPING</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">DataVolatility</span><span class="o">.</span><span class="n">ULTRA_HIGH</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="n">DataVolatility</span><span class="o">.</span><span class="n">HIGH</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+        <span class="n">DataVolatility</span><span class="o">.</span><span class="n">MEDIUM</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+        <span class="n">DataVolatility</span><span class="o">.</span><span class="n">LOW</span><span class="p">:</span> <span class="mi">300</span><span class="p">,</span>
+        <span class="n">DataVolatility</span><span class="o">.</span><span class="n">VERY_LOW</span><span class="p">:</span> <span class="mi">900</span>
+    <span class="p">}</span>
+    
+    <span class="c1"># Data type to volatility mapping</span>
+    <span class="n">DATA_TYPE_VOLATILITY</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="c1"># Ultra high volatility (real-time trading data)</span>
+        <span class="s1">&#39;order_book&#39;</span><span class="p">:</span> <span class="n">DataVolatility</span><span class="o">.</span><span class="n">ULTRA_HIGH</span><span class="p">,</span>
+        <span class="s1">&#39;order_book_depth&#39;</span><span class="p">:</span> <span class="n">DataVolatility</span><span class="o">.</span><span class="n">ULTRA_HIGH</span><span class="p">,</span>
+        <span class="s1">&#39;live_price&#39;</span><span class="p">:</span> <span class="n">DataVolatility</span><span class="o">.</span><span class="n">ULTRA_HIGH</span><span class="p">,</span>
+        <span class="s1">&#39;spread_analysis&#39;</span><span class="p">:</span> <span class="n">DataVolatility</span><span class="o">.</span><span class="n">ULTRA_HIGH</span><span class="p">,</span>
+        
+        <span class="c1"># High volatility (frequent price updates)</span>
+        <span class="s1">&#39;price_data&#39;</span><span class="p">:</span> <span class="n">DataVolatility</span><span class="o">.</span><span class="n">HIGH</span><span class="p">,</span>
+        <span class="s1">&#39;ohlcv_1m&#39;</span><span class="p">:</span> <span class="n">DataVolatility</span><span class="o">.</span><span class="n">HIGH</span><span class="p">,</span>
+        <span class="s1">&#39;ohlcv_5m&#39;</span><span class="p">:</span> <span class="n">DataVolatility</span><span class="o">.</span><span class="n">HIGH</span><span class="p">,</span>
+        <span class="s1">&#39;volume_analysis&#39;</span><span class="p">:</span> <span class="n">DataVolatility</span><span class="o">.</span><span class="n">HIGH</span><span class="p">,</span>
+        <span class="s1">&#39;arbitrage_opportunities&#39;</span><span class="p">:</span> <span class="n">DataVolatility</span><span class="o">.</span><span class="n">HIGH</span><span class="p">,</span>
+        
+        <span class="c1"># Medium volatility (trading signals)</span>
+        <span class="s1">&#39;whale_movements&#39;</span><span class="p">:</span> <span class="n">DataVolatility</span><span class="o">.</span><span class="n">MEDIUM</span><span class="p">,</span>
+        <span class="s1">&#39;exchange_flows&#39;</span><span class="p">:</span> <span class="n">DataVolatility</span><span class="o">.</span><span class="n">MEDIUM</span><span class="p">,</span>
+        <span class="s1">&#39;ohlcv_1h&#39;</span><span class="p">:</span> <span class="n">DataVolatility</span><span class="o">.</span><span class="n">MEDIUM</span><span class="p">,</span>
+        <span class="s1">&#39;market_sentiment&#39;</span><span class="p">:</span> <span class="n">DataVolatility</span><span class="o">.</span><span class="n">MEDIUM</span><span class="p">,</span>
+        <span class="s1">&#39;technical_indicators&#39;</span><span class="p">:</span> <span class="n">DataVolatility</span><span class="o">.</span><span class="n">MEDIUM</span><span class="p">,</span>
+        
+        <span class="c1"># Low volatility (fundamental metrics)</span>
+        <span class="s1">&#39;network_metrics&#39;</span><span class="p">:</span> <span class="n">DataVolatility</span><span class="o">.</span><span class="n">LOW</span><span class="p">,</span>
+        <span class="s1">&#39;active_addresses&#39;</span><span class="p">:</span> <span class="n">DataVolatility</span><span class="o">.</span><span class="n">LOW</span><span class="p">,</span>
+        <span class="s1">&#39;hash_rate&#39;</span><span class="p">:</span> <span class="n">DataVolatility</span><span class="o">.</span><span class="n">LOW</span><span class="p">,</span>
+        <span class="s1">&#39;transactions_count&#39;</span><span class="p">:</span> <span class="n">DataVolatility</span><span class="o">.</span><span class="n">LOW</span><span class="p">,</span>
+        <span class="s1">&#39;ohlcv_4h&#39;</span><span class="p">:</span> <span class="n">DataVolatility</span><span class="o">.</span><span class="n">LOW</span><span class="p">,</span>
+        <span class="s1">&#39;ohlcv_1d&#39;</span><span class="p">:</span> <span class="n">DataVolatility</span><span class="o">.</span><span class="n">LOW</span><span class="p">,</span>
+        
+        <span class="c1"># Very low volatility (historical/static data)</span>
+        <span class="s1">&#39;market_cap&#39;</span><span class="p">:</span> <span class="n">DataVolatility</span><span class="o">.</span><span class="n">VERY_LOW</span><span class="p">,</span>
+        <span class="s1">&#39;supply_metrics&#39;</span><span class="p">:</span> <span class="n">DataVolatility</span><span class="o">.</span><span class="n">VERY_LOW</span><span class="p">,</span>
+        <span class="s1">&#39;token_info&#39;</span><span class="p">:</span> <span class="n">DataVolatility</span><span class="o">.</span><span class="n">VERY_LOW</span><span class="p">,</span>
+        <span class="s1">&#39;historical_data&#39;</span><span class="p">:</span> <span class="n">DataVolatility</span><span class="o">.</span><span class="n">VERY_LOW</span>
+    <span class="p">}</span>
+    
+<div class="viewcode-block" id="SmartTTLStrategy.get_ttl">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.SmartTTLStrategy.get_ttl">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_ttl</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">data_type</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">market_hours</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">high_volatility_period</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get optimal TTL for data type considering market conditions.&quot;&quot;&quot;</span>
+        <span class="n">base_volatility</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">DATA_TYPE_VOLATILITY</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">data_type</span><span class="p">,</span> <span class="n">DataVolatility</span><span class="o">.</span><span class="n">MEDIUM</span><span class="p">)</span>
+        <span class="n">base_ttl</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">TTL_MAPPING</span><span class="p">[</span><span class="n">base_volatility</span><span class="p">]</span>
+        
+        <span class="c1"># Adjust TTL based on market conditions</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">market_hours</span><span class="p">:</span>
+            <span class="c1"># Increase TTL during off-hours</span>
+            <span class="n">base_ttl</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">base_ttl</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">high_volatility_period</span><span class="p">:</span>
+            <span class="c1"># Decrease TTL during high volatility</span>
+            <span class="n">base_ttl</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">base_ttl</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">),</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># Minimum 5 seconds</span>
+        
+        <span class="k">return</span> <span class="n">base_ttl</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="CryptoCacheManager">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.CryptoCacheManager">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">CryptoCacheManager</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enhanced cache manager with smart TTL and batch optimization.&quot;&quot;&quot;</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">redis_host</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;localhost&quot;</span><span class="p">,</span> <span class="n">redis_port</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6379</span><span class="p">,</span> 
+                 <span class="n">redis_db</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">default_ttl</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">60</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize cache manager with Redis connection.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">default_ttl</span> <span class="o">=</span> <span class="n">default_ttl</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">redis_client</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache_enabled</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">ttl_strategy</span> <span class="o">=</span> <span class="n">SmartTTLStrategy</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache_stats</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;hits&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s1">&#39;misses&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s1">&#39;sets&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s1">&#39;batch_requests&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s1">&#39;batch_hits&#39;</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="p">}</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">redis_client</span> <span class="o">=</span> <span class="n">redis</span><span class="o">.</span><span class="n">Redis</span><span class="p">(</span>
+                <span class="n">host</span><span class="o">=</span><span class="n">redis_host</span><span class="p">,</span> 
+                <span class="n">port</span><span class="o">=</span><span class="n">redis_port</span><span class="p">,</span> 
+                <span class="n">db</span><span class="o">=</span><span class="n">redis_db</span><span class="p">,</span>
+                <span class="n">decode_responses</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">socket_connect_timeout</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                <span class="n">socket_timeout</span><span class="o">=</span><span class="mi">2</span>
+            <span class="p">)</span>
+            <span class="c1"># Test connection</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">redis_client</span><span class="o">.</span><span class="n">ping</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cache_enabled</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Redis cache enabled: </span><span class="si">{</span><span class="n">redis_host</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">redis_port</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;⚠️  Redis cache disabled (connection failed): </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cache_enabled</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_generate_cache_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate a consistent cache key from endpoint and parameters.&quot;&quot;&quot;</span>
+        <span class="c1"># Sort params for consistent hashing</span>
+        <span class="n">sorted_params</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">params</span><span class="o">.</span><span class="n">items</span><span class="p">())</span> <span class="k">if</span> <span class="n">params</span> <span class="k">else</span> <span class="p">[]</span>
+        <span class="n">key_data</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">endpoint</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">sorted_params</span><span class="si">}</span><span class="s2">&quot;</span>
+        
+        <span class="c1"># Use hash for long keys to avoid Redis key length limits</span>
+        <span class="n">key_hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">key_data</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;crypto_cache:</span><span class="si">{</span><span class="n">endpoint</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">key_hash</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_detect_data_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Intelligently detect data type from endpoint and parameters.&quot;&quot;&quot;</span>
+        <span class="n">endpoint_lower</span> <span class="o">=</span> <span class="n">endpoint</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+        
+        <span class="c1"># Direct mapping for known endpoints</span>
+        <span class="k">for</span> <span class="n">data_type</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ttl_strategy</span><span class="o">.</span><span class="n">DATA_TYPE_VOLATILITY</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">data_type</span> <span class="ow">in</span> <span class="n">endpoint_lower</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">data_type</span>
+        
+        <span class="c1"># Pattern matching for complex endpoints</span>
+        <span class="k">if</span> <span class="s1">&#39;order&#39;</span> <span class="ow">in</span> <span class="n">endpoint_lower</span> <span class="ow">and</span> <span class="s1">&#39;book&#39;</span> <span class="ow">in</span> <span class="n">endpoint_lower</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;order_book&#39;</span>
+        <span class="k">elif</span> <span class="s1">&#39;ohlcv&#39;</span> <span class="ow">in</span> <span class="n">endpoint_lower</span> <span class="ow">or</span> <span class="s1">&#39;candle&#39;</span> <span class="ow">in</span> <span class="n">endpoint_lower</span><span class="p">:</span>
+            <span class="c1"># Determine timeframe if available</span>
+            <span class="k">if</span> <span class="n">params</span> <span class="ow">and</span> <span class="s1">&#39;timeframe&#39;</span> <span class="ow">in</span> <span class="n">params</span><span class="p">:</span>
+                <span class="n">timeframe</span> <span class="o">=</span> <span class="n">params</span><span class="p">[</span><span class="s1">&#39;timeframe&#39;</span><span class="p">]</span>
+                <span class="k">return</span> <span class="sa">f</span><span class="s1">&#39;ohlcv_</span><span class="si">{</span><span class="n">timeframe</span><span class="si">}</span><span class="s1">&#39;</span>
+            <span class="k">return</span> <span class="s1">&#39;ohlcv_1h&#39;</span>  <span class="c1"># Default</span>
+        <span class="k">elif</span> <span class="s1">&#39;price&#39;</span> <span class="ow">in</span> <span class="n">endpoint_lower</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;price_data&#39;</span>
+        <span class="k">elif</span> <span class="s1">&#39;whale&#39;</span> <span class="ow">in</span> <span class="n">endpoint_lower</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;whale_movements&#39;</span>
+        <span class="k">elif</span> <span class="s1">&#39;exchange&#39;</span> <span class="ow">in</span> <span class="n">endpoint_lower</span> <span class="ow">and</span> <span class="s1">&#39;flow&#39;</span> <span class="ow">in</span> <span class="n">endpoint_lower</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;exchange_flows&#39;</span>
+        <span class="k">elif</span> <span class="s1">&#39;active&#39;</span> <span class="ow">in</span> <span class="n">endpoint_lower</span> <span class="ow">and</span> <span class="s1">&#39;address&#39;</span> <span class="ow">in</span> <span class="n">endpoint_lower</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;active_addresses&#39;</span>
+        <span class="k">elif</span> <span class="s1">&#39;hash&#39;</span> <span class="ow">in</span> <span class="n">endpoint_lower</span> <span class="ow">and</span> <span class="s1">&#39;rate&#39;</span> <span class="ow">in</span> <span class="n">endpoint_lower</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;hash_rate&#39;</span>
+        <span class="k">elif</span> <span class="s1">&#39;network&#39;</span> <span class="ow">in</span> <span class="n">endpoint_lower</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;network_metrics&#39;</span>
+        
+        <span class="k">return</span> <span class="s1">&#39;medium_volatility_default&#39;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_is_market_hours</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if current time is during active trading hours (crypto trades 24/7, but consider US/EU hours).&quot;&quot;&quot;</span>
+        <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span>
+        <span class="c1"># Consider 6 AM to 10 PM UTC as active hours (covers US and EU trading)</span>
+        <span class="k">return</span> <span class="mi">6</span> <span class="o">&lt;=</span> <span class="n">now</span><span class="o">.</span><span class="n">hour</span> <span class="o">&lt;=</span> <span class="mi">22</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_is_high_volatility_period</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Detect if market is in high volatility period (simplified heuristic).&quot;&quot;&quot;</span>
+        <span class="c1"># This could be enhanced with real volatility indicators</span>
+        <span class="c1"># For now, assume first and last 2 hours of &quot;market day&quot; are high volatility</span>
+        <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">now</span><span class="o">.</span><span class="n">hour</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">21</span><span class="p">]</span>
+
+<div class="viewcode-block" id="CryptoCacheManager.get">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.CryptoCacheManager.get">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve cached data if available and valid.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache_enabled</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">None</span>
+            
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">cache_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_cache_key</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">params</span> <span class="ow">or</span> <span class="p">{})</span>
+            <span class="n">cached_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">redis_client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">cache_key</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">cached_data</span><span class="p">:</span>
+                <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">cached_data</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">cache_stats</span><span class="p">[</span><span class="s1">&#39;hits&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;📦 Cache HIT: </span><span class="si">{</span><span class="n">endpoint</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">data</span>
+                
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cache retrieval error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache_stats</span><span class="p">[</span><span class="s1">&#39;misses&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;📭 Cache MISS: </span><span class="si">{</span><span class="n">endpoint</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="CryptoCacheManager.set">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.CryptoCacheManager.set">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">endpoint</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> 
+            <span class="n">ttl</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Store data in cache with smart TTL.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache_enabled</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+            
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">cache_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_cache_key</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">params</span> <span class="ow">or</span> <span class="p">{})</span>
+            
+            <span class="c1"># Use smart TTL if not specified</span>
+            <span class="k">if</span> <span class="n">ttl</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">data_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_detect_data_type</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+                <span class="n">market_hours</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_market_hours</span><span class="p">()</span>
+                <span class="n">high_volatility</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_high_volatility_period</span><span class="p">()</span>
+                <span class="n">ttl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ttl_strategy</span><span class="o">.</span><span class="n">get_ttl</span><span class="p">(</span><span class="n">data_type</span><span class="p">,</span> <span class="n">market_hours</span><span class="p">,</span> <span class="n">high_volatility</span><span class="p">)</span>
+            
+            <span class="c1"># Add metadata</span>
+            <span class="n">cache_data</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">,</span>
+                <span class="s2">&quot;cached_at&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+                <span class="s2">&quot;endpoint&quot;</span><span class="p">:</span> <span class="n">endpoint</span><span class="p">,</span>
+                <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="n">params</span><span class="p">,</span>
+                <span class="s2">&quot;data_type&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_detect_data_type</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">params</span><span class="p">),</span>
+                <span class="s2">&quot;ttl_used&quot;</span><span class="p">:</span> <span class="n">ttl</span>
+            <span class="p">}</span>
+            
+            <span class="bp">self</span><span class="o">.</span><span class="n">redis_client</span><span class="o">.</span><span class="n">setex</span><span class="p">(</span>
+                <span class="n">cache_key</span><span class="p">,</span>
+                <span class="n">ttl</span><span class="p">,</span>
+                <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">cache_data</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="nb">str</span><span class="p">)</span>
+            <span class="p">)</span>
+            
+            <span class="bp">self</span><span class="o">.</span><span class="n">cache_stats</span><span class="p">[</span><span class="s1">&#39;sets&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;💾 Cache SET: </span><span class="si">{</span><span class="n">endpoint</span><span class="si">}</span><span class="s2"> (TTL: </span><span class="si">{</span><span class="n">ttl</span><span class="si">}</span><span class="s2">s)&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+            
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cache storage error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+
+
+<div class="viewcode-block" id="CryptoCacheManager.get_batch">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.CryptoCacheManager.get_batch">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">requests</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Retrieve multiple cached items in a single operation.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache_enabled</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{}</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache_stats</span><span class="p">[</span><span class="s1">&#39;batch_requests&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">cache_keys</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">key_to_request</span> <span class="o">=</span> <span class="p">{}</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Generate all cache keys</span>
+            <span class="k">for</span> <span class="n">endpoint</span><span class="p">,</span> <span class="n">params</span> <span class="ow">in</span> <span class="n">requests</span><span class="p">:</span>
+                <span class="n">cache_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_cache_key</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">params</span> <span class="ow">or</span> <span class="p">{})</span>
+                <span class="n">cache_keys</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cache_key</span><span class="p">)</span>
+                <span class="n">key_to_request</span><span class="p">[</span><span class="n">cache_key</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+            
+            <span class="c1"># Batch retrieve from Redis</span>
+            <span class="k">if</span> <span class="n">cache_keys</span><span class="p">:</span>
+                <span class="n">cached_values</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">redis_client</span><span class="o">.</span><span class="n">mget</span><span class="p">(</span><span class="n">cache_keys</span><span class="p">)</span>
+                
+                <span class="k">for</span> <span class="n">cache_key</span><span class="p">,</span> <span class="n">cached_value</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">cache_keys</span><span class="p">,</span> <span class="n">cached_values</span><span class="p">):</span>
+                    <span class="n">endpoint</span><span class="p">,</span> <span class="n">params</span> <span class="o">=</span> <span class="n">key_to_request</span><span class="p">[</span><span class="n">cache_key</span><span class="p">]</span>
+                    <span class="n">request_id</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">endpoint</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="nb">hash</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">params</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span>
+                    
+                    <span class="k">if</span> <span class="n">cached_value</span><span class="p">:</span>
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">cached_value</span><span class="p">)</span>
+                            <span class="n">results</span><span class="p">[</span><span class="n">request_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
+                            <span class="bp">self</span><span class="o">.</span><span class="n">cache_stats</span><span class="p">[</span><span class="s1">&#39;batch_hits&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="k">except</span> <span class="n">json</span><span class="o">.</span><span class="n">JSONDecodeError</span><span class="p">:</span>
+                            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid JSON in cache for </span><span class="si">{</span><span class="n">endpoint</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">results</span><span class="p">[</span><span class="n">request_id</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+                        
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Batch cache retrieval error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;📦 Batch cache: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2"> requests, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cache_stats</span><span class="p">[</span><span class="s1">&#39;batch_hits&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2"> hits&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">results</span></div>
+
+
+<div class="viewcode-block" id="CryptoCacheManager.set_batch">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.CryptoCacheManager.set_batch">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_items</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]]])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Store multiple items in cache efficiently.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache_enabled</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        
+        <span class="n">successful_sets</span> <span class="o">=</span> <span class="mi">0</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Prepare pipeline for batch operations</span>
+            <span class="n">pipe</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">redis_client</span><span class="o">.</span><span class="n">pipeline</span><span class="p">()</span>
+            
+            <span class="k">for</span> <span class="n">endpoint</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">params</span><span class="p">,</span> <span class="n">ttl</span> <span class="ow">in</span> <span class="n">data_items</span><span class="p">:</span>
+                <span class="n">cache_key</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_generate_cache_key</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">params</span> <span class="ow">or</span> <span class="p">{})</span>
+                
+                <span class="c1"># Use smart TTL if not specified</span>
+                <span class="k">if</span> <span class="n">ttl</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">data_type</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_detect_data_type</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+                    <span class="n">market_hours</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_market_hours</span><span class="p">()</span>
+                    <span class="n">high_volatility</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_high_volatility_period</span><span class="p">()</span>
+                    <span class="n">ttl</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ttl_strategy</span><span class="o">.</span><span class="n">get_ttl</span><span class="p">(</span><span class="n">data_type</span><span class="p">,</span> <span class="n">market_hours</span><span class="p">,</span> <span class="n">high_volatility</span><span class="p">)</span>
+                
+                <span class="c1"># Add metadata</span>
+                <span class="n">cache_data</span> <span class="o">=</span> <span class="p">{</span>
+                    <span class="s2">&quot;data&quot;</span><span class="p">:</span> <span class="n">data</span><span class="p">,</span>
+                    <span class="s2">&quot;cached_at&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+                    <span class="s2">&quot;endpoint&quot;</span><span class="p">:</span> <span class="n">endpoint</span><span class="p">,</span>
+                    <span class="s2">&quot;params&quot;</span><span class="p">:</span> <span class="n">params</span><span class="p">,</span>
+                    <span class="s2">&quot;data_type&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_detect_data_type</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">params</span><span class="p">),</span>
+                    <span class="s2">&quot;ttl_used&quot;</span><span class="p">:</span> <span class="n">ttl</span>
+                <span class="p">}</span>
+                
+                <span class="n">pipe</span><span class="o">.</span><span class="n">setex</span><span class="p">(</span><span class="n">cache_key</span><span class="p">,</span> <span class="n">ttl</span><span class="p">,</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">cache_data</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="nb">str</span><span class="p">))</span>
+            
+            <span class="c1"># Execute pipeline</span>
+            <span class="n">results</span> <span class="o">=</span> <span class="n">pipe</span><span class="o">.</span><span class="n">execute</span><span class="p">()</span>
+            <span class="n">successful_sets</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="mi">1</span> <span class="k">for</span> <span class="n">result</span> <span class="ow">in</span> <span class="n">results</span> <span class="k">if</span> <span class="n">result</span><span class="p">)</span>
+            
+            <span class="bp">self</span><span class="o">.</span><span class="n">cache_stats</span><span class="p">[</span><span class="s1">&#39;sets&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">successful_sets</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;💾 Batch cache SET: </span><span class="si">{</span><span class="n">successful_sets</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data_items</span><span class="p">)</span><span class="si">}</span><span class="s2"> successful&quot;</span><span class="p">)</span>
+            
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Batch cache storage error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            
+        <span class="k">return</span> <span class="n">successful_sets</span></div>
+
+
+<div class="viewcode-block" id="CryptoCacheManager.warm_cache">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.CryptoCacheManager.warm_cache">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">warm_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">critical_endpoints</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]],</span> 
+                   <span class="n">warm_function</span><span class="p">:</span> <span class="nb">callable</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Proactively warm cache with critical data.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache_enabled</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        
+        <span class="n">warmed_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🔥 Starting cache warming for </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">critical_endpoints</span><span class="p">)</span><span class="si">}</span><span class="s2"> endpoints&quot;</span><span class="p">)</span>
+        
+        <span class="k">for</span> <span class="n">endpoint</span><span class="p">,</span> <span class="n">params</span> <span class="ow">in</span> <span class="n">critical_endpoints</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># Check if already cached</span>
+                <span class="n">cached_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">cached_data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="c1"># Fetch fresh data and cache it</span>
+                    <span class="n">fresh_data</span> <span class="o">=</span> <span class="n">warm_function</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">fresh_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">fresh_data</span><span class="p">,</span> <span class="n">params</span><span class="p">):</span>
+                            <span class="n">warmed_count</span> <span class="o">+=</span> <span class="mi">1</span>
+                            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🔥 Warmed cache for </span><span class="si">{</span><span class="n">endpoint</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                        
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cache warming failed for </span><span class="si">{</span><span class="n">endpoint</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🔥 Cache warming complete: </span><span class="si">{</span><span class="n">warmed_count</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">critical_endpoints</span><span class="p">)</span><span class="si">}</span><span class="s2"> endpoints&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">warmed_count</span></div>
+
+
+<div class="viewcode-block" id="CryptoCacheManager.smart_invalidate">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.CryptoCacheManager.smart_invalidate">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">smart_invalidate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">patterns</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">data_types</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                        <span class="n">older_than_minutes</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Intelligent cache invalidation based on patterns, data types, or age.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache_enabled</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        
+        <span class="n">total_deleted</span> <span class="o">=</span> <span class="mi">0</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Get all crypto cache keys</span>
+            <span class="n">all_keys</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">redis_client</span><span class="o">.</span><span class="n">keys</span><span class="p">(</span><span class="s2">&quot;crypto_cache:*&quot;</span><span class="p">)</span>
+            <span class="n">keys_to_delete</span> <span class="o">=</span> <span class="p">[]</span>
+            
+            <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">all_keys</span><span class="p">:</span>
+                <span class="n">should_delete</span> <span class="o">=</span> <span class="kc">False</span>
+                
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="c1"># Get cached data to check metadata</span>
+                    <span class="n">cached_data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">redis_client</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">cached_data</span><span class="p">:</span>
+                        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">cached_data</span><span class="p">)</span>
+                        
+                        <span class="c1"># Check data type filter</span>
+                        <span class="k">if</span> <span class="n">data_types</span><span class="p">:</span>
+                            <span class="n">cache_data_type</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;data_type&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+                            <span class="k">if</span> <span class="n">cache_data_type</span> <span class="ow">in</span> <span class="n">data_types</span><span class="p">:</span>
+                                <span class="n">should_delete</span> <span class="o">=</span> <span class="kc">True</span>
+                        
+                        <span class="c1"># Check age filter</span>
+                        <span class="k">if</span> <span class="n">older_than_minutes</span><span class="p">:</span>
+                            <span class="n">cached_at</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">fromisoformat</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;cached_at&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+                            <span class="n">age_minutes</span> <span class="o">=</span> <span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">utcnow</span><span class="p">()</span> <span class="o">-</span> <span class="n">cached_at</span><span class="p">)</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span> <span class="o">/</span> <span class="mi">60</span>
+                            <span class="k">if</span> <span class="n">age_minutes</span> <span class="o">&gt;</span> <span class="n">older_than_minutes</span><span class="p">:</span>
+                                <span class="n">should_delete</span> <span class="o">=</span> <span class="kc">True</span>
+                        
+                        <span class="c1"># Check pattern filter</span>
+                        <span class="k">if</span> <span class="n">patterns</span><span class="p">:</span>
+                            <span class="n">endpoint</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;endpoint&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span>
+                            <span class="k">for</span> <span class="n">pattern</span> <span class="ow">in</span> <span class="n">patterns</span><span class="p">:</span>
+                                <span class="k">if</span> <span class="n">pattern</span> <span class="ow">in</span> <span class="n">endpoint</span><span class="p">:</span>
+                                    <span class="n">should_delete</span> <span class="o">=</span> <span class="kc">True</span>
+                                    <span class="k">break</span>
+                    
+                    <span class="c1"># If no filters specified, delete all</span>
+                    <span class="k">if</span> <span class="ow">not</span> <span class="n">data_types</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">older_than_minutes</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">patterns</span><span class="p">:</span>
+                        <span class="n">should_delete</span> <span class="o">=</span> <span class="kc">True</span>
+                        
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error checking key </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2"> for invalidation: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="k">continue</span>
+                
+                <span class="k">if</span> <span class="n">should_delete</span><span class="p">:</span>
+                    <span class="n">keys_to_delete</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+            
+            <span class="c1"># Batch delete</span>
+            <span class="k">if</span> <span class="n">keys_to_delete</span><span class="p">:</span>
+                <span class="n">total_deleted</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">redis_client</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="o">*</span><span class="n">keys_to_delete</span><span class="p">)</span>
+                
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🗑️  Smart invalidation: </span><span class="si">{</span><span class="n">total_deleted</span><span class="si">}</span><span class="s2"> entries deleted&quot;</span><span class="p">)</span>
+            
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Smart invalidation error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">total_deleted</span></div>
+
+
+<div class="viewcode-block" id="CryptoCacheManager.get_optimization_stats">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.CryptoCacheManager.get_optimization_stats">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_optimization_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get detailed cache performance and optimization statistics.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache_enabled</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">}</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">redis_client</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+            <span class="n">crypto_keys</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">redis_client</span><span class="o">.</span><span class="n">keys</span><span class="p">(</span><span class="s2">&quot;crypto_cache:*&quot;</span><span class="p">))</span>
+            
+            <span class="c1"># Calculate hit ratio</span>
+            <span class="n">total_requests</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache_stats</span><span class="p">[</span><span class="s1">&#39;hits&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache_stats</span><span class="p">[</span><span class="s1">&#39;misses&#39;</span><span class="p">]</span>
+            <span class="n">hit_ratio</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cache_stats</span><span class="p">[</span><span class="s1">&#39;hits&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">total_requests</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span> <span class="k">if</span> <span class="n">total_requests</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
+            
+            <span class="c1"># Batch efficiency</span>
+            <span class="n">batch_efficiency</span> <span class="o">=</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cache_stats</span><span class="p">[</span><span class="s1">&#39;batch_hits&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cache_stats</span><span class="p">[</span><span class="s1">&#39;batch_requests&#39;</span><span class="p">],</span> <span class="mi">1</span><span class="p">))</span>
+            
+            <span class="n">stats</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                <span class="s2">&quot;performance&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;total_keys&quot;</span><span class="p">:</span> <span class="n">crypto_keys</span><span class="p">,</span>
+                    <span class="s2">&quot;hit_ratio_percent&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">hit_ratio</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+                    <span class="s2">&quot;total_hits&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache_stats</span><span class="p">[</span><span class="s1">&#39;hits&#39;</span><span class="p">],</span>
+                    <span class="s2">&quot;total_misses&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache_stats</span><span class="p">[</span><span class="s1">&#39;misses&#39;</span><span class="p">],</span>
+                    <span class="s2">&quot;total_sets&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache_stats</span><span class="p">[</span><span class="s1">&#39;sets&#39;</span><span class="p">],</span>
+                    <span class="s2">&quot;batch_requests&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache_stats</span><span class="p">[</span><span class="s1">&#39;batch_requests&#39;</span><span class="p">],</span>
+                    <span class="s2">&quot;batch_efficiency&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="n">batch_efficiency</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;redis_info&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;memory_used&quot;</span><span class="p">:</span> <span class="n">info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;used_memory_human&quot;</span><span class="p">,</span> <span class="s2">&quot;Unknown&quot;</span><span class="p">),</span>
+                    <span class="s2">&quot;keyspace_hits&quot;</span><span class="p">:</span> <span class="n">info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;keyspace_hits&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+                    <span class="s2">&quot;keyspace_misses&quot;</span><span class="p">:</span> <span class="n">info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;keyspace_misses&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span>
+                    <span class="s2">&quot;connected_clients&quot;</span><span class="p">:</span> <span class="n">info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;connected_clients&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;ttl_strategy&quot;</span><span class="p">:</span> <span class="p">{</span>
+                    <span class="s2">&quot;smart_ttl_enabled&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span>
+                    <span class="s2">&quot;market_hours_active&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_market_hours</span><span class="p">(),</span>
+                    <span class="s2">&quot;high_volatility_detected&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_is_high_volatility_period</span><span class="p">(),</span>
+                    <span class="s2">&quot;data_type_mappings&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ttl_strategy</span><span class="o">.</span><span class="n">DATA_TYPE_VOLATILITY</span><span class="p">)</span>
+                <span class="p">},</span>
+                <span class="s2">&quot;recommendations&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_optimization_recommendations</span><span class="p">(</span><span class="n">hit_ratio</span><span class="p">,</span> <span class="n">batch_efficiency</span><span class="p">)</span>
+            <span class="p">}</span>
+            
+            <span class="k">return</span> <span class="n">stats</span>
+            
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cache stats error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;enabled&quot;</span><span class="p">:</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;error&quot;</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">e</span><span class="p">)}</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_get_optimization_recommendations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">hit_ratio</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">batch_efficiency</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Generate optimization recommendations based on current performance.&quot;&quot;&quot;</span>
+        <span class="n">recommendations</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="k">if</span> <span class="n">hit_ratio</span> <span class="o">&lt;</span> <span class="mi">70</span><span class="p">:</span>
+            <span class="n">recommendations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Consider increasing TTL for stable data types&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">hit_ratio</span> <span class="o">&gt;</span> <span class="mi">95</span><span class="p">:</span>
+            <span class="n">recommendations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;TTL might be too long; check data freshness requirements&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">batch_efficiency</span> <span class="o">&lt;</span> <span class="mf">0.5</span><span class="p">:</span>
+            <span class="n">recommendations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Implement more batch requests to improve efficiency&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache_stats</span><span class="p">[</span><span class="s1">&#39;batch_requests&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">recommendations</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Start using batch cache operations for better performance&quot;</span><span class="p">)</span>
+            
+        <span class="k">return</span> <span class="n">recommendations</span>
+
+<div class="viewcode-block" id="CryptoCacheManager.invalidate_pattern">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.CryptoCacheManager.invalidate_pattern">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">invalidate_pattern</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">pattern</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Invalidate cache entries matching a pattern.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache_enabled</span><span class="p">:</span>
+            <span class="k">return</span> <span class="mi">0</span>
+            
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">keys</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">redis_client</span><span class="o">.</span><span class="n">keys</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;crypto_cache:</span><span class="si">{</span><span class="n">pattern</span><span class="si">}</span><span class="s2">*&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">keys</span><span class="p">:</span>
+                <span class="n">deleted</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">redis_client</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="o">*</span><span class="n">keys</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🗑️  Invalidated </span><span class="si">{</span><span class="n">deleted</span><span class="si">}</span><span class="s2"> cache entries matching: </span><span class="si">{</span><span class="n">pattern</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">deleted</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cache invalidation error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            
+        <span class="k">return</span> <span class="mi">0</span></div>
+
+
+<div class="viewcode-block" id="CryptoCacheManager.clear_all_cache">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.CryptoCacheManager.clear_all_cache">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">clear_all_cache</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Clear all crypto cache entries.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache_enabled</span><span class="p">:</span>
+            <span class="k">return</span> <span class="kc">False</span>
+            
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">deleted</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">invalidate_pattern</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🧹 Cleared all crypto cache: </span><span class="si">{</span><span class="n">deleted</span><span class="si">}</span><span class="s2"> entries&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Cache clear error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">False</span></div>
+</div>
+
+
+
+<span class="c1"># Global cache instance</span>
+<span class="n">_cache_manager</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="get_cache_manager">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.get_cache_manager">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_cache_manager</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">CryptoCacheManager</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get or create the global cache manager instance.&quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">_cache_manager</span>
+    <span class="k">if</span> <span class="n">_cache_manager</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_cache_manager</span> <span class="o">=</span> <span class="n">CryptoCacheManager</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">_cache_manager</span></div>
+
+
+
+<div class="viewcode-block" id="cache_crypto_request">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.cache_crypto_request">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">cache_crypto_request</span><span class="p">(</span><span class="n">endpoint</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">ttl</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">data_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enhanced decorator to cache crypto API requests with smart TTL.&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="n">cache</span> <span class="o">=</span> <span class="n">get_cache_manager</span><span class="p">()</span>
+            
+            <span class="c1"># Generate cache params from function arguments</span>
+            <span class="n">cache_params</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;args&quot;</span><span class="p">:</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="k">if</span> <span class="n">args</span> <span class="k">else</span> <span class="p">[],</span>  <span class="c1"># Skip &#39;self&#39;</span>
+                <span class="s2">&quot;kwargs&quot;</span><span class="p">:</span> <span class="n">kwargs</span>
+            <span class="p">}</span>
+            
+            <span class="c1"># Override data type if specified</span>
+            <span class="k">if</span> <span class="n">data_type</span><span class="p">:</span>
+                <span class="n">cache_params</span><span class="p">[</span><span class="s2">&quot;_data_type_override&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data_type</span>
+            
+            <span class="c1"># Try cache first</span>
+            <span class="n">cached_result</span> <span class="o">=</span> <span class="n">cache</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">cache_params</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">cached_result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">cached_result</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;data&quot;</span><span class="p">)</span>
+            
+            <span class="c1"># Execute function and cache result</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+            <span class="n">cache</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">endpoint</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">cache_params</span><span class="p">,</span> <span class="n">ttl</span><span class="p">)</span>
+            
+            <span class="k">return</span> <span class="n">result</span>
+        <span class="k">return</span> <span class="n">wrapper</span>
+    <span class="k">return</span> <span class="n">decorator</span> </div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, TauricResearch.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,6 +1,6 @@
 [project]
 name = "tradingagents"
-version = "0.1.0"
+version = "0.3.0"
 description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -32,3 +32,32 @@ dependencies = [
     "typing-extensions>=4.14.0",
     "yfinance>=0.2.63",
 ]
+
+[project.optional-dependencies]
+docs = [
+    "sphinx>=7.0.0",
+    "sphinx-autosummary-accessors>=2023.4.0", 
+    "sphinx-rtd-theme>=2.0.0",
+    "sphinxcontrib-napoleon>=0.7",
+    "nbsphinx>=0.9.3",
+    "jupyter>=1.0.0",
+    "myst-parser>=2.0.0",
+]
+ops = [
+    "prometheus_client>=0.19.0",
+    "fastapi>=0.104.0",
+    "uvicorn>=0.24.0",
+    "grafana-api>=1.0.3",
+    "click>=8.0.0",
+]
+dev = [
+    "pytest>=7.0.0",
+    "pytest-cov>=4.0.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+    "docformatter>=1.7.0",
+    "pre-commit>=3.0.0",
+]
+
+[project.scripts]
+tradingagents-ops = "tradingagents.ops.cli:cli"

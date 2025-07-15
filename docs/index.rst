@@ -1,0 +1,54 @@
+TradingAgents Documentation
+============================
+
+Welcome to TradingAgents, a comprehensive multi-agent LLM financial trading framework with enterprise-grade cryptocurrency infrastructure.
+
+🚀 **TradingAgents** is a production-ready platform that combines the power of Large Language Models with sophisticated trading algorithms to create intelligent trading agents capable of analyzing markets, managing risk, and executing trades across multiple cryptocurrency exchanges.
+
+Features
+--------
+
+* **Multi-Agent Architecture**: Specialized agents for analysis, research, risk management, and trading
+* **Cryptocurrency Infrastructure**: Production-ready integrations with major exchanges (Binance, Coinbase, Kraken, OKX, Huobi)
+* **On-Chain Analytics**: Real-time blockchain metrics via Glassnode integration
+* **Redis Caching**: Enterprise-grade caching for rapid agent debates and API optimization
+* **Risk Management**: Sophisticated risk assessment and management frameworks
+* **Backtesting Engine**: Comprehensive historical testing capabilities
+
+Contents
+--------
+
+.. toctree::
+   :maxdepth: 2
+   :caption: User Guide:
+
+   installation
+   quickstart
+   tutorials/index
+   
+.. toctree::
+   :maxdepth: 2
+   :caption: API Reference:
+   
+   api/index
+   
+.. toctree::
+   :maxdepth: 2
+   :caption: Examples:
+   
+   examples/index
+
+.. toctree::
+   :maxdepth: 1
+   :caption: Development:
+   
+   contributing
+   changelog
+
+Indices and tables
+==================
+
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`
+

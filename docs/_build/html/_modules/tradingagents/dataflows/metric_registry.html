@@ -1,0 +1,1028 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tradingagents.dataflows.metric_registry &mdash; TradingAgents 0.3.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../_static/documentation_options.js?v=e259d695"></script>
+      <script src="../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            TradingAgents
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#quick-install">Quick Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#development-installation">Development Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#redis-setup-recommended">Redis Setup (Recommended)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#environment-configuration">Environment Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#verification">Verification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../installation.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#basic-usage">Basic Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#running-with-caching">Running with Caching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#multi-agent-example">Multi-Agent Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#on-chain-analytics">On-Chain Analytics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#cli-interface">CLI Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../quickstart.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../tutorials/index.html">Tutorials</a><ul class="simple">
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#core-modules">Core Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html">tradingagents.agents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.FinancialSituationMemory"><code class="docutils literal notranslate"><span class="pre">FinancialSituationMemory</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.Toolkit"><code class="docutils literal notranslate"><span class="pre">Toolkit</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.AgentState"><code class="docutils literal notranslate"><span class="pre">AgentState</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_msg_delete"><code class="docutils literal notranslate"><span class="pre">create_msg_delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.InvestDebateState"><code class="docutils literal notranslate"><span class="pre">InvestDebateState</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.RiskDebateState"><code class="docutils literal notranslate"><span class="pre">RiskDebateState</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_bear_researcher"><code class="docutils literal notranslate"><span class="pre">create_bear_researcher()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_bull_researcher"><code class="docutils literal notranslate"><span class="pre">create_bull_researcher()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_research_manager"><code class="docutils literal notranslate"><span class="pre">create_research_manager()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_fundamentals_analyst"><code class="docutils literal notranslate"><span class="pre">create_fundamentals_analyst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_market_analyst"><code class="docutils literal notranslate"><span class="pre">create_market_analyst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_neutral_debator"><code class="docutils literal notranslate"><span class="pre">create_neutral_debator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_news_analyst"><code class="docutils literal notranslate"><span class="pre">create_news_analyst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_onchain_analyst"><code class="docutils literal notranslate"><span class="pre">create_onchain_analyst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_risky_debator"><code class="docutils literal notranslate"><span class="pre">create_risky_debator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_risk_manager"><code class="docutils literal notranslate"><span class="pre">create_risk_manager()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_safe_debator"><code class="docutils literal notranslate"><span class="pre">create_safe_debator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_social_media_analyst"><code class="docutils literal notranslate"><span class="pre">create_social_media_analyst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_trader"><code class="docutils literal notranslate"><span class="pre">create_trader()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html">tradingagents.dataflows</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_finnhub_news"><code class="docutils literal notranslate"><span class="pre">get_finnhub_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_finnhub_company_insider_sentiment"><code class="docutils literal notranslate"><span class="pre">get_finnhub_company_insider_sentiment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_finnhub_company_insider_transactions"><code class="docutils literal notranslate"><span class="pre">get_finnhub_company_insider_transactions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_google_news"><code class="docutils literal notranslate"><span class="pre">get_google_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_reddit_global_news"><code class="docutils literal notranslate"><span class="pre">get_reddit_global_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_reddit_company_news"><code class="docutils literal notranslate"><span class="pre">get_reddit_company_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_simfin_balance_sheet"><code class="docutils literal notranslate"><span class="pre">get_simfin_balance_sheet()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_simfin_cashflow"><code class="docutils literal notranslate"><span class="pre">get_simfin_cashflow()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_simfin_income_statements"><code class="docutils literal notranslate"><span class="pre">get_simfin_income_statements()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_stock_stats_indicators_window"><code class="docutils literal notranslate"><span class="pre">get_stock_stats_indicators_window()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_stockstats_indicator"><code class="docutils literal notranslate"><span class="pre">get_stockstats_indicator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_YFin_data_window"><code class="docutils literal notranslate"><span class="pre">get_YFin_data_window()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_YFin_data"><code class="docutils literal notranslate"><span class="pre">get_YFin_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.ccxt_adapters.html">tradingagents.dataflows.ccxt_adapters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.config.html">tradingagents.dataflows.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html">tradingagents.dataflows.crypto_cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_utils.html">tradingagents.dataflows.crypto_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.finnhub_utils.html">tradingagents.dataflows.finnhub_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.googlenews_utils.html">tradingagents.dataflows.googlenews_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html">tradingagents.dataflows.interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.metric_registry.html">tradingagents.dataflows.metric_registry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.onchain_loader.html">tradingagents.dataflows.onchain_loader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.reddit_utils.html">tradingagents.dataflows.reddit_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.stockstats_utils.html">tradingagents.dataflows.stockstats_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.utils.html">tradingagents.dataflows.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.yfin_utils.html">tradingagents.dataflows.yfin_utils</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.graph.html">tradingagents.graph</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.html#tradingagents.graph.TradingAgentsGraph"><code class="docutils literal notranslate"><span class="pre">TradingAgentsGraph</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.html#tradingagents.graph.ConditionalLogic"><code class="docutils literal notranslate"><span class="pre">ConditionalLogic</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.html#tradingagents.graph.GraphSetup"><code class="docutils literal notranslate"><span class="pre">GraphSetup</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.html#tradingagents.graph.Propagator"><code class="docutils literal notranslate"><span class="pre">Propagator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.html#tradingagents.graph.Reflector"><code class="docutils literal notranslate"><span class="pre">Reflector</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.html#tradingagents.graph.SignalProcessor"><code class="docutils literal notranslate"><span class="pre">SignalProcessor</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.conditional_logic.html">tradingagents.graph.conditional_logic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.propagation.html">tradingagents.graph.propagation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.reflection.html">tradingagents.graph.reflection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.setup.html">tradingagents.graph.setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.signal_processing.html">tradingagents.graph.signal_processing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.trading_graph.html">tradingagents.graph.trading_graph</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#agents">Agents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.fundamentals_analyst.html">tradingagents.agents.analysts.fundamentals_analyst</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.fundamentals_analyst.html#tradingagents.agents.analysts.fundamentals_analyst.create_fundamentals_analyst"><code class="docutils literal notranslate"><span class="pre">create_fundamentals_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.market_analyst.html">tradingagents.agents.analysts.market_analyst</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.market_analyst.html#tradingagents.agents.analysts.market_analyst.create_market_analyst"><code class="docutils literal notranslate"><span class="pre">create_market_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.news_analyst.html">tradingagents.agents.analysts.news_analyst</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.news_analyst.html#tradingagents.agents.analysts.news_analyst.create_news_analyst"><code class="docutils literal notranslate"><span class="pre">create_news_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.onchain_analyst.html">tradingagents.agents.analysts.onchain_analyst</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.onchain_analyst.html#tradingagents.agents.analysts.onchain_analyst.create_onchain_analyst"><code class="docutils literal notranslate"><span class="pre">create_onchain_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.social_media_analyst.html">tradingagents.agents.analysts.social_media_analyst</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.analysts.social_media_analyst.html#tradingagents.agents.analysts.social_media_analyst.create_social_media_analyst"><code class="docutils literal notranslate"><span class="pre">create_social_media_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.managers.research_manager.html">tradingagents.agents.managers.research_manager</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.managers.research_manager.html#tradingagents.agents.managers.research_manager.create_research_manager"><code class="docutils literal notranslate"><span class="pre">create_research_manager()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.managers.risk_manager.html">tradingagents.agents.managers.risk_manager</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.managers.risk_manager.html#tradingagents.agents.managers.risk_manager.create_risk_manager"><code class="docutils literal notranslate"><span class="pre">create_risk_manager()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.researchers.bear_researcher.html">tradingagents.agents.researchers.bear_researcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.researchers.bear_researcher.html#tradingagents.agents.researchers.bear_researcher.create_bear_researcher"><code class="docutils literal notranslate"><span class="pre">create_bear_researcher()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.researchers.bull_researcher.html">tradingagents.agents.researchers.bull_researcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.researchers.bull_researcher.html#tradingagents.agents.researchers.bull_researcher.create_bull_researcher"><code class="docutils literal notranslate"><span class="pre">create_bull_researcher()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.risk_mgmt.aggresive_debator.html">tradingagents.agents.risk_mgmt.aggresive_debator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.risk_mgmt.aggresive_debator.html#tradingagents.agents.risk_mgmt.aggresive_debator.create_risky_debator"><code class="docutils literal notranslate"><span class="pre">create_risky_debator()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.risk_mgmt.conservative_debator.html">tradingagents.agents.risk_mgmt.conservative_debator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.risk_mgmt.conservative_debator.html#tradingagents.agents.risk_mgmt.conservative_debator.create_safe_debator"><code class="docutils literal notranslate"><span class="pre">create_safe_debator()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.risk_mgmt.neutral_debator.html">tradingagents.agents.risk_mgmt.neutral_debator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.risk_mgmt.neutral_debator.html#tradingagents.agents.risk_mgmt.neutral_debator.create_neutral_debator"><code class="docutils literal notranslate"><span class="pre">create_neutral_debator()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.trader.trader.html">tradingagents.agents.trader.trader</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.trader.trader.html#tradingagents.agents.trader.trader.create_trader"><code class="docutils literal notranslate"><span class="pre">create_trader()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#data-infrastructure">Data Infrastructure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.ccxt_adapters.html">tradingagents.dataflows.ccxt_adapters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.ccxt_adapters.html#tradingagents.dataflows.ccxt_adapters.ExchangeConfig"><code class="docutils literal notranslate"><span class="pre">ExchangeConfig</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.ccxt_adapters.html#tradingagents.dataflows.ccxt_adapters.init_exchange_client"><code class="docutils literal notranslate"><span class="pre">init_exchange_client()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.ccxt_adapters.html#tradingagents.dataflows.ccxt_adapters.CCXTAdapters"><code class="docutils literal notranslate"><span class="pre">CCXTAdapters</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html">tradingagents.dataflows.crypto_cache</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.DataVolatility"><code class="docutils literal notranslate"><span class="pre">DataVolatility</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.SmartTTLStrategy"><code class="docutils literal notranslate"><span class="pre">SmartTTLStrategy</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.CryptoCacheManager"><code class="docutils literal notranslate"><span class="pre">CryptoCacheManager</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.get_cache_manager"><code class="docutils literal notranslate"><span class="pre">get_cache_manager()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.cache_crypto_request"><code class="docutils literal notranslate"><span class="pre">cache_crypto_request()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_utils.html">tradingagents.dataflows.crypto_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_utils.html#tradingagents.dataflows.crypto_utils.init_crypto_client"><code class="docutils literal notranslate"><span class="pre">init_crypto_client()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.crypto_utils.html#tradingagents.dataflows.crypto_utils.CryptoUtils"><code class="docutils literal notranslate"><span class="pre">CryptoUtils</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.metric_registry.html">tradingagents.dataflows.metric_registry</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.DataProvider"><code class="docutils literal notranslate"><span class="pre">DataProvider</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.BatchOptimizer"><code class="docutils literal notranslate"><span class="pre">BatchOptimizer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.MetricRegistry"><code class="docutils literal notranslate"><span class="pre">MetricRegistry</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.get_metric_registry"><code class="docutils literal notranslate"><span class="pre">get_metric_registry()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.onchain_loader.html">tradingagents.dataflows.onchain_loader</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.onchain_loader.html#tradingagents.dataflows.onchain_loader.OnChainLoader"><code class="docutils literal notranslate"><span class="pre">OnChainLoader</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.onchain_loader.html#tradingagents.dataflows.onchain_loader.get_onchain_loader"><code class="docutils literal notranslate"><span class="pre">get_onchain_loader()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html">tradingagents.dataflows.interface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_finnhub_news"><code class="docutils literal notranslate"><span class="pre">get_finnhub_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_crypto_data_online"><code class="docutils literal notranslate"><span class="pre">get_crypto_data_online()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_crypto_info_online"><code class="docutils literal notranslate"><span class="pre">get_crypto_info_online()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_exchange_ohlcv_data"><code class="docutils literal notranslate"><span class="pre">get_exchange_ohlcv_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_exchange_order_book"><code class="docutils literal notranslate"><span class="pre">get_exchange_order_book()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.compare_crypto_exchanges"><code class="docutils literal notranslate"><span class="pre">compare_crypto_exchanges()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_supported_crypto_exchanges"><code class="docutils literal notranslate"><span class="pre">get_supported_crypto_exchanges()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_onchain_network_health"><code class="docutils literal notranslate"><span class="pre">get_onchain_network_health()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_onchain_market_indicators"><code class="docutils literal notranslate"><span class="pre">get_onchain_market_indicators()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_onchain_comprehensive_analysis"><code class="docutils literal notranslate"><span class="pre">get_onchain_comprehensive_analysis()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_metric_registry_data"><code class="docutils literal notranslate"><span class="pre">get_metric_registry_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_finnhub_company_insider_sentiment"><code class="docutils literal notranslate"><span class="pre">get_finnhub_company_insider_sentiment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_finnhub_company_insider_transactions"><code class="docutils literal notranslate"><span class="pre">get_finnhub_company_insider_transactions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_simfin_balance_sheet"><code class="docutils literal notranslate"><span class="pre">get_simfin_balance_sheet()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_simfin_cashflow"><code class="docutils literal notranslate"><span class="pre">get_simfin_cashflow()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_simfin_income_statements"><code class="docutils literal notranslate"><span class="pre">get_simfin_income_statements()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_google_news"><code class="docutils literal notranslate"><span class="pre">get_google_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_reddit_global_news"><code class="docutils literal notranslate"><span class="pre">get_reddit_global_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_reddit_company_news"><code class="docutils literal notranslate"><span class="pre">get_reddit_company_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_stock_stats_indicators_window"><code class="docutils literal notranslate"><span class="pre">get_stock_stats_indicators_window()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_stockstats_indicator"><code class="docutils literal notranslate"><span class="pre">get_stockstats_indicator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_YFin_data_window"><code class="docutils literal notranslate"><span class="pre">get_YFin_data_window()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_YFin_data_online"><code class="docutils literal notranslate"><span class="pre">get_YFin_data_online()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_YFin_data"><code class="docutils literal notranslate"><span class="pre">get_YFin_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_stock_news_openai"><code class="docutils literal notranslate"><span class="pre">get_stock_news_openai()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_global_news_openai"><code class="docutils literal notranslate"><span class="pre">get_global_news_openai()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_fundamentals_openai"><code class="docutils literal notranslate"><span class="pre">get_fundamentals_openai()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.config.html">tradingagents.dataflows.config</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.config.html#tradingagents.dataflows.config.initialize_config"><code class="docutils literal notranslate"><span class="pre">initialize_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.config.html#tradingagents.dataflows.config.set_config"><code class="docutils literal notranslate"><span class="pre">set_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.config.html#tradingagents.dataflows.config.get_config"><code class="docutils literal notranslate"><span class="pre">get_config()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#market-data-adapters">Market Data Adapters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.yfin_utils.html">tradingagents.dataflows.yfin_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.yfin_utils.html#tradingagents.dataflows.yfin_utils.init_ticker"><code class="docutils literal notranslate"><span class="pre">init_ticker()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.yfin_utils.html#tradingagents.dataflows.yfin_utils.YFinanceUtils"><code class="docutils literal notranslate"><span class="pre">YFinanceUtils</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.finnhub_utils.html">tradingagents.dataflows.finnhub_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.finnhub_utils.html#tradingagents.dataflows.finnhub_utils.get_data_in_range"><code class="docutils literal notranslate"><span class="pre">get_data_in_range()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.googlenews_utils.html">tradingagents.dataflows.googlenews_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.googlenews_utils.html#tradingagents.dataflows.googlenews_utils.is_rate_limited"><code class="docutils literal notranslate"><span class="pre">is_rate_limited()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.googlenews_utils.html#tradingagents.dataflows.googlenews_utils.make_request"><code class="docutils literal notranslate"><span class="pre">make_request()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.googlenews_utils.html#tradingagents.dataflows.googlenews_utils.getNewsData"><code class="docutils literal notranslate"><span class="pre">getNewsData()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.reddit_utils.html">tradingagents.dataflows.reddit_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.reddit_utils.html#tradingagents.dataflows.reddit_utils.fetch_top_from_category"><code class="docutils literal notranslate"><span class="pre">fetch_top_from_category()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.stockstats_utils.html">tradingagents.dataflows.stockstats_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.stockstats_utils.html#tradingagents.dataflows.stockstats_utils.StockstatsUtils"><code class="docutils literal notranslate"><span class="pre">StockstatsUtils</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#graph-signal-processing">Graph &amp; Signal Processing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.graph.trading_graph.html">tradingagents.graph.trading_graph</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.trading_graph.html#tradingagents.graph.trading_graph.TradingAgentsGraph"><code class="docutils literal notranslate"><span class="pre">TradingAgentsGraph</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.graph.signal_processing.html">tradingagents.graph.signal_processing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.signal_processing.html#tradingagents.graph.signal_processing.SignalProcessor"><code class="docutils literal notranslate"><span class="pre">SignalProcessor</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.graph.conditional_logic.html">tradingagents.graph.conditional_logic</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.conditional_logic.html#tradingagents.graph.conditional_logic.ConditionalLogic"><code class="docutils literal notranslate"><span class="pre">ConditionalLogic</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.graph.propagation.html">tradingagents.graph.propagation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.propagation.html#tradingagents.graph.propagation.Propagator"><code class="docutils literal notranslate"><span class="pre">Propagator</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.graph.reflection.html">tradingagents.graph.reflection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.graph.reflection.html#tradingagents.graph.reflection.Reflector"><code class="docutils literal notranslate"><span class="pre">Reflector</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../api/index.html#utilities">Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.agent_states.html">tradingagents.agents.utils.agent_states</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.agent_states.html#tradingagents.agents.utils.agent_states.InvestDebateState"><code class="docutils literal notranslate"><span class="pre">InvestDebateState</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.agent_states.html#tradingagents.agents.utils.agent_states.RiskDebateState"><code class="docutils literal notranslate"><span class="pre">RiskDebateState</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.agent_states.html#tradingagents.agents.utils.agent_states.AgentState"><code class="docutils literal notranslate"><span class="pre">AgentState</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.agent_utils.html">tradingagents.agents.utils.agent_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.agent_utils.html#tradingagents.agents.utils.agent_utils.create_msg_delete"><code class="docutils literal notranslate"><span class="pre">create_msg_delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.agent_utils.html#tradingagents.agents.utils.agent_utils.Toolkit"><code class="docutils literal notranslate"><span class="pre">Toolkit</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.memory.html">tradingagents.agents.utils.memory</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.agents.utils.memory.html#tradingagents.agents.utils.memory.FinancialSituationMemory"><code class="docutils literal notranslate"><span class="pre">FinancialSituationMemory</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.utils.html">tradingagents.dataflows.utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.utils.html#tradingagents.dataflows.utils.save_output"><code class="docutils literal notranslate"><span class="pre">save_output()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.utils.html#tradingagents.dataflows.utils.get_current_date"><code class="docutils literal notranslate"><span class="pre">get_current_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.utils.html#tradingagents.dataflows.utils.decorate_all_methods"><code class="docutils literal notranslate"><span class="pre">decorate_all_methods()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../api/generated/tradingagents.dataflows.utils.html#tradingagents.dataflows.utils.get_next_weekday"><code class="docutils literal notranslate"><span class="pre">get_next_weekday()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../examples/index.html">Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../changelog.html#v0-3-0-2025-07-15">v0.3.0 (2025-07-15)</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">TradingAgents</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">tradingagents.dataflows.metric_registry</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tradingagents.dataflows.metric_registry</h1><div class="highlight"><pre>
+<span></span><span class="sd">&quot;&quot;&quot;MetricRegistry: Intelligent fallback system for multiple on-chain data providers.&quot;&quot;&quot;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Tuple</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">concurrent.futures</span><span class="w"> </span><span class="kn">import</span> <span class="n">ThreadPoolExecutor</span><span class="p">,</span> <span class="n">as_completed</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">.onchain_loader</span><span class="w"> </span><span class="kn">import</span> <span class="n">OnChainLoader</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">.crypto_cache</span><span class="w"> </span><span class="kn">import</span> <span class="n">get_cache_manager</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="DataProvider">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.DataProvider">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">DataProvider</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Represents a data provider with priority and capabilities.&quot;&quot;&quot;</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">priority</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">loader_func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> 
+                 <span class="n">available_metrics</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">requires_api_key</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">priority</span> <span class="o">=</span> <span class="n">priority</span>  <span class="c1"># Lower number = higher priority</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">loader_func</span> <span class="o">=</span> <span class="n">loader_func</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">available_metrics</span> <span class="o">=</span> <span class="n">available_metrics</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">requires_api_key</span> <span class="o">=</span> <span class="n">requires_api_key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">failure_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_success</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_healthy</span> <span class="o">=</span> <span class="kc">True</span>
+
+<div class="viewcode-block" id="DataProvider.can_provide">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.DataProvider.can_provide">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">can_provide</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Check if this provider can supply the given metric.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">metric</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">available_metrics</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_healthy</span></div>
+
+
+<div class="viewcode-block" id="DataProvider.record_success">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.DataProvider.record_success">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">record_success</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Record a successful data fetch.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">failure_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">last_success</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_healthy</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+
+<div class="viewcode-block" id="DataProvider.record_failure">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.DataProvider.record_failure">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">record_failure</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Record a failed data fetch.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">failure_count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">failure_count</span> <span class="o">&gt;=</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_healthy</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;⚠️  Provider </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> marked unhealthy after </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">failure_count</span><span class="si">}</span><span class="s2"> failures&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DataProvider.reset_health">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.DataProvider.reset_health">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset_health</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset provider health status.&quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">failure_count</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">is_healthy</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Provider </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> health reset&quot;</span><span class="p">)</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="BatchOptimizer">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.BatchOptimizer">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">BatchOptimizer</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Optimizes batch requests by grouping compatible metrics by provider.&quot;&quot;&quot;</span>
+    
+<div class="viewcode-block" id="BatchOptimizer.group_by_provider">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.BatchOptimizer.group_by_provider">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">group_by_provider</span><span class="p">(</span><span class="n">requests</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span> <span class="n">providers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">DataProvider</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Group requests by the best available provider for each metric.&quot;&quot;&quot;</span>
+        <span class="n">provider_groups</span> <span class="o">=</span> <span class="p">{}</span>
+        
+        <span class="k">for</span> <span class="n">metric</span><span class="p">,</span> <span class="n">asset</span> <span class="ow">in</span> <span class="n">requests</span><span class="p">:</span>
+            <span class="c1"># Find best provider for this metric</span>
+            <span class="n">available_providers</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">providers</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">can_provide</span><span class="p">(</span><span class="n">metric</span><span class="p">)]</span>
+            <span class="k">if</span> <span class="n">available_providers</span><span class="p">:</span>
+                <span class="c1"># Sort by priority and health</span>
+                <span class="n">available_providers</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">priority</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">failure_count</span><span class="p">))</span>
+                <span class="n">best_provider</span> <span class="o">=</span> <span class="n">available_providers</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                
+                <span class="k">if</span> <span class="n">best_provider</span><span class="o">.</span><span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">provider_groups</span><span class="p">:</span>
+                    <span class="n">provider_groups</span><span class="p">[</span><span class="n">best_provider</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">provider_groups</span><span class="p">[</span><span class="n">best_provider</span><span class="o">.</span><span class="n">name</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">metric</span><span class="p">,</span> <span class="n">asset</span><span class="p">))</span>
+        
+        <span class="k">return</span> <span class="n">provider_groups</span></div>
+
+
+<div class="viewcode-block" id="BatchOptimizer.optimize_cache_keys">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.BatchOptimizer.optimize_cache_keys">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">optimize_cache_keys</span><span class="p">(</span><span class="n">requests</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Convert metric requests to cache-compatible format.&quot;&quot;&quot;</span>
+        <span class="n">cache_requests</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">metric</span><span class="p">,</span> <span class="n">asset</span> <span class="ow">in</span> <span class="n">requests</span><span class="p">:</span>
+            <span class="n">cache_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;metric_</span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">cache_params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;asset&quot;</span><span class="p">:</span> <span class="n">asset</span><span class="p">,</span> <span class="s2">&quot;metric&quot;</span><span class="p">:</span> <span class="n">metric</span><span class="p">}</span>
+            <span class="n">cache_requests</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">cache_key</span><span class="p">,</span> <span class="n">cache_params</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">cache_requests</span></div>
+
+
+<div class="viewcode-block" id="BatchOptimizer.detect_redundant_requests">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.BatchOptimizer.detect_redundant_requests">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">detect_redundant_requests</span><span class="p">(</span><span class="n">requests</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Detect and eliminate redundant requests, returning unique requests and a mapping.&quot;&quot;&quot;</span>
+        <span class="n">unique_requests</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">redundancy_map</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        
+        <span class="k">for</span> <span class="n">metric</span><span class="p">,</span> <span class="n">asset</span> <span class="ow">in</span> <span class="n">requests</span><span class="p">:</span>
+            <span class="n">request_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">asset</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">if</span> <span class="n">request_key</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+                <span class="n">unique_requests</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">metric</span><span class="p">,</span> <span class="n">asset</span><span class="p">))</span>
+                <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">request_key</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Map this to the first occurrence</span>
+                <span class="n">redundancy_map</span><span class="p">[</span><span class="n">request_key</span><span class="p">]</span> <span class="o">=</span> <span class="n">request_key</span>
+                
+        <span class="k">return</span> <span class="n">unique_requests</span><span class="p">,</span> <span class="n">redundancy_map</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="MetricRegistry">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.MetricRegistry">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">MetricRegistry</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Enhanced registry with batch optimization and intelligent caching.&quot;&quot;&quot;</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">providers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">DataProvider</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cache</span> <span class="o">=</span> <span class="n">get_cache_manager</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_optimizer</span> <span class="o">=</span> <span class="n">BatchOptimizer</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_stats</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s1">&#39;total_batch_requests&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s1">&#39;cache_hits_in_batch&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s1">&#39;provider_calls_saved&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s1">&#39;average_batch_size&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s1">&#39;concurrent_requests&#39;</span><span class="p">:</span> <span class="mi">0</span>
+        <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_initialize_providers</span><span class="p">()</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_initialize_providers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize available data providers in priority order.&quot;&quot;&quot;</span>
+        
+        <span class="c1"># Provider 1: Glassnode (highest priority, most comprehensive)</span>
+        <span class="n">glassnode_metrics</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;active_addresses&quot;</span><span class="p">,</span> <span class="s2">&quot;hash_rate&quot;</span><span class="p">,</span> <span class="s2">&quot;transactions_count&quot;</span><span class="p">,</span> 
+            <span class="s2">&quot;market_cap&quot;</span><span class="p">,</span> <span class="s2">&quot;price&quot;</span><span class="p">,</span> <span class="s2">&quot;nvt_ratio&quot;</span><span class="p">,</span> <span class="s2">&quot;mvrv_ratio&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;exchange_flows&quot;</span><span class="p">,</span> <span class="s2">&quot;whale_activity&quot;</span><span class="p">,</span> <span class="s2">&quot;hodl_waves&quot;</span>
+        <span class="p">]</span>
+        <span class="n">glassnode_loader</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">metric</span><span class="p">,</span> <span class="n">asset</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fetch_glassnode</span><span class="p">(</span><span class="n">metric</span><span class="p">,</span> <span class="n">asset</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">providers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">DataProvider</span><span class="p">(</span>
+            <span class="s2">&quot;Glassnode&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">glassnode_loader</span><span class="p">,</span> <span class="n">glassnode_metrics</span><span class="p">,</span> <span class="n">requires_api_key</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">))</span>
+
+        <span class="c1"># Provider 2: IntoTheBlock (secondary, good for whale metrics)</span>
+        <span class="n">intotheblock_metrics</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;active_addresses&quot;</span><span class="p">,</span> <span class="s2">&quot;large_transactions&quot;</span><span class="p">,</span> <span class="s2">&quot;whale_activity&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;price&quot;</span><span class="p">,</span> <span class="s2">&quot;market_cap&quot;</span><span class="p">,</span> <span class="s2">&quot;transaction_volume&quot;</span>
+        <span class="p">]</span>
+        <span class="n">itb_loader</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">metric</span><span class="p">,</span> <span class="n">asset</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fetch_intotheblock</span><span class="p">(</span><span class="n">metric</span><span class="p">,</span> <span class="n">asset</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">providers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">DataProvider</span><span class="p">(</span>
+            <span class="s2">&quot;IntoTheBlock&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">itb_loader</span><span class="p">,</span> <span class="n">intotheblock_metrics</span><span class="p">,</span> <span class="n">requires_api_key</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">))</span>
+
+        <span class="c1"># Provider 3: Dune Analytics (third, good for DeFi metrics)</span>
+        <span class="n">dune_metrics</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;defi_tvl&quot;</span><span class="p">,</span> <span class="s2">&quot;dex_volume&quot;</span><span class="p">,</span> <span class="s2">&quot;lending_activity&quot;</span><span class="p">,</span> 
+            <span class="s2">&quot;staking_metrics&quot;</span><span class="p">,</span> <span class="s2">&quot;governance_activity&quot;</span>
+        <span class="p">]</span>
+        <span class="n">dune_loader</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">metric</span><span class="p">,</span> <span class="n">asset</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fetch_dune</span><span class="p">(</span><span class="n">metric</span><span class="p">,</span> <span class="n">asset</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">providers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">DataProvider</span><span class="p">(</span>
+            <span class="s2">&quot;Dune&quot;</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">dune_loader</span><span class="p">,</span> <span class="n">dune_metrics</span><span class="p">,</span> <span class="n">requires_api_key</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">))</span>
+
+        <span class="c1"># Provider 4: Mock/Demo Provider (always available, fallback)</span>
+        <span class="n">mock_metrics</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;active_addresses&quot;</span><span class="p">,</span> <span class="s2">&quot;hash_rate&quot;</span><span class="p">,</span> <span class="s2">&quot;transactions_count&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;market_cap&quot;</span><span class="p">,</span> <span class="s2">&quot;price&quot;</span><span class="p">,</span> <span class="s2">&quot;network_health&quot;</span><span class="p">,</span> <span class="s2">&quot;whale_activity&quot;</span>
+        <span class="p">]</span>
+        <span class="n">mock_loader</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">metric</span><span class="p">,</span> <span class="n">asset</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">_fetch_mock_data</span><span class="p">(</span><span class="n">metric</span><span class="p">,</span> <span class="n">asset</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">providers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">DataProvider</span><span class="p">(</span>
+            <span class="s2">&quot;MockProvider&quot;</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="n">mock_loader</span><span class="p">,</span> <span class="n">mock_metrics</span><span class="p">,</span> <span class="n">requires_api_key</span><span class="o">=</span><span class="kc">False</span>
+        <span class="p">))</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🔗 MetricRegistry initialized with </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">providers</span><span class="p">)</span><span class="si">}</span><span class="s2"> providers&quot;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="MetricRegistry.get_metric">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.MetricRegistry.get_metric">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_metric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get a metric with intelligent fallback through providers.&quot;&quot;&quot;</span>
+        
+        <span class="c1"># Sort providers by priority and health</span>
+        <span class="n">available_providers</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">providers</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">can_provide</span><span class="p">(</span><span class="n">metric</span><span class="p">)]</span>
+        <span class="n">available_providers</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">priority</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">failure_count</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">available_providers</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ No providers available for metric: </span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🔍 Fetching </span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s2"> for </span><span class="si">{</span><span class="n">asset</span><span class="si">}</span><span class="s2"> with </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">available_providers</span><span class="p">)</span><span class="si">}</span><span class="s2"> providers&quot;</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">provider</span> <span class="ow">in</span> <span class="n">available_providers</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   Trying </span><span class="si">{</span><span class="n">provider</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">...&quot;</span><span class="p">)</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">provider</span><span class="o">.</span><span class="n">loader_func</span><span class="p">(</span><span class="n">metric</span><span class="p">,</span> <span class="n">asset</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+                
+                <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">)</span> <span class="ow">and</span> <span class="n">result</span><span class="o">.</span><span class="n">empty</span><span class="p">):</span>
+                    <span class="n">provider</span><span class="o">.</span><span class="n">record_success</span><span class="p">()</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ </span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s2"> fetched successfully from </span><span class="si">{</span><span class="n">provider</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="n">result</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;   </span><span class="si">{</span><span class="n">provider</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> returned empty result&quot;</span><span class="p">)</span>
+                    
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;⚠️  </span><span class="si">{</span><span class="n">provider</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> failed for </span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">provider</span><span class="o">.</span><span class="n">record_failure</span><span class="p">()</span>
+                <span class="k">continue</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;❌ All providers failed for </span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s2"> on </span><span class="si">{</span><span class="n">asset</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+<div class="viewcode-block" id="MetricRegistry.get_metrics_batch">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.MetricRegistry.get_metrics_batch">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_metrics_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">requests</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span> <span class="n">use_cache</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> 
+                         <span class="n">max_concurrent</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Efficiently fetch multiple metrics using batch optimization and caching.</span>
+<span class="sd">        </span>
+<span class="sd">        Args:</span>
+<span class="sd">            requests: List of (metric, asset) tuples</span>
+<span class="sd">            use_cache: Whether to use cache for optimization</span>
+<span class="sd">            max_concurrent: Maximum number of concurrent provider calls</span>
+<span class="sd">            </span>
+<span class="sd">        Returns:</span>
+<span class="sd">            Dictionary mapping request_id to results</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">requests</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{}</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_stats</span><span class="p">[</span><span class="s1">&#39;total_batch_requests&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_stats</span><span class="p">[</span><span class="s1">&#39;average_batch_size&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span>
+            <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_stats</span><span class="p">[</span><span class="s1">&#39;average_batch_size&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_stats</span><span class="p">[</span><span class="s1">&#39;total_batch_requests&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">requests</span><span class="p">))</span> 
+            <span class="o">/</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_stats</span><span class="p">[</span><span class="s1">&#39;total_batch_requests&#39;</span><span class="p">]</span>
+        <span class="p">)</span>
+        
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🚀 Starting batch request for </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">requests</span><span class="p">)</span><span class="si">}</span><span class="s2"> metrics&quot;</span><span class="p">)</span>
+        
+        <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">remaining_requests</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="c1"># Step 1: Check cache for existing data</span>
+        <span class="k">if</span> <span class="n">use_cache</span><span class="p">:</span>
+            <span class="n">cache_requests</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_optimizer</span><span class="o">.</span><span class="n">optimize_cache_keys</span><span class="p">(</span><span class="n">requests</span><span class="p">)</span>
+            <span class="n">cached_results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">get_batch</span><span class="p">(</span><span class="n">cache_requests</span><span class="p">)</span>
+            
+            <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">metric</span><span class="p">,</span> <span class="n">asset</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">requests</span><span class="p">):</span>
+                <span class="n">request_id</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">asset</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="n">cache_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;metric_</span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="nb">hash</span><span class="p">(</span><span class="nb">str</span><span class="p">({</span><span class="s1">&#39;asset&#39;</span><span class="p">:</span><span class="w"> </span><span class="n">asset</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;metric&#39;</span><span class="p">:</span><span class="w"> </span><span class="n">metric</span><span class="p">}))</span><span class="si">}</span><span class="s2">&quot;</span>
+                
+                <span class="k">if</span> <span class="n">cache_key</span> <span class="ow">in</span> <span class="n">cached_results</span> <span class="ow">and</span> <span class="n">cached_results</span><span class="p">[</span><span class="n">cache_key</span><span class="p">]</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">results</span><span class="p">[</span><span class="n">request_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">cached_results</span><span class="p">[</span><span class="n">cache_key</span><span class="p">][</span><span class="s1">&#39;data&#39;</span><span class="p">]</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">batch_stats</span><span class="p">[</span><span class="s1">&#39;cache_hits_in_batch&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;📦 Cache hit for </span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">asset</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">remaining_requests</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">metric</span><span class="p">,</span> <span class="n">asset</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">remaining_requests</span> <span class="o">=</span> <span class="n">requests</span>
+        
+        <span class="c1"># Step 2: Optimize remaining requests</span>
+        <span class="k">if</span> <span class="n">remaining_requests</span><span class="p">:</span>
+            <span class="n">unique_requests</span><span class="p">,</span> <span class="n">redundancy_map</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_optimizer</span><span class="o">.</span><span class="n">detect_redundant_requests</span><span class="p">(</span><span class="n">remaining_requests</span><span class="p">)</span>
+            <span class="n">provider_groups</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_optimizer</span><span class="o">.</span><span class="n">group_by_provider</span><span class="p">(</span><span class="n">unique_requests</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">providers</span><span class="p">)</span>
+            
+            <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🔧 Optimized </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">remaining_requests</span><span class="p">)</span><span class="si">}</span><span class="s2"> → </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">unique_requests</span><span class="p">)</span><span class="si">}</span><span class="s2"> unique requests across </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">provider_groups</span><span class="p">)</span><span class="si">}</span><span class="s2"> providers&quot;</span><span class="p">)</span>
+            
+            <span class="c1"># Step 3: Execute requests by provider group with concurrency control</span>
+            <span class="n">fresh_results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_execute_provider_batches</span><span class="p">(</span><span class="n">provider_groups</span><span class="p">,</span> <span class="n">max_concurrent</span><span class="p">)</span>
+            
+            <span class="c1"># Step 4: Cache fresh results</span>
+            <span class="k">if</span> <span class="n">use_cache</span> <span class="ow">and</span> <span class="n">fresh_results</span><span class="p">:</span>
+                <span class="n">cache_items</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="k">for</span> <span class="n">request_id</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">fresh_results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                        <span class="n">metric</span><span class="p">,</span> <span class="n">asset</span> <span class="o">=</span> <span class="n">request_id</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;:&#39;</span><span class="p">)</span>
+                        <span class="n">cache_key</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;metric_</span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s2">&quot;</span>
+                        <span class="n">cache_params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;asset&quot;</span><span class="p">:</span> <span class="n">asset</span><span class="p">,</span> <span class="s2">&quot;metric&quot;</span><span class="p">:</span> <span class="n">metric</span><span class="p">}</span>
+                        <span class="n">cache_items</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">cache_key</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">cache_params</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>  <span class="c1"># Use smart TTL</span>
+                
+                <span class="k">if</span> <span class="n">cache_items</span><span class="p">:</span>
+                    <span class="n">cached_count</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">set_batch</span><span class="p">(</span><span class="n">cache_items</span><span class="p">)</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;💾 Cached </span><span class="si">{</span><span class="n">cached_count</span><span class="si">}</span><span class="s2"> fresh results&quot;</span><span class="p">)</span>
+            
+            <span class="c1"># Merge fresh results</span>
+            <span class="n">results</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">fresh_results</span><span class="p">)</span>
+        
+        <span class="c1"># Calculate optimization savings</span>
+        <span class="n">saved_calls</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">requests</span><span class="p">)</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">remaining_requests</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_stats</span><span class="p">[</span><span class="s1">&#39;provider_calls_saved&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">saved_calls</span>
+        
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Batch complete: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">requests</span><span class="p">)</span><span class="si">}</span><span class="s2"> successful, </span><span class="si">{</span><span class="n">saved_calls</span><span class="si">}</span><span class="s2"> API calls saved&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">results</span></div>
+
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_execute_provider_batches</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">provider_groups</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]],</span> 
+                                <span class="n">max_concurrent</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute provider requests with concurrency control.&quot;&quot;&quot;</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+        
+        <span class="k">with</span> <span class="n">ThreadPoolExecutor</span><span class="p">(</span><span class="n">max_workers</span><span class="o">=</span><span class="n">max_concurrent</span><span class="p">)</span> <span class="k">as</span> <span class="n">executor</span><span class="p">:</span>
+            <span class="c1"># Submit all provider group tasks</span>
+            <span class="n">future_to_provider</span> <span class="o">=</span> <span class="p">{}</span>
+            
+            <span class="k">for</span> <span class="n">provider_name</span><span class="p">,</span> <span class="n">provider_requests</span> <span class="ow">in</span> <span class="n">provider_groups</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="n">provider</span> <span class="o">=</span> <span class="nb">next</span><span class="p">((</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">providers</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">name</span> <span class="o">==</span> <span class="n">provider_name</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">provider</span><span class="p">:</span>
+                    <span class="n">future</span> <span class="o">=</span> <span class="n">executor</span><span class="o">.</span><span class="n">submit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_execute_provider_batch</span><span class="p">,</span> <span class="n">provider</span><span class="p">,</span> <span class="n">provider_requests</span><span class="p">)</span>
+                    <span class="n">future_to_provider</span><span class="p">[</span><span class="n">future</span><span class="p">]</span> <span class="o">=</span> <span class="n">provider_name</span>
+            
+            <span class="c1"># Collect results as they complete</span>
+            <span class="k">for</span> <span class="n">future</span> <span class="ow">in</span> <span class="n">as_completed</span><span class="p">(</span><span class="n">future_to_provider</span><span class="p">):</span>
+                <span class="n">provider_name</span> <span class="o">=</span> <span class="n">future_to_provider</span><span class="p">[</span><span class="n">future</span><span class="p">]</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">provider_results</span> <span class="o">=</span> <span class="n">future</span><span class="o">.</span><span class="n">result</span><span class="p">()</span>
+                    <span class="n">results</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">provider_results</span><span class="p">)</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">batch_stats</span><span class="p">[</span><span class="s1">&#39;concurrent_requests&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">provider_results</span><span class="p">)</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;✅ Provider </span><span class="si">{</span><span class="n">provider_name</span><span class="si">}</span><span class="s2"> batch completed: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">provider_results</span><span class="p">)</span><span class="si">}</span><span class="s2"> results&quot;</span><span class="p">)</span>
+                <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;⚠️  Provider </span><span class="si">{</span><span class="n">provider_name</span><span class="si">}</span><span class="s2"> batch failed: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="n">results</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_execute_provider_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">provider</span><span class="p">:</span> <span class="n">DataProvider</span><span class="p">,</span> <span class="n">requests</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Execute a batch of requests for a single provider.&quot;&quot;&quot;</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+        
+        <span class="k">for</span> <span class="n">metric</span><span class="p">,</span> <span class="n">asset</span> <span class="ow">in</span> <span class="n">requests</span><span class="p">:</span>
+            <span class="n">request_id</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">asset</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">result</span> <span class="o">=</span> <span class="n">provider</span><span class="o">.</span><span class="n">loader_func</span><span class="p">(</span><span class="n">metric</span><span class="p">,</span> <span class="n">asset</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">results</span><span class="p">[</span><span class="n">request_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
+                    <span class="n">provider</span><span class="o">.</span><span class="n">record_success</span><span class="p">()</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">results</span><span class="p">[</span><span class="n">request_id</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+                    
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Provider </span><span class="si">{</span><span class="n">provider</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> failed for </span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">asset</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">provider</span><span class="o">.</span><span class="n">record_failure</span><span class="p">()</span>
+                <span class="n">results</span><span class="p">[</span><span class="n">request_id</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+        
+        <span class="k">return</span> <span class="n">results</span>
+
+<div class="viewcode-block" id="MetricRegistry.warm_critical_metrics">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.MetricRegistry.warm_critical_metrics">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">warm_critical_metrics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">assets</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> 
+                            <span class="n">critical_metrics</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Proactively warm cache with critical trading metrics.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">assets</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">assets</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;BTC&quot;</span><span class="p">,</span> <span class="s2">&quot;ETH&quot;</span><span class="p">,</span> <span class="s2">&quot;ADA&quot;</span><span class="p">,</span> <span class="s2">&quot;SOL&quot;</span><span class="p">]</span>
+        
+        <span class="k">if</span> <span class="n">critical_metrics</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">critical_metrics</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="s2">&quot;price&quot;</span><span class="p">,</span> <span class="s2">&quot;active_addresses&quot;</span><span class="p">,</span> <span class="s2">&quot;whale_activity&quot;</span><span class="p">,</span> 
+                <span class="s2">&quot;exchange_flows&quot;</span><span class="p">,</span> <span class="s2">&quot;market_cap&quot;</span><span class="p">,</span> <span class="s2">&quot;hash_rate&quot;</span>
+            <span class="p">]</span>
+        
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;🔥 Starting cache warming for </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">assets</span><span class="p">)</span><span class="si">}</span><span class="s2"> assets × </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">critical_metrics</span><span class="p">)</span><span class="si">}</span><span class="s2"> metrics&quot;</span><span class="p">)</span>
+        
+        <span class="c1"># Generate warming requests</span>
+        <span class="n">warming_requests</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="n">metric</span><span class="p">,</span> <span class="n">asset</span><span class="p">)</span> <span class="k">for</span> <span class="n">asset</span> <span class="ow">in</span> <span class="n">assets</span> <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="n">critical_metrics</span>
+        <span class="p">]</span>
+        
+        <span class="k">def</span><span class="w"> </span><span class="nf">warm_function</span><span class="p">(</span><span class="n">endpoint</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+            <span class="n">metric</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;metric&#39;</span><span class="p">)</span>
+            <span class="n">asset</span> <span class="o">=</span> <span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;asset&#39;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_metric</span><span class="p">(</span><span class="n">metric</span><span class="p">,</span> <span class="n">asset</span><span class="p">)</span>
+        
+        <span class="c1"># Convert to cache warming format</span>
+        <span class="n">cache_requests</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;metric_</span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="p">{</span><span class="s2">&quot;asset&quot;</span><span class="p">:</span> <span class="n">asset</span><span class="p">,</span> <span class="s2">&quot;metric&quot;</span><span class="p">:</span> <span class="n">metric</span><span class="p">})</span>
+            <span class="k">for</span> <span class="n">metric</span><span class="p">,</span> <span class="n">asset</span> <span class="ow">in</span> <span class="n">warming_requests</span>
+        <span class="p">]</span>
+        
+        <span class="n">warmed_count</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">warm_cache</span><span class="p">(</span><span class="n">cache_requests</span><span class="p">,</span> <span class="n">warm_function</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;total_requests&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">warming_requests</span><span class="p">),</span>
+            <span class="s2">&quot;successfully_warmed&quot;</span><span class="p">:</span> <span class="n">warmed_count</span><span class="p">,</span>
+            <span class="s2">&quot;cache_coverage&quot;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">warmed_count</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">warming_requests</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="MetricRegistry.get_batch_optimization_stats">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.MetricRegistry.get_batch_optimization_stats">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_batch_optimization_stats</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get comprehensive batch optimization statistics.&quot;&quot;&quot;</span>
+        <span class="n">cache_stats</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cache</span><span class="o">.</span><span class="n">get_optimization_stats</span><span class="p">()</span>
+        
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">&quot;batch_performance&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;total_batch_requests&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_stats</span><span class="p">[</span><span class="s1">&#39;total_batch_requests&#39;</span><span class="p">],</span>
+                <span class="s2">&quot;average_batch_size&quot;</span><span class="p">:</span> <span class="nb">round</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_stats</span><span class="p">[</span><span class="s1">&#39;average_batch_size&#39;</span><span class="p">],</span> <span class="mi">2</span><span class="p">),</span>
+                <span class="s2">&quot;cache_hits_in_batch&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_stats</span><span class="p">[</span><span class="s1">&#39;cache_hits_in_batch&#39;</span><span class="p">],</span>
+                <span class="s2">&quot;provider_calls_saved&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_stats</span><span class="p">[</span><span class="s1">&#39;provider_calls_saved&#39;</span><span class="p">],</span>
+                <span class="s2">&quot;concurrent_requests_processed&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_stats</span><span class="p">[</span><span class="s1">&#39;concurrent_requests&#39;</span><span class="p">],</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;optimization_efficiency&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;api_call_reduction_ratio&quot;</span><span class="p">:</span> <span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">batch_stats</span><span class="p">[</span><span class="s1">&#39;provider_calls_saved&#39;</span><span class="p">]</span> <span class="o">/</span> 
+                    <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_stats</span><span class="p">[</span><span class="s1">&#39;provider_calls_saved&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">batch_stats</span><span class="p">[</span><span class="s1">&#39;concurrent_requests&#39;</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="p">),</span>
+                <span class="s2">&quot;batch_cache_hit_ratio&quot;</span><span class="p">:</span> <span class="p">(</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">batch_stats</span><span class="p">[</span><span class="s1">&#39;cache_hits_in_batch&#39;</span><span class="p">]</span> <span class="o">/</span> 
+                    <span class="nb">max</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_stats</span><span class="p">[</span><span class="s1">&#39;total_batch_requests&#39;</span><span class="p">],</span> <span class="mi">1</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;cache_integration&quot;</span><span class="p">:</span> <span class="n">cache_stats</span><span class="p">,</span>
+            <span class="s2">&quot;provider_status&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_provider_status</span><span class="p">()</span>
+        <span class="p">}</span></div>
+
+
+<div class="viewcode-block" id="MetricRegistry.get_comprehensive_analysis">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.MetricRegistry.get_comprehensive_analysis">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_comprehensive_analysis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get comprehensive analysis using best available providers.&quot;&quot;&quot;</span>
+        
+        <span class="n">analysis</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;asset&quot;</span><span class="p">:</span> <span class="n">asset</span><span class="o">.</span><span class="n">upper</span><span class="p">(),</span>
+            <span class="s2">&quot;timestamp&quot;</span><span class="p">:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">(),</span>
+            <span class="s2">&quot;data_sources&quot;</span><span class="p">:</span> <span class="p">[],</span>
+            <span class="s2">&quot;network_health&quot;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">&quot;market_indicators&quot;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">&quot;address_metrics&quot;</span><span class="p">:</span> <span class="p">{},</span>
+            <span class="s2">&quot;provider_status&quot;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_provider_status</span><span class="p">()</span>
+        <span class="p">}</span>
+
+        <span class="c1"># Key metrics to fetch</span>
+        <span class="n">key_metrics</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="s2">&quot;active_addresses&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;hash_rate&quot;</span><span class="p">,</span> 
+            <span class="s2">&quot;transactions_count&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;market_cap&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;price&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;whale_activity&quot;</span>
+        <span class="p">]</span>
+
+        <span class="c1"># Use batch optimization for comprehensive analysis</span>
+        <span class="n">batch_requests</span> <span class="o">=</span> <span class="p">[(</span><span class="n">metric</span><span class="p">,</span> <span class="n">asset</span><span class="p">)</span> <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="n">key_metrics</span><span class="p">]</span>
+        <span class="n">batch_results</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_metrics_batch</span><span class="p">(</span><span class="n">batch_requests</span><span class="p">)</span>
+
+        <span class="n">successful_providers</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="n">key_metrics</span><span class="p">:</span>
+            <span class="n">request_id</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">metric</span><span class="si">}</span><span class="s2">:</span><span class="si">{</span><span class="n">asset</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">batch_results</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">request_id</span><span class="p">)</span>
+            
+            <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># Determine which provider succeeded (simplified)</span>
+                <span class="k">for</span> <span class="n">provider</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">providers</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">provider</span><span class="o">.</span><span class="n">last_success</span> <span class="ow">and</span> <span class="n">provider</span><span class="o">.</span><span class="n">can_provide</span><span class="p">(</span><span class="n">metric</span><span class="p">):</span>
+                        <span class="n">successful_providers</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">provider</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                        <span class="k">break</span>
+
+                <span class="c1"># Store result in appropriate section</span>
+                <span class="k">if</span> <span class="n">metric</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;active_addresses&quot;</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+                        <span class="n">analysis</span><span class="p">[</span><span class="s2">&quot;address_metrics&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
+                <span class="k">elif</span> <span class="n">metric</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;hash_rate&quot;</span><span class="p">,</span> <span class="s2">&quot;transactions_count&quot;</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)):</span>
+                        <span class="n">analysis</span><span class="p">[</span><span class="s2">&quot;network_health&quot;</span><span class="p">][</span><span class="n">metric</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
+                <span class="k">elif</span> <span class="n">metric</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;market_cap&quot;</span><span class="p">,</span> <span class="s2">&quot;price&quot;</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="nb">dict</span><span class="p">)):</span>
+                        <span class="n">analysis</span><span class="p">[</span><span class="s2">&quot;market_indicators&quot;</span><span class="p">][</span><span class="n">metric</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
+                <span class="k">elif</span> <span class="n">metric</span> <span class="o">==</span> <span class="s2">&quot;whale_activity&quot;</span><span class="p">:</span>
+                    <span class="n">analysis</span><span class="p">[</span><span class="s2">&quot;whale_metrics&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span>
+
+        <span class="n">analysis</span><span class="p">[</span><span class="s2">&quot;data_sources&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">successful_providers</span><span class="p">)</span>
+        
+        <span class="c1"># Generate summary</span>
+        <span class="n">health_score</span> <span class="o">=</span> <span class="s2">&quot;Good&quot;</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">successful_providers</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">2</span> <span class="k">else</span> <span class="s2">&quot;Limited&quot;</span>
+        <span class="n">analysis</span><span class="p">[</span><span class="s2">&quot;summary&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="si">{</span><span class="n">asset</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2"> Multi-Provider Analysis (Batch Optimized):</span>
+<span class="s2">- Data Sources: </span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">successful_providers</span><span class="p">)</span><span class="si">}</span>
+<span class="s2">- Coverage: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">successful_providers</span><span class="p">)</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">providers</span><span class="p">)</span><span class="si">}</span><span class="s2"> providers</span>
+<span class="s2">- Reliability: </span><span class="si">{</span><span class="n">health_score</span><span class="si">}</span>
+<span class="s2">- Batch Efficiency: Enabled</span>
+<span class="s2">- Last Updated: </span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s1">&#39;%H:%M:%S&#39;</span><span class="p">)</span><span class="si">}</span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="n">analysis</span></div>
+
+
+<div class="viewcode-block" id="MetricRegistry.get_provider_status">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.MetricRegistry.get_provider_status">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_provider_status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Get current status of all providers.&quot;&quot;&quot;</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="p">{}</span>
+        
+        <span class="k">for</span> <span class="n">provider</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">providers</span><span class="p">:</span>
+            <span class="n">status</span><span class="p">[</span><span class="n">provider</span><span class="o">.</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
+                <span class="s2">&quot;healthy&quot;</span><span class="p">:</span> <span class="n">provider</span><span class="o">.</span><span class="n">is_healthy</span><span class="p">,</span>
+                <span class="s2">&quot;priority&quot;</span><span class="p">:</span> <span class="n">provider</span><span class="o">.</span><span class="n">priority</span><span class="p">,</span>
+                <span class="s2">&quot;failure_count&quot;</span><span class="p">:</span> <span class="n">provider</span><span class="o">.</span><span class="n">failure_count</span><span class="p">,</span>
+                <span class="s2">&quot;last_success&quot;</span><span class="p">:</span> <span class="n">provider</span><span class="o">.</span><span class="n">last_success</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span> <span class="k">if</span> <span class="n">provider</span><span class="o">.</span><span class="n">last_success</span> <span class="k">else</span> <span class="kc">None</span><span class="p">,</span>
+                <span class="s2">&quot;metrics_count&quot;</span><span class="p">:</span> <span class="nb">len</span><span class="p">(</span><span class="n">provider</span><span class="o">.</span><span class="n">available_metrics</span><span class="p">),</span>
+                <span class="s2">&quot;requires_api_key&quot;</span><span class="p">:</span> <span class="n">provider</span><span class="o">.</span><span class="n">requires_api_key</span>
+            <span class="p">}</span>
+        
+        <span class="k">return</span> <span class="n">status</span></div>
+
+
+<div class="viewcode-block" id="MetricRegistry.reset_all_providers">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.MetricRegistry.reset_all_providers">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reset_all_providers</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Reset health status for all providers.&quot;&quot;&quot;</span>
+        <span class="k">for</span> <span class="n">provider</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">providers</span><span class="p">:</span>
+            <span class="n">provider</span><span class="o">.</span><span class="n">reset_health</span><span class="p">()</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;🔄 All provider health statuses reset&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="MetricRegistry.add_custom_provider">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.MetricRegistry.add_custom_provider">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_custom_provider</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">priority</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">loader_func</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> 
+                          <span class="n">metrics</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">requires_api_key</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Add a custom data provider.&quot;&quot;&quot;</span>
+        <span class="n">provider</span> <span class="o">=</span> <span class="n">DataProvider</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">priority</span><span class="p">,</span> <span class="n">loader_func</span><span class="p">,</span> <span class="n">metrics</span><span class="p">,</span> <span class="n">requires_api_key</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">providers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">provider</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;➕ Added custom provider: </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+    <span class="c1"># Provider-specific fetch methods</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_fetch_glassnode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fetch from Glassnode (real implementation would use API key).&quot;&quot;&quot;</span>
+        <span class="c1"># Simulate Glassnode API call</span>
+        <span class="c1"># In real implementation, this would use OnChainLoader with API key</span>
+        <span class="n">loader</span> <span class="o">=</span> <span class="n">OnChainLoader</span><span class="p">()</span>  <span class="c1"># Would pass API key in real scenario</span>
+        
+        <span class="k">if</span> <span class="n">metric</span> <span class="o">==</span> <span class="s2">&quot;active_addresses&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">loader</span><span class="o">.</span><span class="n">get_active_addresses</span><span class="p">(</span><span class="n">asset</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">metric</span> <span class="o">==</span> <span class="s2">&quot;hash_rate&quot;</span><span class="p">:</span>
+            <span class="n">health</span> <span class="o">=</span> <span class="n">loader</span><span class="o">.</span><span class="n">get_network_health</span><span class="p">(</span><span class="n">asset</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">health</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;hash_rate_th&quot;</span><span class="p">)</span>
+        <span class="c1"># ... other Glassnode metrics</span>
+        
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_fetch_intotheblock</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fetch from IntoTheBlock API.&quot;&quot;&quot;</span>
+        <span class="c1"># Placeholder for IntoTheBlock integration</span>
+        <span class="c1"># Would implement actual API calls in production</span>
+        <span class="k">if</span> <span class="n">metric</span> <span class="o">==</span> <span class="s2">&quot;whale_activity&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s2">&quot;large_transactions_24h&quot;</span><span class="p">:</span> <span class="mi">1247</span><span class="p">,</span>
+                <span class="s2">&quot;whale_addresses&quot;</span><span class="p">:</span> <span class="mi">1842</span><span class="p">,</span>
+                <span class="s2">&quot;top_holders_concentration&quot;</span><span class="p">:</span> <span class="s2">&quot;14.2%&quot;</span>
+            <span class="p">}</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_fetch_dune</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fetch from Dune Analytics API.&quot;&quot;&quot;</span>
+        <span class="c1"># Placeholder for Dune Analytics integration  </span>
+        <span class="c1"># Would implement actual GraphQL queries in production</span>
+        <span class="k">if</span> <span class="n">metric</span> <span class="o">==</span> <span class="s2">&quot;defi_tvl&quot;</span> <span class="ow">and</span> <span class="n">asset</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;ETH&quot;</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">{</span>
+                <span class="s2">&quot;total_value_locked&quot;</span><span class="p">:</span> <span class="s2">&quot;$45,600,000,000&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;protocols_count&quot;</span><span class="p">:</span> <span class="mi">157</span><span class="p">,</span>
+                <span class="s2">&quot;top_protocol&quot;</span><span class="p">:</span> <span class="s2">&quot;Uniswap&quot;</span>
+            <span class="p">}</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">_fetch_mock_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">metric</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">asset</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Fetch mock data (always available fallback).&quot;&quot;&quot;</span>
+        <span class="c1"># Reliable fallback data for testing/demo</span>
+        <span class="n">mock_data</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">&quot;active_addresses&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;current_active_addresses&quot;</span><span class="p">:</span> <span class="mi">850000</span><span class="p">,</span>
+                <span class="s2">&quot;30d_average&quot;</span><span class="p">:</span> <span class="mi">820000</span><span class="p">,</span>
+                <span class="s2">&quot;trend&quot;</span><span class="p">:</span> <span class="s2">&quot;increasing&quot;</span><span class="p">,</span>
+                <span class="s2">&quot;data_source&quot;</span><span class="p">:</span> <span class="s2">&quot;MockProvider&quot;</span>
+            <span class="p">},</span>
+            <span class="s2">&quot;hash_rate&quot;</span><span class="p">:</span> <span class="s2">&quot;245.7 TH/s&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;transactions_count&quot;</span><span class="p">:</span> <span class="mi">245000</span><span class="p">,</span>
+            <span class="s2">&quot;market_cap&quot;</span><span class="p">:</span> <span class="s2">&quot;$2,100,000,000,000&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;price&quot;</span><span class="p">:</span> <span class="s2">&quot;$116,000.00&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;network_health&quot;</span><span class="p">:</span> <span class="s2">&quot;Good&quot;</span><span class="p">,</span>
+            <span class="s2">&quot;whale_activity&quot;</span><span class="p">:</span> <span class="p">{</span>
+                <span class="s2">&quot;large_transactions&quot;</span><span class="p">:</span> <span class="mi">1100</span><span class="p">,</span>
+                <span class="s2">&quot;accumulation_trend&quot;</span><span class="p">:</span> <span class="s2">&quot;increasing&quot;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        
+        <span class="k">return</span> <span class="n">mock_data</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">metric</span><span class="p">)</span></div>
+
+
+
+<span class="c1"># Global registry instance</span>
+<span class="n">_metric_registry</span> <span class="o">=</span> <span class="kc">None</span>
+
+
+<div class="viewcode-block" id="get_metric_registry">
+<a class="viewcode-back" href="../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.get_metric_registry">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">get_metric_registry</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">MetricRegistry</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get or create the global metric registry instance.&quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">_metric_registry</span>
+    <span class="k">if</span> <span class="n">_metric_registry</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">_metric_registry</span> <span class="o">=</span> <span class="n">MetricRegistry</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">_metric_registry</span> </div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, TauricResearch.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

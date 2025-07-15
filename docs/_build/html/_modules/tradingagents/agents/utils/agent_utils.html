@@ -1,0 +1,1001 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../../">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>tradingagents.agents.utils.agent_utils &mdash; TradingAgents 0.3.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=b86133f3" />
+      <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=e59714d7" />
+
+  
+      <script src="../../../../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../../../../_static/documentation_options.js?v=e259d695"></script>
+      <script src="../../../../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script src="../../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../../index.html" class="icon icon-home">
+            TradingAgents
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">User Guide:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../installation.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation.html#requirements">Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation.html#quick-install">Quick Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation.html#development-installation">Development Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation.html#redis-setup-recommended">Redis Setup (Recommended)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation.html#environment-configuration">Environment Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation.html#verification">Verification</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../installation.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../quickstart.html">Quick Start</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../quickstart.html#basic-usage">Basic Usage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../quickstart.html#running-with-caching">Running with Caching</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../quickstart.html#multi-agent-example">Multi-Agent Example</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../quickstart.html#on-chain-analytics">On-Chain Analytics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../quickstart.html#cli-interface">CLI Interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../quickstart.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../tutorials/index.html">Tutorials</a><ul class="simple">
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../api/index.html">API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api/index.html#core-modules">Core Modules</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.html">tradingagents.agents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.html#tradingagents.agents.FinancialSituationMemory"><code class="docutils literal notranslate"><span class="pre">FinancialSituationMemory</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.html#tradingagents.agents.Toolkit"><code class="docutils literal notranslate"><span class="pre">Toolkit</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.html#tradingagents.agents.AgentState"><code class="docutils literal notranslate"><span class="pre">AgentState</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_msg_delete"><code class="docutils literal notranslate"><span class="pre">create_msg_delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.html#tradingagents.agents.InvestDebateState"><code class="docutils literal notranslate"><span class="pre">InvestDebateState</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.html#tradingagents.agents.RiskDebateState"><code class="docutils literal notranslate"><span class="pre">RiskDebateState</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_bear_researcher"><code class="docutils literal notranslate"><span class="pre">create_bear_researcher()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_bull_researcher"><code class="docutils literal notranslate"><span class="pre">create_bull_researcher()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_research_manager"><code class="docutils literal notranslate"><span class="pre">create_research_manager()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_fundamentals_analyst"><code class="docutils literal notranslate"><span class="pre">create_fundamentals_analyst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_market_analyst"><code class="docutils literal notranslate"><span class="pre">create_market_analyst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_neutral_debator"><code class="docutils literal notranslate"><span class="pre">create_neutral_debator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_news_analyst"><code class="docutils literal notranslate"><span class="pre">create_news_analyst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_onchain_analyst"><code class="docutils literal notranslate"><span class="pre">create_onchain_analyst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_risky_debator"><code class="docutils literal notranslate"><span class="pre">create_risky_debator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_risk_manager"><code class="docutils literal notranslate"><span class="pre">create_risk_manager()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_safe_debator"><code class="docutils literal notranslate"><span class="pre">create_safe_debator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_social_media_analyst"><code class="docutils literal notranslate"><span class="pre">create_social_media_analyst()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.html#tradingagents.agents.create_trader"><code class="docutils literal notranslate"><span class="pre">create_trader()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.html">tradingagents.dataflows</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_finnhub_news"><code class="docutils literal notranslate"><span class="pre">get_finnhub_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_finnhub_company_insider_sentiment"><code class="docutils literal notranslate"><span class="pre">get_finnhub_company_insider_sentiment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_finnhub_company_insider_transactions"><code class="docutils literal notranslate"><span class="pre">get_finnhub_company_insider_transactions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_google_news"><code class="docutils literal notranslate"><span class="pre">get_google_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_reddit_global_news"><code class="docutils literal notranslate"><span class="pre">get_reddit_global_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_reddit_company_news"><code class="docutils literal notranslate"><span class="pre">get_reddit_company_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_simfin_balance_sheet"><code class="docutils literal notranslate"><span class="pre">get_simfin_balance_sheet()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_simfin_cashflow"><code class="docutils literal notranslate"><span class="pre">get_simfin_cashflow()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_simfin_income_statements"><code class="docutils literal notranslate"><span class="pre">get_simfin_income_statements()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_stock_stats_indicators_window"><code class="docutils literal notranslate"><span class="pre">get_stock_stats_indicators_window()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_stockstats_indicator"><code class="docutils literal notranslate"><span class="pre">get_stockstats_indicator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_YFin_data_window"><code class="docutils literal notranslate"><span class="pre">get_YFin_data_window()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.html#tradingagents.dataflows.get_YFin_data"><code class="docutils literal notranslate"><span class="pre">get_YFin_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.ccxt_adapters.html">tradingagents.dataflows.ccxt_adapters</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.config.html">tradingagents.dataflows.config</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.crypto_cache.html">tradingagents.dataflows.crypto_cache</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.crypto_utils.html">tradingagents.dataflows.crypto_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.finnhub_utils.html">tradingagents.dataflows.finnhub_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.googlenews_utils.html">tradingagents.dataflows.googlenews_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.interface.html">tradingagents.dataflows.interface</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.metric_registry.html">tradingagents.dataflows.metric_registry</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.onchain_loader.html">tradingagents.dataflows.onchain_loader</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.reddit_utils.html">tradingagents.dataflows.reddit_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.stockstats_utils.html">tradingagents.dataflows.stockstats_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.utils.html">tradingagents.dataflows.utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.yfin_utils.html">tradingagents.dataflows.yfin_utils</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.graph.html">tradingagents.graph</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.graph.html#tradingagents.graph.TradingAgentsGraph"><code class="docutils literal notranslate"><span class="pre">TradingAgentsGraph</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.graph.html#tradingagents.graph.ConditionalLogic"><code class="docutils literal notranslate"><span class="pre">ConditionalLogic</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.graph.html#tradingagents.graph.GraphSetup"><code class="docutils literal notranslate"><span class="pre">GraphSetup</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.graph.html#tradingagents.graph.Propagator"><code class="docutils literal notranslate"><span class="pre">Propagator</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.graph.html#tradingagents.graph.Reflector"><code class="docutils literal notranslate"><span class="pre">Reflector</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.graph.html#tradingagents.graph.SignalProcessor"><code class="docutils literal notranslate"><span class="pre">SignalProcessor</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.graph.conditional_logic.html">tradingagents.graph.conditional_logic</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.graph.propagation.html">tradingagents.graph.propagation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.graph.reflection.html">tradingagents.graph.reflection</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.graph.setup.html">tradingagents.graph.setup</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.graph.signal_processing.html">tradingagents.graph.signal_processing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.graph.trading_graph.html">tradingagents.graph.trading_graph</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api/index.html#agents">Agents</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.analysts.fundamentals_analyst.html">tradingagents.agents.analysts.fundamentals_analyst</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.analysts.fundamentals_analyst.html#tradingagents.agents.analysts.fundamentals_analyst.create_fundamentals_analyst"><code class="docutils literal notranslate"><span class="pre">create_fundamentals_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.analysts.market_analyst.html">tradingagents.agents.analysts.market_analyst</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.analysts.market_analyst.html#tradingagents.agents.analysts.market_analyst.create_market_analyst"><code class="docutils literal notranslate"><span class="pre">create_market_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.analysts.news_analyst.html">tradingagents.agents.analysts.news_analyst</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.analysts.news_analyst.html#tradingagents.agents.analysts.news_analyst.create_news_analyst"><code class="docutils literal notranslate"><span class="pre">create_news_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.analysts.onchain_analyst.html">tradingagents.agents.analysts.onchain_analyst</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.analysts.onchain_analyst.html#tradingagents.agents.analysts.onchain_analyst.create_onchain_analyst"><code class="docutils literal notranslate"><span class="pre">create_onchain_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.analysts.social_media_analyst.html">tradingagents.agents.analysts.social_media_analyst</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.analysts.social_media_analyst.html#tradingagents.agents.analysts.social_media_analyst.create_social_media_analyst"><code class="docutils literal notranslate"><span class="pre">create_social_media_analyst()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.managers.research_manager.html">tradingagents.agents.managers.research_manager</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.managers.research_manager.html#tradingagents.agents.managers.research_manager.create_research_manager"><code class="docutils literal notranslate"><span class="pre">create_research_manager()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.managers.risk_manager.html">tradingagents.agents.managers.risk_manager</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.managers.risk_manager.html#tradingagents.agents.managers.risk_manager.create_risk_manager"><code class="docutils literal notranslate"><span class="pre">create_risk_manager()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.researchers.bear_researcher.html">tradingagents.agents.researchers.bear_researcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.researchers.bear_researcher.html#tradingagents.agents.researchers.bear_researcher.create_bear_researcher"><code class="docutils literal notranslate"><span class="pre">create_bear_researcher()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.researchers.bull_researcher.html">tradingagents.agents.researchers.bull_researcher</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.researchers.bull_researcher.html#tradingagents.agents.researchers.bull_researcher.create_bull_researcher"><code class="docutils literal notranslate"><span class="pre">create_bull_researcher()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.risk_mgmt.aggresive_debator.html">tradingagents.agents.risk_mgmt.aggresive_debator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.risk_mgmt.aggresive_debator.html#tradingagents.agents.risk_mgmt.aggresive_debator.create_risky_debator"><code class="docutils literal notranslate"><span class="pre">create_risky_debator()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.risk_mgmt.conservative_debator.html">tradingagents.agents.risk_mgmt.conservative_debator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.risk_mgmt.conservative_debator.html#tradingagents.agents.risk_mgmt.conservative_debator.create_safe_debator"><code class="docutils literal notranslate"><span class="pre">create_safe_debator()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.risk_mgmt.neutral_debator.html">tradingagents.agents.risk_mgmt.neutral_debator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.risk_mgmt.neutral_debator.html#tradingagents.agents.risk_mgmt.neutral_debator.create_neutral_debator"><code class="docutils literal notranslate"><span class="pre">create_neutral_debator()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.trader.trader.html">tradingagents.agents.trader.trader</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.trader.trader.html#tradingagents.agents.trader.trader.create_trader"><code class="docutils literal notranslate"><span class="pre">create_trader()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api/index.html#data-infrastructure">Data Infrastructure</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.ccxt_adapters.html">tradingagents.dataflows.ccxt_adapters</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.ccxt_adapters.html#tradingagents.dataflows.ccxt_adapters.ExchangeConfig"><code class="docutils literal notranslate"><span class="pre">ExchangeConfig</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.ccxt_adapters.html#tradingagents.dataflows.ccxt_adapters.init_exchange_client"><code class="docutils literal notranslate"><span class="pre">init_exchange_client()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.ccxt_adapters.html#tradingagents.dataflows.ccxt_adapters.CCXTAdapters"><code class="docutils literal notranslate"><span class="pre">CCXTAdapters</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.crypto_cache.html">tradingagents.dataflows.crypto_cache</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.DataVolatility"><code class="docutils literal notranslate"><span class="pre">DataVolatility</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.SmartTTLStrategy"><code class="docutils literal notranslate"><span class="pre">SmartTTLStrategy</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.CryptoCacheManager"><code class="docutils literal notranslate"><span class="pre">CryptoCacheManager</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.get_cache_manager"><code class="docutils literal notranslate"><span class="pre">get_cache_manager()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.crypto_cache.html#tradingagents.dataflows.crypto_cache.cache_crypto_request"><code class="docutils literal notranslate"><span class="pre">cache_crypto_request()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.crypto_utils.html">tradingagents.dataflows.crypto_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.crypto_utils.html#tradingagents.dataflows.crypto_utils.init_crypto_client"><code class="docutils literal notranslate"><span class="pre">init_crypto_client()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.crypto_utils.html#tradingagents.dataflows.crypto_utils.CryptoUtils"><code class="docutils literal notranslate"><span class="pre">CryptoUtils</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.metric_registry.html">tradingagents.dataflows.metric_registry</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.DataProvider"><code class="docutils literal notranslate"><span class="pre">DataProvider</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.BatchOptimizer"><code class="docutils literal notranslate"><span class="pre">BatchOptimizer</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.MetricRegistry"><code class="docutils literal notranslate"><span class="pre">MetricRegistry</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.metric_registry.html#tradingagents.dataflows.metric_registry.get_metric_registry"><code class="docutils literal notranslate"><span class="pre">get_metric_registry()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.onchain_loader.html">tradingagents.dataflows.onchain_loader</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.onchain_loader.html#tradingagents.dataflows.onchain_loader.OnChainLoader"><code class="docutils literal notranslate"><span class="pre">OnChainLoader</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.onchain_loader.html#tradingagents.dataflows.onchain_loader.get_onchain_loader"><code class="docutils literal notranslate"><span class="pre">get_onchain_loader()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.interface.html">tradingagents.dataflows.interface</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_finnhub_news"><code class="docutils literal notranslate"><span class="pre">get_finnhub_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_crypto_data_online"><code class="docutils literal notranslate"><span class="pre">get_crypto_data_online()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_crypto_info_online"><code class="docutils literal notranslate"><span class="pre">get_crypto_info_online()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_exchange_ohlcv_data"><code class="docutils literal notranslate"><span class="pre">get_exchange_ohlcv_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_exchange_order_book"><code class="docutils literal notranslate"><span class="pre">get_exchange_order_book()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.compare_crypto_exchanges"><code class="docutils literal notranslate"><span class="pre">compare_crypto_exchanges()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_supported_crypto_exchanges"><code class="docutils literal notranslate"><span class="pre">get_supported_crypto_exchanges()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_onchain_network_health"><code class="docutils literal notranslate"><span class="pre">get_onchain_network_health()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_onchain_market_indicators"><code class="docutils literal notranslate"><span class="pre">get_onchain_market_indicators()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_onchain_comprehensive_analysis"><code class="docutils literal notranslate"><span class="pre">get_onchain_comprehensive_analysis()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_metric_registry_data"><code class="docutils literal notranslate"><span class="pre">get_metric_registry_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_finnhub_company_insider_sentiment"><code class="docutils literal notranslate"><span class="pre">get_finnhub_company_insider_sentiment()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_finnhub_company_insider_transactions"><code class="docutils literal notranslate"><span class="pre">get_finnhub_company_insider_transactions()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_simfin_balance_sheet"><code class="docutils literal notranslate"><span class="pre">get_simfin_balance_sheet()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_simfin_cashflow"><code class="docutils literal notranslate"><span class="pre">get_simfin_cashflow()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_simfin_income_statements"><code class="docutils literal notranslate"><span class="pre">get_simfin_income_statements()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_google_news"><code class="docutils literal notranslate"><span class="pre">get_google_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_reddit_global_news"><code class="docutils literal notranslate"><span class="pre">get_reddit_global_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_reddit_company_news"><code class="docutils literal notranslate"><span class="pre">get_reddit_company_news()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_stock_stats_indicators_window"><code class="docutils literal notranslate"><span class="pre">get_stock_stats_indicators_window()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_stockstats_indicator"><code class="docutils literal notranslate"><span class="pre">get_stockstats_indicator()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_YFin_data_window"><code class="docutils literal notranslate"><span class="pre">get_YFin_data_window()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_YFin_data_online"><code class="docutils literal notranslate"><span class="pre">get_YFin_data_online()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_YFin_data"><code class="docutils literal notranslate"><span class="pre">get_YFin_data()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_stock_news_openai"><code class="docutils literal notranslate"><span class="pre">get_stock_news_openai()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_global_news_openai"><code class="docutils literal notranslate"><span class="pre">get_global_news_openai()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.interface.html#tradingagents.dataflows.interface.get_fundamentals_openai"><code class="docutils literal notranslate"><span class="pre">get_fundamentals_openai()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.config.html">tradingagents.dataflows.config</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.config.html#tradingagents.dataflows.config.initialize_config"><code class="docutils literal notranslate"><span class="pre">initialize_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.config.html#tradingagents.dataflows.config.set_config"><code class="docutils literal notranslate"><span class="pre">set_config()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.config.html#tradingagents.dataflows.config.get_config"><code class="docutils literal notranslate"><span class="pre">get_config()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api/index.html#market-data-adapters">Market Data Adapters</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.yfin_utils.html">tradingagents.dataflows.yfin_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.yfin_utils.html#tradingagents.dataflows.yfin_utils.init_ticker"><code class="docutils literal notranslate"><span class="pre">init_ticker()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.yfin_utils.html#tradingagents.dataflows.yfin_utils.YFinanceUtils"><code class="docutils literal notranslate"><span class="pre">YFinanceUtils</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.finnhub_utils.html">tradingagents.dataflows.finnhub_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.finnhub_utils.html#tradingagents.dataflows.finnhub_utils.get_data_in_range"><code class="docutils literal notranslate"><span class="pre">get_data_in_range()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.googlenews_utils.html">tradingagents.dataflows.googlenews_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.googlenews_utils.html#tradingagents.dataflows.googlenews_utils.is_rate_limited"><code class="docutils literal notranslate"><span class="pre">is_rate_limited()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.googlenews_utils.html#tradingagents.dataflows.googlenews_utils.make_request"><code class="docutils literal notranslate"><span class="pre">make_request()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.googlenews_utils.html#tradingagents.dataflows.googlenews_utils.getNewsData"><code class="docutils literal notranslate"><span class="pre">getNewsData()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.reddit_utils.html">tradingagents.dataflows.reddit_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.reddit_utils.html#tradingagents.dataflows.reddit_utils.fetch_top_from_category"><code class="docutils literal notranslate"><span class="pre">fetch_top_from_category()</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.stockstats_utils.html">tradingagents.dataflows.stockstats_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.stockstats_utils.html#tradingagents.dataflows.stockstats_utils.StockstatsUtils"><code class="docutils literal notranslate"><span class="pre">StockstatsUtils</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api/index.html#graph-signal-processing">Graph &amp; Signal Processing</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.graph.trading_graph.html">tradingagents.graph.trading_graph</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.graph.trading_graph.html#tradingagents.graph.trading_graph.TradingAgentsGraph"><code class="docutils literal notranslate"><span class="pre">TradingAgentsGraph</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.graph.signal_processing.html">tradingagents.graph.signal_processing</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.graph.signal_processing.html#tradingagents.graph.signal_processing.SignalProcessor"><code class="docutils literal notranslate"><span class="pre">SignalProcessor</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.graph.conditional_logic.html">tradingagents.graph.conditional_logic</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.graph.conditional_logic.html#tradingagents.graph.conditional_logic.ConditionalLogic"><code class="docutils literal notranslate"><span class="pre">ConditionalLogic</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.graph.propagation.html">tradingagents.graph.propagation</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.graph.propagation.html#tradingagents.graph.propagation.Propagator"><code class="docutils literal notranslate"><span class="pre">Propagator</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.graph.reflection.html">tradingagents.graph.reflection</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.graph.reflection.html#tradingagents.graph.reflection.Reflector"><code class="docutils literal notranslate"><span class="pre">Reflector</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../../../api/index.html#utilities">Utilities</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.utils.agent_states.html">tradingagents.agents.utils.agent_states</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.utils.agent_states.html#tradingagents.agents.utils.agent_states.InvestDebateState"><code class="docutils literal notranslate"><span class="pre">InvestDebateState</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.utils.agent_states.html#tradingagents.agents.utils.agent_states.RiskDebateState"><code class="docutils literal notranslate"><span class="pre">RiskDebateState</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.utils.agent_states.html#tradingagents.agents.utils.agent_states.AgentState"><code class="docutils literal notranslate"><span class="pre">AgentState</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.utils.agent_utils.html">tradingagents.agents.utils.agent_utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.utils.agent_utils.html#tradingagents.agents.utils.agent_utils.create_msg_delete"><code class="docutils literal notranslate"><span class="pre">create_msg_delete()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.utils.agent_utils.html#tradingagents.agents.utils.agent_utils.Toolkit"><code class="docutils literal notranslate"><span class="pre">Toolkit</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.utils.memory.html">tradingagents.agents.utils.memory</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.agents.utils.memory.html#tradingagents.agents.utils.memory.FinancialSituationMemory"><code class="docutils literal notranslate"><span class="pre">FinancialSituationMemory</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.utils.html">tradingagents.dataflows.utils</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.utils.html#tradingagents.dataflows.utils.save_output"><code class="docutils literal notranslate"><span class="pre">save_output()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.utils.html#tradingagents.dataflows.utils.get_current_date"><code class="docutils literal notranslate"><span class="pre">get_current_date()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.utils.html#tradingagents.dataflows.utils.decorate_all_methods"><code class="docutils literal notranslate"><span class="pre">decorate_all_methods()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="../../../../api/generated/tradingagents.dataflows.utils.html#tradingagents.dataflows.utils.get_next_weekday"><code class="docutils literal notranslate"><span class="pre">get_next_weekday()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Examples:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../examples/index.html">Examples</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Development:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../../contributing.html">Contributing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Changelog</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../../../changelog.html#v0-3-0-2025-07-15">v0.3.0 (2025-07-15)</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../../index.html">TradingAgents</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">tradingagents.agents.utils.agent_utils</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for tradingagents.agents.utils.agent_utils</h1><div class="highlight"><pre>
+<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.messages</span><span class="w"> </span><span class="kn">import</span> <span class="n">BaseMessage</span><span class="p">,</span> <span class="n">HumanMessage</span><span class="p">,</span> <span class="n">ToolMessage</span><span class="p">,</span> <span class="n">AIMessage</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Annotated</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.prompts</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatPromptTemplate</span><span class="p">,</span> <span class="n">MessagesPlaceholder</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.messages</span><span class="w"> </span><span class="kn">import</span> <span class="n">RemoveMessage</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.tools</span><span class="w"> </span><span class="kn">import</span> <span class="n">tool</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">date</span><span class="p">,</span> <span class="n">timedelta</span><span class="p">,</span> <span class="n">datetime</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">functools</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dateutil.relativedelta</span><span class="w"> </span><span class="kn">import</span> <span class="n">relativedelta</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_openai</span><span class="w"> </span><span class="kn">import</span> <span class="n">ChatOpenAI</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tradingagents.dataflows.interface</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">interface</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">tradingagents.default_config</span><span class="w"> </span><span class="kn">import</span> <span class="n">DEFAULT_CONFIG</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">langchain_core.messages</span><span class="w"> </span><span class="kn">import</span> <span class="n">HumanMessage</span>
+
+
+<div class="viewcode-block" id="create_msg_delete">
+<a class="viewcode-back" href="../../../../api/generated/tradingagents.agents.utils.agent_utils.html#tradingagents.agents.create_msg_delete">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">create_msg_delete</span><span class="p">():</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">delete_messages</span><span class="p">(</span><span class="n">state</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Clear messages and add placeholder for Anthropic compatibility&quot;&quot;&quot;</span>
+        <span class="n">messages</span> <span class="o">=</span> <span class="n">state</span><span class="p">[</span><span class="s2">&quot;messages&quot;</span><span class="p">]</span>
+        
+        <span class="c1"># Remove all messages</span>
+        <span class="n">removal_operations</span> <span class="o">=</span> <span class="p">[</span><span class="n">RemoveMessage</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">m</span><span class="o">.</span><span class="n">id</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">messages</span><span class="p">]</span>
+        
+        <span class="c1"># Add a minimal placeholder message</span>
+        <span class="n">placeholder</span> <span class="o">=</span> <span class="n">HumanMessage</span><span class="p">(</span><span class="n">content</span><span class="o">=</span><span class="s2">&quot;Continue&quot;</span><span class="p">)</span>
+        
+        <span class="k">return</span> <span class="p">{</span><span class="s2">&quot;messages&quot;</span><span class="p">:</span> <span class="n">removal_operations</span> <span class="o">+</span> <span class="p">[</span><span class="n">placeholder</span><span class="p">]}</span>
+    
+    <span class="k">return</span> <span class="n">delete_messages</span></div>
+
+
+
+<div class="viewcode-block" id="Toolkit">
+<a class="viewcode-back" href="../../../../api/generated/tradingagents.agents.utils.agent_utils.html#tradingagents.agents.Toolkit">[docs]</a>
+<span class="k">class</span><span class="w"> </span><span class="nc">Toolkit</span><span class="p">:</span>
+    <span class="n">_config</span> <span class="o">=</span> <span class="n">DEFAULT_CONFIG</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+<div class="viewcode-block" id="Toolkit.update_config">
+<a class="viewcode-back" href="../../../../api/generated/tradingagents.agents.utils.agent_utils.html#tradingagents.agents.Toolkit.update_config">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update_config</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">config</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Update the class-level configuration.&quot;&quot;&quot;</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">_config</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">config</span><span class="p">)</span></div>
+
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">config</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Access the configuration.&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_config</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">config</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">config</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update_config</span><span class="p">(</span><span class="n">config</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@tool</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_reddit_news</span><span class="p">(</span>
+        <span class="n">curr_date</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Date you want to get news for in yyyy-mm-dd format&quot;</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve global news from Reddit within a specified time frame.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            curr_date (str): Date you want to get news for in yyyy-mm-dd format</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: A formatted dataframe containing the latest global news from Reddit in the specified time frame.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">global_news_result</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">get_reddit_global_news</span><span class="p">(</span><span class="n">curr_date</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">global_news_result</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@tool</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_finnhub_news</span><span class="p">(</span>
+        <span class="n">ticker</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
+            <span class="nb">str</span><span class="p">,</span>
+            <span class="s2">&quot;Search query of a company, e.g. &#39;AAPL, TSM, etc.&quot;</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="n">start_date</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Start date in yyyy-mm-dd format&quot;</span><span class="p">],</span>
+        <span class="n">end_date</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;End date in yyyy-mm-dd format&quot;</span><span class="p">],</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve the latest news about a given stock from Finnhub within a date range</span>
+<span class="sd">        Args:</span>
+<span class="sd">            ticker (str): Ticker of a company. e.g. AAPL, TSM</span>
+<span class="sd">            start_date (str): Start date in yyyy-mm-dd format</span>
+<span class="sd">            end_date (str): End date in yyyy-mm-dd format</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: A formatted dataframe containing news about the company within the date range from start_date to end_date</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">end_date_str</span> <span class="o">=</span> <span class="n">end_date</span>
+
+        <span class="n">end_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">end_date</span><span class="p">,</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">start_date</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">start_date</span><span class="p">,</span> <span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">look_back_days</span> <span class="o">=</span> <span class="p">(</span><span class="n">end_date</span> <span class="o">-</span> <span class="n">start_date</span><span class="p">)</span><span class="o">.</span><span class="n">days</span>
+
+        <span class="n">finnhub_news_result</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">get_finnhub_news</span><span class="p">(</span>
+            <span class="n">ticker</span><span class="p">,</span> <span class="n">end_date_str</span><span class="p">,</span> <span class="n">look_back_days</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">finnhub_news_result</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@tool</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_reddit_stock_info</span><span class="p">(</span>
+        <span class="n">ticker</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
+            <span class="nb">str</span><span class="p">,</span>
+            <span class="s2">&quot;Ticker of a company. e.g. AAPL, TSM&quot;</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="n">curr_date</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Current date you want to get news for&quot;</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve the latest news about a given stock from Reddit, given the current date.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            ticker (str): Ticker of a company. e.g. AAPL, TSM</span>
+<span class="sd">            curr_date (str): current date in yyyy-mm-dd format to get news for</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: A formatted dataframe containing the latest news about the company on the given date</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">stock_news_results</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">get_reddit_company_news</span><span class="p">(</span><span class="n">ticker</span><span class="p">,</span> <span class="n">curr_date</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">stock_news_results</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@tool</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_YFin_data</span><span class="p">(</span>
+        <span class="n">symbol</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;ticker symbol of the company&quot;</span><span class="p">],</span>
+        <span class="n">start_date</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Start date in yyyy-mm-dd format&quot;</span><span class="p">],</span>
+        <span class="n">end_date</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;End date in yyyy-mm-dd format&quot;</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve the stock price data for a given ticker symbol from Yahoo Finance.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            symbol (str): Ticker symbol of the company, e.g. AAPL, TSM</span>
+<span class="sd">            start_date (str): Start date in yyyy-mm-dd format</span>
+<span class="sd">            end_date (str): End date in yyyy-mm-dd format</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: A formatted dataframe containing the stock price data for the specified ticker symbol in the specified date range.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">result_data</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">get_YFin_data</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result_data</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@tool</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_YFin_data_online</span><span class="p">(</span>
+        <span class="n">symbol</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;ticker symbol of the company&quot;</span><span class="p">],</span>
+        <span class="n">start_date</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Start date in yyyy-mm-dd format&quot;</span><span class="p">],</span>
+        <span class="n">end_date</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;End date in yyyy-mm-dd format&quot;</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve the stock price data for a given ticker symbol from Yahoo Finance.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            symbol (str): Ticker symbol of the company, e.g. AAPL, TSM</span>
+<span class="sd">            start_date (str): Start date in yyyy-mm-dd format</span>
+<span class="sd">            end_date (str): End date in yyyy-mm-dd format</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: A formatted dataframe containing the stock price data for the specified ticker symbol in the specified date range.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">result_data</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">get_YFin_data_online</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result_data</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@tool</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_crypto_data_online</span><span class="p">(</span>
+        <span class="n">symbol</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;crypto symbol like BTC, ETH, BTC-USD&quot;</span><span class="p">],</span>
+        <span class="n">start_date</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Start date in yyyy-mm-dd format&quot;</span><span class="p">],</span>
+        <span class="n">end_date</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;End date in yyyy-mm-dd format&quot;</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve crypto price data from CoinGecko API.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            symbol (str): Crypto symbol like BTC, ETH, BTC-USD</span>
+<span class="sd">            start_date (str): Start date in yyyy-mm-dd format</span>
+<span class="sd">            end_date (str): End date in yyyy-mm-dd format</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: A formatted dataframe containing crypto price data for the specified symbol in the specified date range.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">result_data</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">get_crypto_data_online</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="n">start_date</span><span class="p">,</span> <span class="n">end_date</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result_data</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@tool</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_crypto_info_online</span><span class="p">(</span>
+        <span class="n">symbol</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;crypto symbol like BTC, ETH, BTC-USD&quot;</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve current crypto market information from CoinGecko API.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            symbol (str): Crypto symbol like BTC, ETH, BTC-USD</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Formatted crypto market information including price, market cap, volume, and 24h change.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">result_data</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">get_crypto_info_online</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result_data</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@tool</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_stockstats_indicators_report</span><span class="p">(</span>
+        <span class="n">symbol</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;ticker symbol of the company&quot;</span><span class="p">],</span>
+        <span class="n">indicator</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
+            <span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;technical indicator to get the analysis and report of&quot;</span>
+        <span class="p">],</span>
+        <span class="n">curr_date</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
+            <span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;The current trading date you are trading on, YYYY-mm-dd&quot;</span>
+        <span class="p">],</span>
+        <span class="n">look_back_days</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="s2">&quot;how many days to look back&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve stock stats indicators for a given ticker symbol and indicator.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            symbol (str): Ticker symbol of the company, e.g. AAPL, TSM</span>
+<span class="sd">            indicator (str): Technical indicator to get the analysis and report of</span>
+<span class="sd">            curr_date (str): The current trading date you are trading on, YYYY-mm-dd</span>
+<span class="sd">            look_back_days (int): How many days to look back, default is 30</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: A formatted dataframe containing the stock stats indicators for the specified ticker symbol and indicator.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">result_stockstats</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">get_stock_stats_indicators_window</span><span class="p">(</span>
+            <span class="n">symbol</span><span class="p">,</span> <span class="n">indicator</span><span class="p">,</span> <span class="n">curr_date</span><span class="p">,</span> <span class="n">look_back_days</span><span class="p">,</span> <span class="kc">False</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result_stockstats</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@tool</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_stockstats_indicators_report_online</span><span class="p">(</span>
+        <span class="n">symbol</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;ticker symbol of the company&quot;</span><span class="p">],</span>
+        <span class="n">indicator</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
+            <span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;technical indicator to get the analysis and report of&quot;</span>
+        <span class="p">],</span>
+        <span class="n">curr_date</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
+            <span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;The current trading date you are trading on, YYYY-mm-dd&quot;</span>
+        <span class="p">],</span>
+        <span class="n">look_back_days</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="s2">&quot;how many days to look back&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve stock stats indicators for a given ticker symbol and indicator.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            symbol (str): Ticker symbol of the company, e.g. AAPL, TSM</span>
+<span class="sd">            indicator (str): Technical indicator to get the analysis and report of</span>
+<span class="sd">            curr_date (str): The current trading date you are trading on, YYYY-mm-dd</span>
+<span class="sd">            look_back_days (int): How many days to look back, default is 30</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: A formatted dataframe containing the stock stats indicators for the specified ticker symbol and indicator.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">result_stockstats</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">get_stock_stats_indicators_window</span><span class="p">(</span>
+            <span class="n">symbol</span><span class="p">,</span> <span class="n">indicator</span><span class="p">,</span> <span class="n">curr_date</span><span class="p">,</span> <span class="n">look_back_days</span><span class="p">,</span> <span class="kc">True</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">result_stockstats</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@tool</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_finnhub_company_insider_sentiment</span><span class="p">(</span>
+        <span class="n">ticker</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;ticker symbol for the company&quot;</span><span class="p">],</span>
+        <span class="n">curr_date</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
+            <span class="nb">str</span><span class="p">,</span>
+            <span class="s2">&quot;current date of you are trading at, yyyy-mm-dd&quot;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve insider sentiment information about a company (retrieved from public SEC information) for the past 30 days</span>
+<span class="sd">        Args:</span>
+<span class="sd">            ticker (str): ticker symbol of the company</span>
+<span class="sd">            curr_date (str): current date you are trading at, yyyy-mm-dd</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: a report of the sentiment in the past 30 days starting at curr_date</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">data_sentiment</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">get_finnhub_company_insider_sentiment</span><span class="p">(</span>
+            <span class="n">ticker</span><span class="p">,</span> <span class="n">curr_date</span><span class="p">,</span> <span class="mi">30</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">data_sentiment</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@tool</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_finnhub_company_insider_transactions</span><span class="p">(</span>
+        <span class="n">ticker</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;ticker symbol&quot;</span><span class="p">],</span>
+        <span class="n">curr_date</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
+            <span class="nb">str</span><span class="p">,</span>
+            <span class="s2">&quot;current date you are trading at, yyyy-mm-dd&quot;</span><span class="p">,</span>
+        <span class="p">],</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve insider transaction information about a company (retrieved from public SEC information) for the past 30 days</span>
+<span class="sd">        Args:</span>
+<span class="sd">            ticker (str): ticker symbol of the company</span>
+<span class="sd">            curr_date (str): current date you are trading at, yyyy-mm-dd</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: a report of the company&#39;s insider transactions/trading information in the past 30 days</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">data_trans</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">get_finnhub_company_insider_transactions</span><span class="p">(</span>
+            <span class="n">ticker</span><span class="p">,</span> <span class="n">curr_date</span><span class="p">,</span> <span class="mi">30</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">data_trans</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@tool</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_simfin_balance_sheet</span><span class="p">(</span>
+        <span class="n">ticker</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;ticker symbol&quot;</span><span class="p">],</span>
+        <span class="n">freq</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
+            <span class="nb">str</span><span class="p">,</span>
+            <span class="s2">&quot;reporting frequency of the company&#39;s financial history: annual/quarterly&quot;</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="n">curr_date</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;current date you are trading at, yyyy-mm-dd&quot;</span><span class="p">],</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve the most recent balance sheet of a company</span>
+<span class="sd">        Args:</span>
+<span class="sd">            ticker (str): ticker symbol of the company</span>
+<span class="sd">            freq (str): reporting frequency of the company&#39;s financial history: annual / quarterly</span>
+<span class="sd">            curr_date (str): current date you are trading at, yyyy-mm-dd</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: a report of the company&#39;s most recent balance sheet</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">data_balance_sheet</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">get_simfin_balance_sheet</span><span class="p">(</span><span class="n">ticker</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">curr_date</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">data_balance_sheet</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@tool</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_simfin_cashflow</span><span class="p">(</span>
+        <span class="n">ticker</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;ticker symbol&quot;</span><span class="p">],</span>
+        <span class="n">freq</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
+            <span class="nb">str</span><span class="p">,</span>
+            <span class="s2">&quot;reporting frequency of the company&#39;s financial history: annual/quarterly&quot;</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="n">curr_date</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;current date you are trading at, yyyy-mm-dd&quot;</span><span class="p">],</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve the most recent cash flow statement of a company</span>
+<span class="sd">        Args:</span>
+<span class="sd">            ticker (str): ticker symbol of the company</span>
+<span class="sd">            freq (str): reporting frequency of the company&#39;s financial history: annual / quarterly</span>
+<span class="sd">            curr_date (str): current date you are trading at, yyyy-mm-dd</span>
+<span class="sd">        Returns:</span>
+<span class="sd">                str: a report of the company&#39;s most recent cash flow statement</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">data_cashflow</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">get_simfin_cashflow</span><span class="p">(</span><span class="n">ticker</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">curr_date</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">data_cashflow</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@tool</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_simfin_income_stmt</span><span class="p">(</span>
+        <span class="n">ticker</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;ticker symbol&quot;</span><span class="p">],</span>
+        <span class="n">freq</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span>
+            <span class="nb">str</span><span class="p">,</span>
+            <span class="s2">&quot;reporting frequency of the company&#39;s financial history: annual/quarterly&quot;</span><span class="p">,</span>
+        <span class="p">],</span>
+        <span class="n">curr_date</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;current date you are trading at, yyyy-mm-dd&quot;</span><span class="p">],</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve the most recent income statement of a company</span>
+<span class="sd">        Args:</span>
+<span class="sd">            ticker (str): ticker symbol of the company</span>
+<span class="sd">            freq (str): reporting frequency of the company&#39;s financial history: annual / quarterly</span>
+<span class="sd">            curr_date (str): current date you are trading at, yyyy-mm-dd</span>
+<span class="sd">        Returns:</span>
+<span class="sd">                str: a report of the company&#39;s most recent income statement</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">data_income_stmt</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">get_simfin_income_statements</span><span class="p">(</span>
+            <span class="n">ticker</span><span class="p">,</span> <span class="n">freq</span><span class="p">,</span> <span class="n">curr_date</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">data_income_stmt</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@tool</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_google_news</span><span class="p">(</span>
+        <span class="n">query</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Query to search with&quot;</span><span class="p">],</span>
+        <span class="n">curr_date</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Curr date in yyyy-mm-dd format&quot;</span><span class="p">],</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve the latest news from Google News based on a query and date range.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            query (str): Query to search with</span>
+<span class="sd">            curr_date (str): Current date in yyyy-mm-dd format</span>
+<span class="sd">            look_back_days (int): How many days to look back</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: A formatted string containing the latest news from Google News based on the query and date range.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">google_news_results</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">get_google_news</span><span class="p">(</span><span class="n">query</span><span class="p">,</span> <span class="n">curr_date</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">google_news_results</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@tool</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_stock_news_openai</span><span class="p">(</span>
+        <span class="n">ticker</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;the company&#39;s ticker&quot;</span><span class="p">],</span>
+        <span class="n">curr_date</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Current date in yyyy-mm-dd format&quot;</span><span class="p">],</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve the latest news about a given stock by using OpenAI&#39;s news API.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            ticker (str): Ticker of a company. e.g. AAPL, TSM</span>
+<span class="sd">            curr_date (str): Current date in yyyy-mm-dd format</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: A formatted string containing the latest news about the company on the given date.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">openai_news_results</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">get_stock_news_openai</span><span class="p">(</span><span class="n">ticker</span><span class="p">,</span> <span class="n">curr_date</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">openai_news_results</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@tool</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_global_news_openai</span><span class="p">(</span>
+        <span class="n">curr_date</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Current date in yyyy-mm-dd format&quot;</span><span class="p">],</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve the latest macroeconomics news on a given date using OpenAI&#39;s macroeconomics news API.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            curr_date (str): Current date in yyyy-mm-dd format</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: A formatted string containing the latest macroeconomic news on the given date.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">openai_news_results</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">get_global_news_openai</span><span class="p">(</span><span class="n">curr_date</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">openai_news_results</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@tool</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_fundamentals_openai</span><span class="p">(</span>
+        <span class="n">ticker</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;the company&#39;s ticker&quot;</span><span class="p">],</span>
+        <span class="n">curr_date</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Current date in yyyy-mm-dd format&quot;</span><span class="p">],</span>
+    <span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve the latest fundamental information about a given stock on a given date by using OpenAI&#39;s news API.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            ticker (str): Ticker of a company. e.g. AAPL, TSM</span>
+<span class="sd">            curr_date (str): Current date in yyyy-mm-dd format</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: A formatted string containing the latest fundamental information about the company on the given date.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">openai_fundamentals_results</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">get_fundamentals_openai</span><span class="p">(</span>
+            <span class="n">ticker</span><span class="p">,</span> <span class="n">curr_date</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">openai_fundamentals_results</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@tool</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_onchain_network_health</span><span class="p">(</span>
+        <span class="n">symbol</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;crypto symbol like BTC, ETH&quot;</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve comprehensive network health metrics for a cryptocurrency.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            symbol (str): Crypto symbol like BTC, ETH</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Formatted network health analysis including active addresses, hash rate, and health score</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">result_data</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">get_onchain_network_health</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result_data</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@tool</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_onchain_market_indicators</span><span class="p">(</span>
+        <span class="n">symbol</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;crypto symbol like BTC, ETH&quot;</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve on-chain market indicators for a cryptocurrency.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            symbol (str): Crypto symbol like BTC, ETH</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Formatted market indicators including exchange flows, whale activity, and market signals</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">result_data</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">get_onchain_market_indicators</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result_data</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@tool</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_onchain_comprehensive_analysis</span><span class="p">(</span>
+        <span class="n">symbol</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;crypto symbol like BTC, ETH&quot;</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve comprehensive on-chain analysis combining network health, market indicators, and AI insights.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            symbol (str): Crypto symbol like BTC, ETH</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Comprehensive on-chain analysis with investment thesis and confidence scoring</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">result_data</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">get_onchain_comprehensive_analysis</span><span class="p">(</span><span class="n">symbol</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result_data</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@tool</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_metric_registry_data</span><span class="p">(</span>
+        <span class="n">metric</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;metric name like &#39;active_addresses&#39;, &#39;whale_activity&#39;&quot;</span><span class="p">],</span>
+        <span class="n">symbol</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;crypto symbol like BTC, ETH&quot;</span><span class="p">],</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Retrieve specific on-chain metrics using the intelligent fallback system.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            metric (str): Specific metric name (active_addresses, whale_activity, exchange_flows, etc.)</span>
+<span class="sd">            symbol (str): Crypto symbol like BTC, ETH</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Formatted metric data with fallback provider information</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">result_data</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">get_metric_registry_data</span><span class="p">(</span><span class="n">metric</span><span class="p">,</span> <span class="n">symbol</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result_data</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@tool</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_exchange_ohlcv_data</span><span class="p">(</span>
+        <span class="n">exchange</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Exchange name like &#39;binance&#39;, &#39;kraken&#39;, &#39;coinbase&#39;&quot;</span><span class="p">],</span>
+        <span class="n">symbol</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Trading pair symbol like &#39;BTC/USDT&#39;, &#39;ETH/USD&#39;&quot;</span><span class="p">],</span>
+        <span class="n">timeframe</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Timeframe like &#39;1h&#39;, &#39;4h&#39;, &#39;1d&#39;&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;1h&#39;</span><span class="p">,</span>
+        <span class="n">limit</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="s2">&quot;Number of candles to fetch&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fetch OHLCV data from a specific cryptocurrency exchange using CCXT.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            exchange (str): Exchange name (binance, kraken, coinbase, okx, huobi)</span>
+<span class="sd">            symbol (str): Trading pair symbol (e.g., &#39;BTC/USDT&#39;, &#39;ETH/USD&#39;)</span>
+<span class="sd">            timeframe (str): Candlestick timeframe (&#39;1m&#39;, &#39;5m&#39;, &#39;1h&#39;, &#39;4h&#39;, &#39;1d&#39;)</span>
+<span class="sd">            limit (int): Number of candlesticks to fetch</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Formatted DataFrame with OHLCV data</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">result_data</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">get_exchange_ohlcv_data</span><span class="p">(</span><span class="n">exchange</span><span class="p">,</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">timeframe</span><span class="p">,</span> <span class="n">limit</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result_data</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@tool</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_exchange_order_book</span><span class="p">(</span>
+        <span class="n">exchange</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Exchange name like &#39;binance&#39;, &#39;kraken&#39;, &#39;coinbase&#39;&quot;</span><span class="p">],</span>
+        <span class="n">symbol</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Trading pair symbol like &#39;BTC/USDT&#39;, &#39;ETH/USD&#39;&quot;</span><span class="p">],</span>
+        <span class="n">limit</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="s2">&quot;Number of order book levels to fetch&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Fetch order book depth from a specific cryptocurrency exchange using CCXT.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            exchange (str): Exchange name (binance, kraken, coinbase, okx, huobi)</span>
+<span class="sd">            symbol (str): Trading pair symbol (e.g., &#39;BTC/USDT&#39;, &#39;ETH/USD&#39;)</span>
+<span class="sd">            limit (int): Number of order book levels to fetch</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Formatted order book data with analysis</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">result_data</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">get_exchange_order_book</span><span class="p">(</span><span class="n">exchange</span><span class="p">,</span> <span class="n">symbol</span><span class="p">,</span> <span class="n">limit</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result_data</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@tool</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">compare_crypto_exchanges</span><span class="p">(</span>
+        <span class="n">symbol</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Trading pair symbol like &#39;BTC/USDT&#39;, &#39;ETH/USD&#39;&quot;</span><span class="p">],</span>
+        <span class="n">exchanges</span><span class="p">:</span> <span class="n">Annotated</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="s2">&quot;Comma-separated exchange names&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;binance,kraken,coinbase&quot;</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Compare cryptocurrency prices and liquidity across multiple exchanges for arbitrage opportunities.</span>
+<span class="sd">        Args:</span>
+<span class="sd">            symbol (str): Trading pair symbol (e.g., &#39;BTC/USDT&#39;, &#39;ETH/USD&#39;)</span>
+<span class="sd">            exchanges (str): Comma-separated list of exchange names</span>
+<span class="sd">        Returns:</span>
+<span class="sd">            str: Exchange comparison with arbitrage opportunities</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">result_data</span> <span class="o">=</span> <span class="n">interface</span><span class="o">.</span><span class="n">compare_crypto_exchanges</span><span class="p">(</span><span class="n">symbol</span><span class="p">,</span> <span class="n">exchanges</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result_data</span></div>
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, TauricResearch.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
