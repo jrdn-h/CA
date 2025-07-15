@@ -129,7 +129,8 @@ class CryptoCacheManager:
         key_data = f"{endpoint}:{sorted_params}"
         
         # Use hash for long keys to avoid Redis key length limits
-        key_hash = hashlib.md5(key_data.encode()).hexdigest()
+        # MD5 is acceptable here as we're using it for key generation, not security
+        key_hash = hashlib.md5(key_data.encode(), usedforsecurity=False).hexdigest()  # nosec B324
         return f"crypto_cache:{endpoint}:{key_hash}"
 
     def _detect_data_type(self, endpoint: str, params: Dict[str, Any] = None) -> str:

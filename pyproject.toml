@@ -7,6 +7,7 @@ requires-python = ">=3.10"
 dependencies = [
     "akshare>=1.16.98",
     "backtrader>=1.9.78.123",
+    "ccxt>=4.0.0",
     "chainlit>=2.5.5",
     "chromadb>=1.0.12",
     "eodhd>=1.0.32",
@@ -20,9 +21,11 @@ dependencies = [
     "pandas>=2.3.0",
     "parsel>=1.10.0",
     "praw>=7.8.1",
+    "python-dotenv>=1.0.0",
     "pytz>=2025.2",
     "questionary>=2.1.0",
     "redis>=6.2.0",
+    "hiredis>=2.0.0",
     "requests>=2.32.4",
     "rich>=14.0.0",
     "setuptools>=80.9.0",
@@ -123,3 +126,13 @@ exclude = [
 [tool.docformatter]
 wrap-summaries = 88
 wrap-descriptions = 88
+
+[tool.bandit]
+exclude_dirs = ["tests", "docs/_build", "build", "dist"]
+skips = [
+    "B104",  # Hardcoded bind all interfaces - acceptable for development dashboard
+    "B404",  # Subprocess import - needed for Docker operations
+    "B603",  # Subprocess without shell - safe with list arguments
+    "B607",  # Start process with partial path - docker-compose is in PATH
+    "B608",  # SQL injection - false positive in system message string
+]

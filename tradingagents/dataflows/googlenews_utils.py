@@ -26,8 +26,9 @@ def is_rate_limited(response):
 def make_request(url, headers):
     """Make a request with retry logic for rate limiting"""
     # Random delay before each request to avoid detection
-    time.sleep(random.uniform(2, 6))
-    response = requests.get(url, headers=headers)
+    # Using random for rate limiting, not security purposes
+    time.sleep(random.uniform(2, 6))  # nosec B311
+    response = requests.get(url, headers=headers, timeout=30)  # Added timeout for security
     return response
 
 
