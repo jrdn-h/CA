@@ -162,7 +162,7 @@ jobs:
     - name: Run Bandit security scan
       run: |
         bandit -r tradingagents/ -f json -o bandit-report.json || true
-        bandit -r tradingagents/ --exit-zero-on-skipped
+        bandit -r tradingagents/
         
     - name: Check for security vulnerabilities
       run: |

@@ -23,6 +23,7 @@ def test_onchain_analyst_initialization():
         "deep_think_llm": "gpt-4o-mini",
         "quick_think_llm": "gpt-4o-mini",
         "backend_url": "https://api.openai.com/v1",
+        "OPENAI_API_KEY": "test-key-12345",  # Dummy API key for testing
         "online_tools": True,
         "project_dir": os.path.abspath("."),
         "data_dir": "./data",
@@ -133,6 +134,7 @@ def test_crypto_mode_integration():
             "deep_think_llm": "gpt-4o-mini",
             "quick_think_llm": "gpt-4o-mini",
             "backend_url": "https://api.openai.com/v1",
+            "OPENAI_API_KEY": "test-key-12345",  # Dummy API key for testing
             "project_dir": os.path.abspath("."),
             "data_dir": "./data",
             "results_dir": "./results",
@@ -153,6 +155,7 @@ def test_crypto_mode_integration():
             "deep_think_llm": "gpt-4o-mini",
             "quick_think_llm": "gpt-4o-mini",
             "backend_url": "https://api.openai.com/v1",
+            "OPENAI_API_KEY": "test-key-12345",  # Dummy API key for testing
             "project_dir": os.path.abspath("."),
             "data_dir": "./data",
             "results_dir": "./results",
