@@ -67,7 +67,7 @@ def test_comprehensive_analysis():
         if analysis["address_metrics"]:
             print(f"👥 Address Metrics:")
             addr = analysis["address_metrics"]
-            print(f"   Current: {addr.get('current_active_addresses', 'N/A'):,}")
+            print(f"   Current: {addr.get('current_active_addresses', 'N/A')}")
             print(f"   Trend: {addr.get('trend', 'Unknown')}")
         
         # Network health

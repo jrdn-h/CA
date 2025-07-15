@@ -42,10 +42,10 @@ def test_crypto_integration():
         print("🔍 Test 2: Testing crypto tools directly...")
         toolkit = ta.toolkit
         
-        btc_data = toolkit.get_crypto_data_online("BTC", "2024-12-01", "2024-12-07")
+        btc_data = toolkit.get_crypto_data_online.invoke({"symbol": "BTC", "start_date": "2024-12-01", "end_date": "2024-12-07"})
         print(f"✅ BTC data fetch: {len(btc_data)} characters returned")
         
-        btc_info = toolkit.get_crypto_info_online("BTC")
+        btc_info = toolkit.get_crypto_info_online.invoke({"symbol": "BTC"})
         print(f"✅ BTC info fetch: {len(btc_info)} characters returned")
         print()
         
@@ -108,7 +108,7 @@ def test_toggle_functionality():
         
         # Test that crypto tools are available in enabled mode
         try:
-            crypto_result = ta_enabled.toolkit.get_crypto_data_online("BTC", "2024-12-01", "2024-12-02")
+            crypto_result = ta_enabled.toolkit.get_crypto_data_online.invoke({"symbol": "BTC", "start_date": "2024-12-01", "end_date": "2024-12-02"})
             print(f"  ✅ Crypto tools accessible: {len(crypto_result)} chars returned")
         except Exception as e:
             print(f"  ❌ Crypto tools failed: {e}")

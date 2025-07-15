@@ -468,7 +468,15 @@ def run_comprehensive_integration_tests():
         # Also try to clean any ChromaDB collections programmatically
         try:
             import chromadb
-            chroma_client = chromadb.Client()
+            from chromadb.config import Settings
+            
+            # Use the same settings as the application code to avoid conflicts
+            client_settings = Settings(allow_reset=True)
+            chroma_client = chromadb.Client(client_settings)
+            
+            # Reset the database at the beginning of the test run
+            chroma_client.reset()
+
             collections = chroma_client.list_collections()
             for collection in collections:
                 print(f"   🗑️  Deleting ChromaDB collection: {collection.name}")

@@ -17,12 +17,12 @@ def test_cache_performance():
     cache = get_cache_manager()
     
     # Display cache status
-    stats = cache.get_cache_stats()
+    stats = cache.get_optimization_stats()
     print(f"📊 Cache Status: {'✅ Enabled' if stats['enabled'] else '❌ Disabled'}")
     
     if stats['enabled']:
-        print(f"   - Memory used: {stats.get('memory_used', 'Unknown')}")
-        print(f"   - Total keys: {stats.get('total_keys', 0)}")
+        print(f"   - Memory used: {stats.get('redis_info', {}).get('memory_used', 'Unknown')}")
+        print(f"   - Total keys: {stats.get('performance', {}).get('total_keys', 0)}")
     print()
     
     crypto_utils = CryptoUtils()
@@ -65,11 +65,11 @@ def test_cache_performance():
     
     # Test 3: Cache stats after operations
     print("\n📈 Updated Cache Stats:")
-    updated_stats = cache.get_cache_stats()
+    updated_stats = cache.get_optimization_stats()
     if updated_stats['enabled']:
-        print(f"   - Total keys: {updated_stats.get('total_keys', 0)}")
-        print(f"   - Cache hits: {updated_stats.get('hits', 0)}")
-        print(f"   - Cache misses: {updated_stats.get('misses', 0)}")
+        print(f"   - Total keys: {updated_stats.get('performance', {}).get('total_keys', 0)}")
+        print(f"   - Cache hits: {updated_stats.get('performance', {}).get('total_hits', 0)}")
+        print(f"   - Cache misses: {updated_stats.get('performance', {}).get('total_misses', 0)}")
     
     return True
 
@@ -122,16 +122,16 @@ def test_cache_invalidation():
     cache = get_cache_manager()
     
     # Show current cache stats
-    stats = cache.get_cache_stats()
-    print(f"📊 Cache keys before: {stats.get('total_keys', 0)}")
+    stats = cache.get_optimization_stats()
+    print(f"📊 Cache keys before: {stats.get('performance', {}).get('total_keys', 0)}")
     
     # Invalidate all crypto cache
     cleared = cache.clear_all_cache()
     print(f"🧹 Cache cleared: {'✅ Success' if cleared else '❌ Failed'}")
     
     # Show updated stats
-    stats_after = cache.get_cache_stats()
-    print(f"📊 Cache keys after: {stats_after.get('total_keys', 0)}")
+    stats_after = cache.get_optimization_stats()
+    print(f"📊 Cache keys after: {stats_after.get('performance', {}).get('total_keys', 0)}")
     
     return True
 

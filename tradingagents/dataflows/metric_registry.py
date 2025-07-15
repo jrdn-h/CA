@@ -1,17 +1,11 @@
 """MetricRegistry: Intelligent fallback system for multiple on-chain data providers."""
 
 import logging
-<<<<<<< HEAD
 from typing import Dict, List, Optional, Any, Callable, Tuple
 from datetime import datetime
 import pandas as pd
 import asyncio
 from concurrent.futures import ThreadPoolExecutor, as_completed
-=======
-from typing import Dict, List, Optional, Any, Callable
-from datetime import datetime
-import pandas as pd
->>>>>>> ee8f7c2 (feat: production-grade data layer with Redis caching and intelligent fallback)
 
 from .onchain_loader import OnChainLoader
 from .crypto_cache import get_cache_manager
@@ -57,7 +51,6 @@ class DataProvider:
         logger.info(f"✅ Provider {self.name} health reset")
 
 
-<<<<<<< HEAD
 class BatchOptimizer:
     """Optimizes batch requests by grouping compatible metrics by provider."""
     
@@ -111,15 +104,10 @@ class BatchOptimizer:
 
 class MetricRegistry:
     """Enhanced registry with batch optimization and intelligent caching."""
-=======
-class MetricRegistry:
-    """Central registry for managing multiple on-chain data providers with intelligent fallback."""
->>>>>>> ee8f7c2 (feat: production-grade data layer with Redis caching and intelligent fallback)
     
     def __init__(self):
         self.providers: List[DataProvider] = []
         self.cache = get_cache_manager()
-<<<<<<< HEAD
         self.batch_optimizer = BatchOptimizer()
         self.batch_stats = {
             'total_batch_requests': 0,
@@ -128,8 +116,6 @@ class MetricRegistry:
             'average_batch_size': 0,
             'concurrent_requests': 0
         }
-=======
->>>>>>> ee8f7c2 (feat: production-grade data layer with Redis caching and intelligent fallback)
         self._initialize_providers()
 
     def _initialize_providers(self):
@@ -211,7 +197,6 @@ class MetricRegistry:
         logger.error(f"❌ All providers failed for {metric} on {asset}")
         return None
 
-<<<<<<< HEAD
     def get_metrics_batch(self, requests: List[Tuple[str, str]], use_cache: bool = True, 
                          max_concurrent: int = 5) -> Dict[str, Any]:
         """
@@ -404,8 +389,6 @@ class MetricRegistry:
             "provider_status": self.get_provider_status()
         }
 
-=======
->>>>>>> ee8f7c2 (feat: production-grade data layer with Redis caching and intelligent fallback)
     def get_comprehensive_analysis(self, asset: str) -> Dict[str, Any]:
         """Get comprehensive analysis using best available providers."""
         
@@ -429,7 +412,6 @@ class MetricRegistry:
             "whale_activity"
         ]
 
-<<<<<<< HEAD
         # Use batch optimization for comprehensive analysis
         batch_requests = [(metric, asset) for metric in key_metrics]
         batch_results = self.get_metrics_batch(batch_requests)
@@ -442,14 +424,6 @@ class MetricRegistry:
             
             if result is not None:
                 # Determine which provider succeeded (simplified)
-=======
-        successful_providers = set()
-
-        for metric in key_metrics:
-            result = self.get_metric(metric, asset)
-            if result is not None:
-                # Determine which provider succeeded
->>>>>>> ee8f7c2 (feat: production-grade data layer with Redis caching and intelligent fallback)
                 for provider in self.providers:
                     if provider.last_success and provider.can_provide(metric):
                         successful_providers.add(provider.name)
@@ -473,18 +447,11 @@ class MetricRegistry:
         # Generate summary
         health_score = "Good" if len(successful_providers) >= 2 else "Limited"
         analysis["summary"] = f"""
-<<<<<<< HEAD
 {asset.upper()} Multi-Provider Analysis (Batch Optimized):
 - Data Sources: {', '.join(successful_providers)}
 - Coverage: {len(successful_providers)}/{len(self.providers)} providers
 - Reliability: {health_score}
 - Batch Efficiency: Enabled
-=======
-{asset.upper()} Multi-Provider Analysis:
-- Data Sources: {', '.join(successful_providers)}
-- Coverage: {len(successful_providers)}/{len(self.providers)} providers
-- Reliability: {health_score}
->>>>>>> ee8f7c2 (feat: production-grade data layer with Redis caching and intelligent fallback)
 - Last Updated: {datetime.now().strftime('%H:%M:%S')}
         """.strip()
 
